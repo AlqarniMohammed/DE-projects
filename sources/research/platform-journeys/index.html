@@ -1,0 +1,1377 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Research Report — Real-World Data Platform Build Journeys - The Data Engineer Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#research-report--real-world-data-platform-build-journeys" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="The Data Engineer Framework" class="md-header__button md-logo" aria-label="The Data Engineer Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The Data Engineer Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Research Report — Real-World Data Platform Build Journeys
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="The Data Engineer Framework" class="md-nav__button md-logo" aria-label="The Data Engineer Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    The Data Engineer Framework
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phases
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-0-orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Orientation & Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-1-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Foundations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-2-aws-lakehouse-core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — AWS Lakehouse Core
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-3-spark-databricks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Spark & Databricks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-4-orchestration-ingestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Orchestration & Ingestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-5-streaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 5 — Streaming & CDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-6-production-serving/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 6 — Production, Serving & Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../GLOSSARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../PROGRESS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progress tracker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/WHY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why it looks this way
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/TOOLS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/DATASETS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datasets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/CERTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Certifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/COURSES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Video courses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/LEARNERS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learners & placement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/SOURCES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#section-1--primary-source-tweeq-data-platform-saudi-fintech" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 1 — Primary Source: Tweeq Data Platform (Saudi fintech)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 1 — Primary Source: Tweeq Data Platform (Saudi fintech)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-requirements-that-drove-the-design-verbatim-from-the-article" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Requirements that drove the design (verbatim from the article)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-the-stack-and-why-each-piece-was-chosen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 The stack and why each piece was chosen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-what-they-triedconsidered-and-abandoned" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 What they tried/considered and abandoned
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-explicit-lessons-learned-all-of-them" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Explicit lessons learned (all of them)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-build-sequence-team-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Build sequence, team, timeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-2--comparable-case-studies-20232025" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 2 — Comparable Case Studies (2023–2025)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2 — Comparable Case Studies (2023–2025)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-summary-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Summary table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-per-case-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Per-case notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-3--synthesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 3 — Synthesis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 3 — Synthesis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-recurring-build-order-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (a) Recurring build-order pattern
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-most-common-mistakes-and-regrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (b) Most common mistakes and regrets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-the-minimum-viable-data-platform-consensus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (c) The "minimum viable data platform" consensus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-where-clickhousesuperset-style-serving-layers-fit-relative-to-a-lakehouse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (d) Where ClickHouse/Superset-style serving layers fit relative to a lakehouse
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e-implications-for-a-solo-12-month-personal-platform-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (e) Implications for a solo 12-month personal platform build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        All sources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="research-report--real-world-data-platform-build-journeys">Research Report — Real-World Data Platform Build Journeys<a class="headerlink" href="#research-report--real-world-data-platform-build-journeys" title="Permanent link">&para;</a></h1>
+<p><em>Research date: 2026-08-20. For: design of a 12-month personal data-platform build (AWS Lakehouse spine: S3 + Iceberg + Glue/Athena + dbt + orchestrator, plus open-source satellites). The primary Medium article was Cloudflare-blocked to direct fetch; full text retrieved via a reader proxy (published 2024-05-16, author Atheer Alabdullatif, Tweeq Engineering).</em></p>
+<hr />
+<h2 id="section-1--primary-source-tweeq-data-platform-saudi-fintech">Section 1 — Primary Source: Tweeq Data Platform (Saudi fintech)<a class="headerlink" href="#section-1--primary-source-tweeq-data-platform-saudi-fintech" title="Permanent link">&para;</a></h2>
+<p><strong>Source:</strong> <a href="https://engineering.tweeq.sa/tweeq-data-platform-journey-and-lessons-learned-clickhouse-dbt-dagster-and-superset-fa27a4a61904">Tweeq Data Platform: Journey and Lessons Learned — ClickHouse, dbt, Dagster, and Superset</a> (May 16, 2024)</p>
+<h3 id="11-requirements-that-drove-the-design-verbatim-from-the-article">1.1 Requirements that drove the design (verbatim from the article)<a class="headerlink" href="#11-requirements-that-drove-the-design-verbatim-from-the-article" title="Permanent link">&para;</a></h3>
+<p>Tweeq (a Saudi spend-management fintech) started from explicit constraints, not tools:</p>
+<ul>
+<li>"hosted within the region to comply with regulatory requirements" (Saudi data residency)</li>
+<li>"cloud agnostic for future cloud provider migration"</li>
+<li>"optimised for analytical usage, including: customer-facing/in-app analytics and Business intelligence (BI)/Data analytics"</li>
+<li>"utilise open-source tools"</li>
+<li>"highly available and support data replication by storing data in multiple nodes"</li>
+<li>"achieve some level of observability"</li>
+</ul>
+<p>Key architectural driver: Tweeq runs microservices, so "data is distributed across service-level databases, which make joining the tables for any customer-facing features an expensive operation, thus the choice to relay in the data warehouse for any feature that requires data join/aggregation." Their warehouse is not just BI — it is a <strong>production backend for in-app features</strong>.</p>
+<h3 id="12-the-stack-and-why-each-piece-was-chosen">1.2 The stack and why each piece was chosen<a class="headerlink" href="#12-the-stack-and-why-each-piece-was-chosen" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Tool</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Warehouse/storage</td>
+<td><strong>ClickHouse</strong> (self-hosted on K8s via Altinity Operator)</td>
+<td>Column store needed for customer-facing analytics; "AWS &amp; GCP tools such as Redshift &amp; BigQuery were out of question" due to regional residency + cloud-agnosticism; Altinity K8s Operator made it "a cloud agnostic data warehouse"</td>
+</tr>
+<tr>
+<td>Ingestion</td>
+<td><strong>CockroachDB CDC changefeeds → Kafka → ClickHouse Kafka Engine tables</strong></td>
+<td>CDC is "out of the box" in CockroachDB; Kafka acts as "a buffer layer"; ClickHouse Kafka Engine tables "helped us avoid using any third-party sink tools"</td>
+</tr>
+<tr>
+<td>Load philosophy</td>
+<td><strong>EtLT</strong></td>
+<td>"we ship the raw data without any manipulation except for discarding some PII data" — small "t" is PII-stripping only, real transformation happens post-load</td>
+</tr>
+<tr>
+<td>Modeling</td>
+<td><strong>dbt</strong> — dimensional modeling (facts, dimensions, data marts)</td>
+<td>Incremental models for freshness; seeds "to create a local mock for testing"; analysts "have the freedom to create their own data marts"</td>
+</tr>
+<tr>
+<td>Orchestration</td>
+<td><strong>Dagster</strong></td>
+<td>"developed specifically for data pipelines, integrates super smoothly with dbt, can be deployed on top of K8s, has a data lineage feature, and an easy to use UI." Tags separate freshness tiers; sensors push failures to Slack</td>
+</tr>
+<tr>
+<td>BI</td>
+<td><strong>Superset</strong> (+ <strong>PostHog</strong> for product analytics)</td>
+<td>Open source, K8s-deployable, GoogleAuth integration</td>
+</tr>
+</tbody>
+</table>
+<p>Two freshness tiers: customer-facing models refresh <strong>every 5 minutes</strong>; warehouse/BI models <strong>at least daily</strong> — separated with Dagster tags.</p>
+<h3 id="13-what-they-triedconsidered-and-abandoned">1.3 What they tried/considered and abandoned<a class="headerlink" href="#13-what-they-triedconsidered-and-abandoned" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Redshift and BigQuery</strong>: rejected up front (residency + lock-in), not abandoned mid-flight.</li>
+<li><strong>Multi-node dbt→ClickHouse writes</strong>: "we faced issues with having dbt write to a ClickHouse cluster. We had to make some compromises by storing the data in one node, which was later fixed in newer dbt versions" — they temporarily sacrificed their own HA requirement because of adapter immaturity.</li>
+<li><strong>Third-party sink tools</strong> (Kafka Connect-style sinks): deliberately avoided via ClickHouse Kafka Engine — but this bought a new problem (below).</li>
+</ul>
+<h3 id="14-explicit-lessons-learned-all-of-them">1.4 Explicit lessons learned (all of them)<a class="headerlink" href="#14-explicit-lessons-learned-all-of-them" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Kafka Engine schema-change pain:</strong> "one of the main limitations of Kafka Engine tables is managing schema changes, dropping and recreating the tables manually without down time can be a hectic process." (The no-third-party-sink shortcut has an operational tax.)</li>
+<li><strong>dbt-ClickHouse adapter maturity:</strong> early cluster-write issues forced a single-node compromise; fixed in later versions. Lesson: adapter maturity is a real selection criterion, not a footnote.</li>
+<li><strong>Dagster on K8s setup friction:</strong> "The only downside of Dagster is the initial set up part on k8s, however the community is super helpful and responsive."</li>
+<li><strong>Superset UX:</strong> "The UI can be intimidating at first glance"; visualization options are "good enough" but they still <strong>added PostHog</strong> because a BI tool does not cover product analytics.</li>
+<li>Implicit but clear: constraints-first design (residency, open source, cloud-agnostic) made every tool decision almost mechanical.</li>
+</ol>
+<h3 id="15-build-sequence-team-timeline">1.5 Build sequence, team, timeline<a class="headerlink" href="#15-build-sequence-team-timeline" title="Permanent link">&para;</a></h3>
+<p>The article does <strong>not</strong> state team size or timeline (the author is a data engineer; the platform reads as a 1–3 person build typical of a Series-A fintech). Implied sequence: (1) CDC ingestion path (CockroachDB → Kafka → ClickHouse), (2) dbt dimensional models, (3) Dagster orchestration with freshness tiers + Slack alerting, (4) Superset/PostHog consumption layer.</p>
+<hr />
+<h2 id="section-2--comparable-case-studies-20232025">Section 2 — Comparable Case Studies (2023–2025)<a class="headerlink" href="#section-2--comparable-case-studies-20232025" title="Permanent link">&para;</a></h2>
+<h3 id="21-summary-table">2.1 Summary table<a class="headerlink" href="#21-summary-table" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Company / context</th>
+<th>Stack</th>
+<th>Team size</th>
+<th>Standout numbers</th>
+<th>Source(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>ClickHouse Inc.</strong> — internal DWH for their own cloud business (2023, +1yr update 2024)</td>
+<td>ClickHouse Cloud, Airflow, S3 raw staging, Superset, dbt (added yr 2), Docker</td>
+<td><strong>3 people</strong> (1 FT DE, 1 analyst, 1 lead at ~30%)</td>
+<td>~$1,500/mo infra; 40k queries/day; 70+ MAU; yr 2: 19 sources, 6B rows/day, 470TB compressed</td>
+<td><a href="https://clickhouse.com/blog/building-a-data-warehouse-with-clickhouse">Part 1</a>, <a href="https://clickhouse.com/blog/building-a-data-warehouse-with-clickhouse-part-2">Part 2</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Zippi</strong> — Brazilian YC fintech</td>
+<td>Hevo → S3 → Redshift, dbt Core, Dagster, Hex/Metabase, Metaplane</td>
+<td>Startup-scale, small data team</td>
+<td>Adopted Dagster for ML first, then pulled dbt + ingestion under it</td>
+<td><a href="https://dagster.io/blog/zippi-case-study">Dagster case study</a> (vendor)</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>UK Ministry of Justice</strong> — government analytical platform (Oct 2024)</td>
+<td><strong>S3 + Parquet + Iceberg + Athena + Glue Catalog + dbt-core (dbt-athena)</strong>, GitHub Actions orchestration, medallion layers</td>
+<td>Public-sector DE team (small)</td>
+<td>"99% reduction in individual query costs" vs Glue PySpark; longest jobs −75%; tables ≤200GB/~3B rows</td>
+<td><a href="https://ministryofjustice.github.io/data-and-analytics-engineering/blog/posts/building-a-transaction-data-lake-using-amazon-athena-apache-iceberg-and-dbt/">MoJ blog</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Halodoc</strong> — Indonesian healthtech (2021–22; closest real AWS-lakehouse journey with explicit lessons)</td>
+<td>DMS CDC → S3 raw → EMR/PySpark + <strong>Hudi</strong> → S3 processed → Glue/Athena → Redshift marts; MWAA</td>
+<td>Mid-size DE team</td>
+<td>Framework-driven onboarding replaced per-pipeline builds; detailed Hudi tuning lessons</td>
+<td><a href="https://blogs.halodoc.io/lake-house-architecture-halodoc-data-platform-2-0/">Data Platform 2.0</a>, <a href="https://blogs.halodoc.io/key-learnings-on-using-apache-hudi-in-building-lakehouse-architecture-halodoc/">Hudi learnings</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>jchandra (Indian SME-lending fintech)</strong> — "modern data stack from scratch, bill −70%" (Mar 2025)</td>
+<td>Debezium CDC → Kafka/Confluent → S3 + Parquet, Glue catalog, <strong>Trino</strong> + <strong>DuckDB</strong>, dbt, Great Expectations, Airflow, Metabase, medallion</td>
+<td>~2 people</td>
+<td>$2,200/mo → ~$460/mo (~79% reduction)</td>
+<td><a href="https://jchandra.com/posts/data-infra/">Article</a>, <a href="https://news.ycombinator.com/item?id=43312199">HN thread</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>UDisc</strong> — bootstrapped disc-golf app</td>
+<td>MongoDB (OLTP) → MotherDuck (DuckDB), Dagster, dbt, Hex</td>
+<td>Small bootstrapped team</td>
+<td>dbt job 6h → 30min; typical query 2min+ → 5s</td>
+<td><a href="https://motherduck.com/case-studies/udisc-motherduck-sports-management/">MotherDuck case study</a> (vendor)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="22-per-case-notes">2.2 Per-case notes<a class="headerlink" href="#22-per-case-notes" title="Permanent link">&para;</a></h3>
+<p><strong>Case 1 — ClickHouse internal DWH (the best "team of 3" benchmark).</strong>
+Built because their VP Product was analyzing cloud usage in Excel. Deliberate simplicity: <strong>rejected CDC as "much more expensive"</strong> than hourly batch extract-to-S3-then-load; 1-hour granularity ("real-time wasn't necessary at our stage"); ~$1,500/month total. Abandoned along the way: (a) a two-layer architecture — recursive mart dependencies forced an intermediate detail layer; (b) sophisticated Airflow DAG graphs — collapsed to per-source extract DAGs + one main DAG; (c) a year later, <strong>the monolithic hourly DAG itself</strong> — refactored into 9 processes managed with <strong>dbt</strong>, which they had originally deferred. Other lessons: idempotency via ReplacingMergeTree + re-runnable jobs as the foundation; <code>insert_quorum=3</code> (consistency over availability) with orchestrator retries; GDPR via masked row versions rather than deletes; users unexpectedly loved <strong>raw, less-structured real-time logs</strong>.</p>
+<p><strong>Case 2 — Zippi (vendor case study; treat framing skeptically).</strong>
+Managed ingestion (Hevo) + Redshift + dbt Cloud first; hit a wall when ML scoring needed pipelines that "both write tables and then dynamically read back from those same tables." Adopted Dagster <strong>incrementally</strong>: ML jobs first, then dbt orchestration (gaining lineage), then replaced scattered cron/Python scripts. Pain that motivated it: "dbt Cloud alerts were very limited, with no context on the error." The <em>sequence</em> (managed EL + warehouse + dbt first, orchestrator when complexity demands it) is credible and matches non-vendor accounts.</p>
+<p><strong>Case 3 — UK Ministry of Justice (the closest match to the AWS spine).</strong>
+Migrated from Glue PySpark jobs to <strong>Athena + Iceberg + dbt-athena</strong>, orchestrated by GitHub Workflows. Why: Athena is serverless and SQL-first; at their scale (≤500GB datasets) $5/TB-scanned is cheap; Iceberg gives ACID writes, row-level updates for SCD2, <code>RENAME TABLE</code> for write-audit-publish, time travel for validating incrementals. Results: "99% reduction in individual query costs," 75% faster longest jobs, weekly → daily refreshes. Honest caveats: they <strong>started with full-refresh materializations, not incrementals</strong>; dbt's one-model-per-table philosophy forced a Python model-generator for repeated logic; Athena per-query resource caps forced a custom <code>insert_by_chunk</code> materialization; native observability weak. Meta-lesson: a unified SQL stack "fosters a culture of collaboration"; cost advantage "may diminish… at the petabyte-scale."</p>
+<p><strong>Case 4 — Halodoc (AWS lakehouse, hard-won table-format ops lessons).</strong>
+Platform 1.0 (timestamp-based batch replication) failed on cost and correctness. Platform 2.0: DMS CDC → S3 raw → EMR/PySpark writing <strong>Hudi</strong> → Glue catalog → Athena + Redshift marts, MWAA, Terraform. Biggest structural lesson: moving <strong>from hand-built per-source pipelines to a config/framework-driven platform</strong>. Hudi lessons that transfer to Iceberg: cleaner/retention policies or storage "would increase exponentially"; small-file compaction must be planned; CoW vs MoR effectively irreversible; millisecond-safe ordering needed DMS <code>ar_h_change_seq</code> as precombine key; enable the metadata table to avoid file-listing bottlenecks.</p>
+<p><strong>Case 5 — jchandra fintech + the HN counter-narrative (the most instructive pairing).</strong>
+Two people replaced Hevo + BigQuery (~$2,200/mo) with Debezium/Kafka CDC → S3 Parquet (medallion) → Glue → Trino + DuckDB → dbt → Great Expectations → Airflow → Metabase. ~$460/mo after. Lessons: reuse infra you already pay for; cheap object storage makes ELT-with-raw-retention the default; early pragmatic choices must be re-architected at scale. <strong>The HN thread is the required skepticism</strong>: "$20k/year savings… doesn't seem like a good use of time"; "engineers who work on projects like these inevitably get bored and move on, and then the company is stuck"; and the sharpest — after making a pipeline work, "keeping it working, keeping it accurate and keeping it cheap comes next."</p>
+<p><strong>Case 6 — UDisc (vendor case study; DuckDB-class engine as the whole warehouse).</strong>
+Analytics off MongoDB; dashboards capped at 30 days of data to protect the OLTP DB. Evaluated ClickHouse, Snowflake, Databricks, BigQuery, Postgres — "too expensive and too complex for our use case." Landed on MotherDuck + Dagster + dbt + Hex: dbt run 6h → 30min, queries 2min+ → 5s. Pattern corroborated by MoJ's Athena-over-Spark finding: at small-to-mid volumes a single-node vectorized engine beats distributed warehouses on cost <em>and</em> simplicity.</p>
+<hr />
+<h2 id="section-3--synthesis">Section 3 — Synthesis<a class="headerlink" href="#section-3--synthesis" title="Permanent link">&para;</a></h2>
+<h3 id="a-recurring-build-order-pattern">(a) Recurring build-order pattern<a class="headerlink" href="#a-recurring-build-order-pattern" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Pain first, platform second.</strong> Every build started from a concrete failing workload. Nobody built a platform speculatively.</li>
+<li><strong>Ingestion + raw storage</strong> (cheap durable storage — S3 in 5 of 7 cases; CDC only where the product needs it; ClickHouse Inc. explicitly rejected CDC as premature complexity).</li>
+<li><strong>SQL transformation layer with layered modeling</strong> (dbt in 6 of 7; medallion or facts/dims/marts in all). Both ClickHouse Inc. and MoJ learned the same lesson: <strong>two layers are never enough</strong> — an intermediate layer appears within a year whether planned or not.</li>
+<li><strong>Orchestration</strong> comes <em>after</em> transforms exist — typically after cron/one-DAG pain. Dagster where dbt-integration and lineage were the draw; Airflow where the team knew it; MoJ got away with GitHub Actions.</li>
+<li><strong>BI/serving layer</strong> (Superset, Metabase, Hex) once models are trustworthy.</li>
+<li><strong>Only then</strong>: observability, quality frameworks, lineage, self-service — universally "future work," rarely done in year one.</li>
+</ol>
+<h3 id="b-most-common-mistakes-and-regrets">(b) Most common mistakes and regrets<a class="headerlink" href="#b-most-common-mistakes-and-regrets" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>The monolith DAG / linear pipeline</strong> — decomposed within a year in two cases. Design for many small idempotent jobs from the start.</li>
+<li><strong>Deferring dbt</strong> — ClickHouse Inc. retrofitted it in year two for lineage, docs, decomposition. Everyone who had it early kept it.</li>
+<li><strong>Underestimating table-format/streaming operations</strong> — Tweeq's Kafka Engine schema pain, Halodoc's compaction learning curve, MoJ's Athena caps. The lakehouse's hidden cost is table maintenance, not queries.</li>
+<li><strong>Trusting adapter/tool maturity claims</strong> — Tweeq's dbt-ClickHouse compromise. Budget for immaturity in any adapter less mainstream than the big ones.</li>
+<li><strong>Two-layer modeling</strong> — independently regretted; preempted by medallion users.</li>
+<li><strong>Over-engineering vs TCO blindness (the HN lesson)</strong> — self-built stacks carry a maintenance annuity and bus-factor risk small teams rarely price in; the counter-mistake is staying on a mispriced managed service past the crossover point.</li>
+<li><strong>Skipping data quality/observability until incidents force it</strong> — dbt tests and Slack failure alerts were the cheap early wins.</li>
+</ol>
+<h3 id="c-the-minimum-viable-data-platform-consensus">(c) The "minimum viable data platform" consensus<a class="headerlink" href="#c-the-minimum-viable-data-platform-consensus" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Batch extract (CDC only if the product demands it) → object storage/warehouse with raw data retained → dbt with three layers (staging → intermediate → marts) → one orchestrator with retries + Slack alerting → one open-source BI tool → idempotency everywhere.</strong></p>
+</blockquote>
+<p>Corroborating parameters: 3 people and ~$1,500/mo ran a 40k-queries/day warehouse; 2 people ran a full CDC lakehouse for ~$460/mo; hourly (not real-time) freshness was "enough for our stage"; MoJ served a national justice system on Athena full refreshes before bothering with incrementals. <strong>Idempotent, re-runnable jobs plus orchestrator retries substitute for most reliability engineering</strong> at this scale.</p>
+<h3 id="d-where-clickhousesuperset-style-serving-layers-fit-relative-to-a-lakehouse">(d) Where ClickHouse/Superset-style serving layers fit relative to a lakehouse<a class="headerlink" href="#d-where-clickhousesuperset-style-serving-layers-fit-relative-to-a-lakehouse" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>The lakehouse (S3 + Iceberg + Athena/Trino + dbt) is the system of record and transformation substrate</strong> — cheap, durable, engine-agnostic; latency seconds-to-minutes, fine for BI.</li>
+<li><strong>ClickHouse/DuckDB-class engines are the low-latency <em>serving</em> tier</strong> — when queries face customers (Tweeq's 5-minute in-app analytics; UDisc's dashboards). Tweeq ran ClickHouse as <em>both</em> warehouse and serving — forced by residency/cloud-agnostic constraints, and it cost them Kafka Engine schema pain and adapter compromises.</li>
+<li><strong>Superset/Metabase/Hex sit on top of either</strong>; every team found one BI tool insufficient for product analytics (Tweeq added PostHog).</li>
+<li>Pattern to copy: <strong>lakehouse spine as truth, serving engine as a satellite fed from the marts</strong> — added only when a latency-sensitive consumer exists.</li>
+</ul>
+<h3 id="e-implications-for-a-solo-12-month-personal-platform-build">(e) Implications for a solo 12-month personal platform build<a class="headerlink" href="#e-implications-for-a-solo-12-month-personal-platform-build" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>The spine is validated at this scale by the closest comparable.</strong> MoJ runs essentially the same stack in production and found it dramatically cheaper and simpler than Spark. Expect their potholes: Athena per-query limits, dbt one-model-per-table friction, weak default observability.</li>
+<li><strong>Sequence like the consensus:</strong> Months 1–3 batch EL into S3 + Glue catalog + Athena end-to-end on one real dataset (skip CDC early). Months 3–6 dbt with three layers from day one, full-refresh first, tests + docs as you go. Months 5–8 orchestrator with idempotent, retryable, alerting jobs — many small jobs, never one mega-DAG. Months 8–12 satellites — BI (Superset), then one of: serving layer, CDC/streaming path, or quality/lineage tooling.</li>
+<li><strong>Iceberg maintenance is a first-class learning objective, not an afterthought</strong> — compaction, snapshot expiry, small files, schema evolution drills. This is where lakehouse builds actually hurt.</li>
+<li><strong>Add the serving satellite only against a concrete "customer-facing" use case</strong> — e.g., a live dashboard hitting ClickHouse or DuckDB fed from gold marts. That demonstrates the lakehouse-vs-serving distinction better than making ClickHouse the warehouse (Tweeq only did that because residency ruled out managed warehouses).</li>
+<li><strong>Practice the pattern everyone converged on: idempotency + retries as the reliability model.</strong> MERGE-upsert semantics, re-runnable partitioned loads, orchestrator retries, failure alerts. Highest lesson-density skill in all seven case studies.</li>
+<li><strong>Internalize the HN critique as a design constraint:</strong> anything built must survive weeks of inattention. Prefer serverless (Athena, GitHub Actions early scheduling) over K8s self-hosting — Tweeq's Dagster-on-K8s setup pain and Superset ops are exactly the yak-shaves that stall a solo plan.</li>
+<li><strong>Plan the year-2 refactors in year 1</strong>: an intermediate modeling layer, decomposed jobs, and naming conventions — the three things ClickHouse Inc. wished they'd done earlier.</li>
+</ol>
+<h3 id="all-sources">All sources<a class="headerlink" href="#all-sources" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Tweeq: https://engineering.tweeq.sa/tweeq-data-platform-journey-and-lessons-learned-clickhouse-dbt-dagster-and-superset-fa27a4a61904</li>
+<li>ClickHouse internal DWH pt 1: https://clickhouse.com/blog/building-a-data-warehouse-with-clickhouse · pt 2: https://clickhouse.com/blog/building-a-data-warehouse-with-clickhouse-part-2</li>
+<li>Zippi (Dagster, vendor): https://dagster.io/blog/zippi-case-study</li>
+<li>UK MoJ Athena+Iceberg+dbt: https://ministryofjustice.github.io/data-and-analytics-engineering/blog/posts/building-a-transaction-data-lake-using-amazon-athena-apache-iceberg-and-dbt/</li>
+<li>Halodoc Data Platform 2.0: https://blogs.halodoc.io/lake-house-architecture-halodoc-data-platform-2-0/ · Hudi learnings: https://blogs.halodoc.io/key-learnings-on-using-apache-hudi-in-building-lakehouse-architecture-halodoc/</li>
+<li>jchandra fintech stack: https://jchandra.com/posts/data-infra/ · HN discussion: https://news.ycombinator.com/item?id=43312199</li>
+<li>UDisc (MotherDuck, vendor): https://motherduck.com/case-studies/udisc-motherduck-sports-management/</li>
+</ul>
+<p>Caveats: Zippi and UDisc are vendor-published (flagged inline); Halodoc's posts predate the 2023 window slightly (2021–22) but are the most detailed real-world AWS open-table-format journey; Tweeq's article omits team size and timeline — those gaps are stated, not inferred.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.top", "search.suggest", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

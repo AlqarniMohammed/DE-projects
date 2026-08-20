@@ -1,0 +1,1354 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../phase-2-aws-lakehouse-core/">
+      
+      
+        <link rel="next" href="../phase-4-orchestration-ingestion/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Phase 3 — Spark & Databricks - The Data Engineer Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#phase-3--spark--databricks--cert-phase-2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="The Data Engineer Framework" class="md-header__button md-logo" aria-label="The Data Engineer Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The Data Engineer Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Phase 3 — Spark & Databricks
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="The Data Engineer Framework" class="md-nav__button md-logo" aria-label="The Data Engineer Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    The Data Engineer Framework
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phases
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-0-orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Orientation & Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-1-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Foundations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-2-aws-lakehouse-core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — AWS Lakehouse Core
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Spark & Databricks
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Spark & Databricks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-terminology--glossarymd-p3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New terminology → GLOSSARY.md [P3]
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learn-20-h--book-as-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learn (~20 h + book as-needed)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build--labs-on-free-edition-30-h-maps-11-to-exam-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build — labs on Free Edition (~30 h; maps 1:1 to exam sections)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Build — labs on Free Edition (~30 h; maps 1:1 to exam sections)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prove-it-assignment-23-h-do-it-before-s3a-skew-detection-kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prove-it assignment (2–3 h, do it before S3a): skew-detection kata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build--satellites-15-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build — Satellites (~15 h)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#competency-gate-g3-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Competency gate G3 ⭐
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publish-checkpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Publish checkpoint
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-yourself--questions-you-can-now-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check yourself — questions you can now answer
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-4-orchestration-ingestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Orchestration & Ingestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-5-streaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 5 — Streaming & CDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-6-production-serving/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 6 — Production, Serving & Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GLOSSARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PROGRESS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progress tracker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/WHY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why it looks this way
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/TOOLS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/DATASETS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datasets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/CERTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Certifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/COURSES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Video courses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/LEARNERS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learners & placement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/SOURCES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-terminology--glossarymd-p3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New terminology → GLOSSARY.md [P3]
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learn-20-h--book-as-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learn (~20 h + book as-needed)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build--labs-on-free-edition-30-h-maps-11-to-exam-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build — labs on Free Edition (~30 h; maps 1:1 to exam sections)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Build — labs on Free Edition (~30 h; maps 1:1 to exam sections)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prove-it-assignment-23-h-do-it-before-s3a-skew-detection-kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prove-it assignment (2–3 h, do it before S3a): skew-detection kata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build--satellites-15-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build — Satellites (~15 h)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#competency-gate-g3-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Competency gate G3 ⭐
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publish-checkpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Publish checkpoint
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-yourself--questions-you-can-now-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check yourself — questions you can now answer
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="phase-3--spark--databricks--cert-phase-2">Phase 3 — Spark &amp; Databricks ⭐ Cert Phase 2<a class="headerlink" href="#phase-3--spark--databricks--cert-phase-2" title="Permanent link">&para;</a></h1>
+<p><strong>Duration:</strong> months 5–7 (elastic — the gate decides) · <strong>Budget:</strong> ~75 hours (cert prep overlaps the phase — it <em>is</em> the phase) · <strong>Cost:</strong> $0 platform (Databricks Free Edition) + exam $200 (→$100 with voucher) + optional course ~$30–40</p>
+<p>Distributed compute enters. The exam labs run on <strong>Databricks Free Edition</strong> (serverless, Unity Catalog on by default — exactly the environment the current exam assumes); the Spark-internals work runs on <strong>local PySpark</strong>, where the full Spark UI is available. The gate is the <strong>Databricks Certified Data Engineer Associate</strong> exam — current version effective <strong>May 4, 2026</strong>: PySpark-first, Lakeflow-branded. Full blueprint: <a href="../../reference/CERTS/">CERTS.md</a>.</p>
+<h2 id="objectives">Objectives<a class="headerlink" href="#objectives" title="Permanent link">&para;</a></h2>
+<ol>
+<li>PySpark DataFrame fluency + reading the <strong>Spark UI</strong> (the real interview filter for Spark roles).</li>
+<li>Delta Lake mechanics: transaction log, MERGE, time travel, Liquid Clustering.</li>
+<li>The Lakeflow trio: Connect (ingestion), Jobs (orchestration), Spark Declarative Pipelines (ex-DLT).</li>
+<li>Unity Catalog governance: grants, masking, row filters, ABAC.</li>
+<li>Pass the cert.</li>
+</ol>
+<h2 id="new-terminology--glossarymd-p3">New terminology → <a href="../../GLOSSARY/">GLOSSARY.md</a> <code>[P3]</code><a class="headerlink" href="#new-terminology--glossarymd-p3" title="Permanent link">&para;</a></h2>
+<p>Spark/PySpark · lazy evaluation, transformations vs actions · shuffle · skew · broadcast join · AQE · Spark UI · Delta Lake · MERGE · Unity Catalog · Lakeflow (Connect/Jobs/SDP) · Auto Loader / COPY INTO · Liquid Clustering · Asset Bundles · serverless vs classic compute.</p>
+<h2 id="learn-20-h--book-as-needed">Learn (~20 h + book as-needed)<a class="headerlink" href="#learn-20-h--book-as-needed" title="Permanent link">&para;</a></h2>
+<p>Every resource is <strong>pinned</strong> to an exercise — nothing here is learn-only.</p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Scope</th>
+<th>Hours</th>
+<th>Pinned by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.databricks.com/learn/training/home"><strong>Databricks Academy</strong> self-paced DE path (free)</a> — the exam guide names these: <em>Data Ingestion with Lakeflow Connect · Deploy Workloads with Lakeflow Jobs · DevOps Essentials for Data Engineering · Data Interoperability with Unity Catalog · Build Data Pipelines with Lakeflow Spark Declarative Pipelines · Get Started with Data Governance</em></td>
+<td>All six</td>
+<td>15–20</td>
+<td>Labs 1–7 below — they map 1:1 to the courses and the exam sections</td>
+</tr>
+<tr>
+<td><em>Data Analysis with Python and PySpark</em> (Rioux, Manning, ~$33) — optional; the strongest current PySpark book</td>
+<td>Ch. 1–9 as reference alongside labs</td>
+<td>as-needed</td>
+<td>The medallion lab's hand-typed notebooks</td>
+</tr>
+<tr>
+<td><a href="https://spark.apache.org/docs/latest/sql-performance-tuning.html">Spark performance-tuning docs</a> — skew, broadcast joins, AQE</td>
+<td>Quick read — you now have the context to appreciate it</td>
+<td>0.5</td>
+<td>The skew-detection kata + forensics satellite S3a</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Video lane — optional swap.</strong> Each row below <strong>replaces</strong> the default row it names: same "Pinned by" exercise, hours swap rather than add. Pick one lane per row before starting (<a href="../../GUIDE/#the-phase-loop">the rule</a>); prices, details, and the rows with no video twin: <a href="../../reference/COURSES/">COURSES.md</a>. <em>(Most default rows above are already video — this swap changes the provider or the price, not the format.)</em></p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Scope</th>
+<th>Hours</th>
+<th>Pinned by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.udemy.com/course/databricks-certified-data-engineer-associate/">Derar Alhussein: Databricks DE Associate prep course</a> + <a href="https://www.udemy.com/course/practice-exams-databricks-certified-data-engineer-associate/">practice exams</a> (~$30–40 on sale; V4, May-2026 syllabus)</td>
+<td>Swaps the <em>Databricks Academy path</em> row as your primary video, if a single-instructor format sticks better; keep the Academy course list as your syllabus checklist — the exam guide names those courses. (His practice exams are already assumed by gate G3)</td>
+<td>15–20</td>
+<td>Labs 1–7 below — they map 1:1 to the courses and the exam sections</td>
+</tr>
+<tr>
+<td><a href="https://www.udemy.com/course/apache-spark-programming-in-python-for-beginners/">PySpark: Apache Spark Programming for Beginners</a> (Pandey, ~$15–20 on sale; runs in Databricks)</td>
+<td>Swaps the <em>Rioux book</em> reference row — course-as-reference instead of book-as-reference; watch sections as the labs demand them, not front-to-back</td>
+<td>as-needed (14–18 watched through)</td>
+<td>The medallion lab's hand-typed notebooks</td>
+</tr>
+</tbody>
+</table>
+<p><em>Before starting, re-verify:</em> the exam guide PDF (revises every 6–10 months!), Free Edition quotas, and whether a <strong>Learning Festival</strong> window (50% exam voucher) falls in these two months — plan the Academy pathway inside it if so.</p>
+<h2 id="build--labs-on-free-edition-30-h-maps-11-to-exam-sections">Build — labs on Free Edition (~30 h; maps 1:1 to exam sections)<a class="headerlink" href="#build--labs-on-free-edition-30-h-maps-11-to-exam-sections" title="Permanent link">&para;</a></h2>
+<p>A fresh dataset keeps it interesting — pick from the P3 menu in <a href="../../reference/DATASETS/"><code>DATASETS.md</code></a> (Spotify charts or IMDb are the proven defaults; anything with daily updates for MERGE practice works):</p>
+<ol>
+<li><strong>Ingestion lab:</strong> Auto Loader streaming file ingestion with schema evolution + COPY INTO batch equivalent; know when each.</li>
+<li><strong>Medallion lab:</strong> bronze→silver→gold in PySpark notebooks; joins (incl. one broadcast), explode, dedup; gold as <strong>materialized view vs view vs streaming table</strong> — build one of each and explain the difference (exam favorite).</li>
+<li><strong>Delta mechanics lab:</strong> MERGE an SCD2 dimension; inspect <code>_delta_log</code>; time-travel query; Liquid Clustering on the fact table.</li>
+<li><strong>Lakeflow Jobs lab:</strong> a multi-task DAG (notebook + SQL tasks), retries/branching, one <strong>file-arrival trigger</strong> and one <strong>table-update trigger</strong>.</li>
+<li><strong>Declarative pipeline lab:</strong> rebuild the medallion as a <strong>Lakeflow Spark Declarative Pipeline</strong> with expectations (Free Edition quota: 1 active pipeline — enough).</li>
+<li><strong>Governance lab:</strong> UC grants for two personas, one column mask, one row filter; browse the lineage UI.</li>
+<li><strong>CI/CD lab:</strong> wrap one job in an <strong>Asset Bundle</strong>, deploy dev→prod via the Databricks CLI from your terminal (on one free workspace, dev/prod are two bundle <em>targets</em> — that's normal and worth saying out loud).</li>
+</ol>
+<p><strong>AI rule:</strong> notebooks are yours to hand-type; your assistant may quiz you (paste an exam-guide section, ask for hard questions) — it may not write the lab code.</p>
+<h3 id="prove-it-assignment-23-h-do-it-before-s3a-skew-detection-kata">Prove-it assignment (2–3 h, do it before S3a): skew-detection kata<a class="headerlink" href="#prove-it-assignment-23-h-do-it-before-s3a-skew-detection-kata" title="Permanent link">&para;</a></h3>
+<p>Hand-write a small <code>detect_skew(df, key)</code> helper (partition-size distribution + a skew-ratio number), plus pytest asserts you write yourself against two synthetic DataFrames — one uniform, one ~90/10 skewed. It becomes the measuring instrument you use inside the forensics satellite.</p>
+<h2 id="build--satellites-15-h">Build — Satellites (~15 h)<a class="headerlink" href="#build--satellites-15-h" title="Permanent link">&para;</a></h2>
+<p><strong>Environment note first:</strong> S3a runs on <strong>local PySpark</strong> (<code>uv add pyspark</code>, single-node — the full Spark UI at <code>localhost:4040</code> works there; ~1 h setup). Free Edition's serverless environment can't show the classic Spark UI the artifact needs — it stays the exam-lab home.</p>
+<p><strong>S3a — Spark Performance Forensics:</strong> deliberately slow job (skewed join, tiny files) on MovieLens → measure with your kata → apply fixes one at a time (broadcast, AQE, salting, repartition, file sizing) → <code>FORENSICS.md</code> with before/after Spark UI screenshots and a ranked impact table. The strongest Spark showcase artifact that exists.</p>
+<p><strong>S3b — Iceberg vs Delta bake-off</strong> <em>(local)</em>: same workload through PyIceberg and delta-rs on your laptop; benchmark write/read/schema-evolution/time-travel; publish <code>BAKEOFF.md</code> with real numbers and a verdict. Read about <strong>UniForm/format convergence</strong> to frame the conclusion.</p>
+<p>Unique briefs for either satellite: the <code>/satellite-brief</code> skill or <a href="../../prompts/generate-satellite-requirements/"><code>prompts/generate-satellite-requirements.md</code></a>.</p>
+<h2 id="competency-gate-g3-">Competency gate G3 ⭐<a class="headerlink" href="#competency-gate-g3-" title="Permanent link">&para;</a></h2>
+<ul>
+<li>[ ] <strong>Databricks Certified Data Engineer Associate — passed.</strong> (Book only after ≥80% on Derar Alhussein V4 practice exams.)</li>
+<li>[ ] All 7 Free Edition labs done (ingestion, medallion, Delta, Jobs, declarative pipeline, UC, Asset Bundle).</li>
+<li>[ ] Skew-detection kata: asserts green, used inside S3a.</li>
+<li>[ ] Forensics artifact published (<code>FORENSICS.md</code> + screenshots).</li>
+<li>[ ] Bake-off artifact published (<code>BAKEOFF.md</code>).</li>
+<li>[ ] 3-minute narrated demo: your declarative pipeline graph with expectations catching bad rows.</li>
+<li>[ ] <strong>External critique requested:</strong> forensics or bake-off artifact posted to a practitioner community — request thread linked in PROGRESS.md. <em>(Optional but high-leverage: one community or paid </em><em>mentor checkpoint</em><em> reviewing the platform repo — an hour of external eyes at mid-year is worth ten at month 12.)</em></li>
+<li>[ ] <code>SELF-CHECK.md</code> updated with this phase's written answers.</li>
+<li>[ ] <strong>Retrieval checkpoint:</strong> all <code>[P3]</code> terms + 10 random earlier terms, ≥80%.</li>
+<li>[ ] Both phase posts published (see below).</li>
+</ul>
+<h2 id="publish-checkpoint">Publish checkpoint<a class="headerlink" href="#publish-checkpoint" title="Permanent link">&para;</a></h2>
+<p>Two posts this phase (any public platform): (1) the cert announcement with your honest prep notes (what the new exam actually tests); (2) the forensics story — "I made a Spark job 10× faster with six changes; here's each one ranked by impact."</p>
+<h2 id="check-yourself--questions-you-can-now-answer">Check yourself — questions you can now answer<a class="headerlink" href="#check-yourself--questions-you-can-now-answer" title="Permanent link">&para;</a></h2>
+<ul>
+<li>"A Spark job is slow — walk me through your diagnosis."</li>
+<li>"What is a shuffle and why is it expensive?"</li>
+<li>"Delta vs Iceberg — how would you choose?" (with <em>your own</em> benchmark numbers)</li>
+<li>"Explain the medallion architecture and what lives in each layer."</li>
+<li>"Materialized view vs streaming table — when each?"</li>
+</ul>
+<hr />
+<p>← <a href="../phase-2-aws-lakehouse-core/">Phase 2 — AWS Lakehouse Core</a> · <a href="../../">Route map</a> · <a href="../../GUIDE/">Guide</a> · <a href="../../PROGRESS/">Progress</a> · <strong>Next: <a href="../phase-4-orchestration-ingestion/">Phase 4 — Orchestration &amp; Ingestion →</a></strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

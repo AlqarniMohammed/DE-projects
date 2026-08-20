@@ -1,0 +1,1634 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>2026 Data Engineering Tool Verdicts — AWS Lakehouse Training Framework - The Data Engineer Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2026-data-engineering-tool-verdicts--aws-lakehouse-training-framework" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="The Data Engineer Framework" class="md-header__button md-logo" aria-label="The Data Engineer Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The Data Engineer Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2026 Data Engineering Tool Verdicts — AWS Lakehouse Training Framework
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="The Data Engineer Framework" class="md-nav__button md-logo" aria-label="The Data Engineer Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    The Data Engineer Framework
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phases
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-0-orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Orientation & Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-1-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Foundations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-2-aws-lakehouse-core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — AWS Lakehouse Core
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-3-spark-databricks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Spark & Databricks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-4-orchestration-ingestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Orchestration & Ingestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-5-streaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 5 — Streaming & CDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-6-production-serving/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 6 — Production, Serving & Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../GLOSSARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../PROGRESS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progress tracker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/WHY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why it looks this way
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/TOOLS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/DATASETS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datasets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/CERTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Certifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/COURSES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Video courses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/LEARNERS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learners & placement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/SOURCES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#foundations--processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Foundations &amp; Processing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-formats--catalogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table Formats &amp; Catalogs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transformation-quality--semantics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transformation, Quality &amp; Semantics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#orchestration--iac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Orchestration &amp; IaC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#streaming--cdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Streaming &amp; CDC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ingestion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ingestion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query-serving--bi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Query, Serving &amp; BI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aws-platform-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AWS Platform Services
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lineage--ai-era-de" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lineage &amp; AI-era DE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-changed-recently-that-older-guides-miss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What changed recently that older guides miss
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contested-calls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contested calls
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="2026-data-engineering-tool-verdicts--aws-lakehouse-training-framework">2026 Data Engineering Tool Verdicts — AWS Lakehouse Training Framework<a class="headerlink" href="#2026-data-engineering-tool-verdicts--aws-lakehouse-training-framework" title="Permanent link">&para;</a></h1>
+<p><em>Research date: 2026-08-20. Verdicts optimize employability for a career transition into DE, weighted toward an AWS Lakehouse build (S3 + Iceberg + Glue/Athena + dbt + orchestrator) with open-source satellite projects. CORE = learn hands-on; AWARE = concepts + ~1 day exposure; SKIP = ignore for now.</em></p>
+<h2 id="foundations--processing">Foundations &amp; Processing<a class="headerlink" href="#foundations--processing" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Verdict</th>
+<th>2026 status evidence</th>
+<th>Source URL(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spark / PySpark</td>
+<td><strong>CORE</strong> — still the backbone of the 2026 stack</td>
+<td>2026 surveys put SQL+Python → Spark/dbt → Airflow as the canonical stack; AWS Glue 5.1 runs Spark 3.5.6, so Spark is unavoidable on this platform</td>
+<td>https://data.folio3.com/blog/data-engineering-stats/ ; https://aws.amazon.com/about-aws/whats-new/2025/11/aws-glue-5-1</td>
+</tr>
+<tr>
+<td>Parquet</td>
+<td><strong>CORE</strong> — the physical layer under Iceberg, DuckLake, everything</td>
+<td>Every table format and engine researched here (Iceberg, DuckLake, S3 Tables, DuckDB) is Parquet-underneath; non-negotiable fundamentals</td>
+<td>https://ducklake.select/ ; https://iceberg.apache.org/spec/</td>
+</tr>
+<tr>
+<td>DuckDB</td>
+<td><strong>CORE</strong> — default local/dev analytical engine, now with lakehouse ambitions</td>
+<td>Ecosystem still accelerating; DuckLake extension in DuckDB's top-10 by downloads; consistently beats pandas by 10x+ on analytical work and is the "SQL-on-files" default in 2026 guides</td>
+<td>https://motherduck.com/blog/duckdb-ecosystem-newsletter-april-2026/ ; https://www.birjob.com/blog/polars-duckdb-pandas-2026-decision-guide</td>
+</tr>
+<tr>
+<td>Polars</td>
+<td><strong>AWARE</strong> — learn enough to use; DuckDB covers most of the niche</td>
+<td>2026 guides recommend Polars as the default new DataFrame library (11s vs pandas' 107s+OOM on 100M-row groupby), but job specs still say pandas/Spark; a day of exposure transfers</td>
+<td>https://www.analyticsinsight.net/programming/pandas-vs-polars-vs-duckdb-what-data-scientists-should-use-in-2026</td>
+</tr>
+<tr>
+<td>chDB</td>
+<td><strong>SKIP</strong> — embedded-ClickHouse niche that DuckDB already fills for you</td>
+<td>Real but narrow: ClickHouse-in-a-Python-process for teams already ClickHouse-centric</td>
+<td>https://clickhouse.com/resources/engineering/how-to-choose-a-database-for-real-time-analytics-in-2026</td>
+</tr>
+</tbody>
+</table>
+<h2 id="table-formats--catalogs">Table Formats &amp; Catalogs<a class="headerlink" href="#table-formats--catalogs" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Verdict</th>
+<th>2026 status evidence</th>
+<th>Source URL(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apache Iceberg</td>
+<td><strong>CORE</strong> — the format war is over; Iceberg won for open lakehouses</td>
+<td>v3 spec ratified June 2025 (deletion vectors, variant type, row lineage); "the default choice for new open lakehouses" in 2026 comparisons; note only ~10% of teams have it in <em>production</em> yet — being genuinely hands-on is a differentiator</td>
+<td>https://opensource.googleblog.com/2025/08/whats-new-in-iceberg-v3.html ; https://risingwave.com/blog/apache-iceberg-vs-delta-lake-vs-hudi-2026/ ; https://joereis.github.io/practical_data_data_eng_survey/</td>
+</tr>
+<tr>
+<td>Amazon S3 Tables</td>
+<td><strong>CORE</strong> — AWS's managed Iceberg is now mature enough to be the platform default</td>
+<td>Added Iceberg REST Catalog API (Mar 2025), then replication, Intelligent-Tiering, sort/z-order compaction (Q4 2025) — operational-storage-grade maturity</td>
+<td>https://aws.amazon.com/blogs/aws/announcing-replication-support-and-intelligent-tiering-for-amazon-s3-tables/ ; https://aws.amazon.com/about-aws/whats-new/2025/03/amazon-s3-tables-apache-iceberg-rest-catalog-apis</td>
+</tr>
+<tr>
+<td>Delta Lake</td>
+<td><strong>AWARE</strong> — Databricks-shop currency, converging toward Iceberg anyway</td>
+<td>Delta 4.0 (2025, on Spark 4.0) shipped Variant + UniForm GA; UniForm makes Delta readable <em>as</em> Iceberg — "write once, read anywhere" convergence means Iceberg knowledge mostly transfers. (Note: still CORE <em>within the Databricks cert phase</em>.)</td>
+<td>https://delta.io/blog/delta-lake-4-0/ ; https://www.capitalone.com/tech/cloud/lakehouse-format-convergence-delta-lake-iceberg/</td>
+</tr>
+<tr>
+<td>Apache Hudi</td>
+<td><strong>SKIP</strong> — repositioned as a niche (streaming upserts), losing new deployments</td>
+<td>2026 comparisons: Iceberg is the default for new builds; Hudi survives in legacy Spark-centric CDC-upsert estates and is itself adding Iceberg compatibility</td>
+<td>https://atlan.com/know/iceberg/apache-hudi-vs-iceberg/ ; https://risingwave.com/blog/apache-iceberg-vs-delta-lake-vs-hudi-2026/</td>
+</tr>
+<tr>
+<td>DuckLake</td>
+<td><strong>AWARE</strong> — the format to watch, not yet the one jobs pay for</td>
+<td>v1.0 production-ready April 2026; top-10 DuckDB extension with Spark/Trino/DataFusion clients; SQL-database-as-catalog design is genuinely simpler than Iceberg, but AWS ecosystem gravity is Iceberg</td>
+<td>https://ducklake.select/2026/04/13/ducklake-10/ ; https://motherduck.com/blog/announcing-ducklake-1-0-on-motherduck/</td>
+</tr>
+<tr>
+<td>Apache Polaris</td>
+<td><strong>AWARE</strong> — the vendor-neutral Iceberg REST catalog; know the REST catalog spec cold</td>
+<td>Graduated to Apache TLP Feb 19, 2026; contributors include AWS, Google, Microsoft, Dremio, dbt Labs; ~21% adoption in 2025 Iceberg ecosystem survey</td>
+<td>https://amdatalakehouse.substack.com/p/the-state-of-apache-polaris-in-july ; https://datalakehousehub.com/blog/2026-02-state-of-the-apache-iceberg-ecosystem/</td>
+</tr>
+<tr>
+<td>Apache Gravitino</td>
+<td><strong>SKIP</strong> — interesting "catalog of catalogs," not employability-critical</td>
+<td>Apache TLP June 2025, v1.2 Mar 2026, shipped an MCP server; still a federation layer most AWS shops don't run</td>
+<td>https://dev.to/alexmercedcoder/the-state-of-apache-iceberg-catalogs-in-june-2026-265e</td>
+</tr>
+<tr>
+<td>Unity Catalog OSS</td>
+<td><strong>SKIP</strong> (on the AWS path) — Databricks-gravity; Glue + Lake Formation is your catalog</td>
+<td>Still an LF sandbox project; adoption is real but overwhelmingly Databricks-adjacent. (Managed Unity Catalog is still CORE <em>within the Databricks cert phase</em>.)</td>
+<td>https://unitycatalog.io/ ; https://www.databricks.com/blog/open-sourcing-unity-catalog</td>
+</tr>
+<tr>
+<td>DataHub</td>
+<td><strong>AWARE</strong> — the engineering-led OSS metadata graph</td>
+<td>With OpenMetadata, co-leads OSS catalogs in 2026; both added data contracts in 2025; concept-level + one quickstart is enough at entry level</td>
+<td>https://atlan.com/openmetadata-vs-datahub/</td>
+</tr>
+<tr>
+<td>OpenMetadata</td>
+<td><strong>AWARE</strong> — the more productized OSS catalog; pick <em>one</em> of DataHub/OpenMetadata to demo</td>
+<td>2026 buyer guides: OpenMetadata for governance-led fast adoption, DataHub for event-driven scale</td>
+<td>https://www.ovaledge.com/blog/openmetadata-vs-datahub ; https://thedatagovernor.com/open-source-data-catalog-tools/</td>
+</tr>
+</tbody>
+</table>
+<h2 id="transformation-quality--semantics">Transformation, Quality &amp; Semantics<a class="headerlink" href="#transformation-quality--semantics" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Verdict</th>
+<th>2026 status evidence</th>
+<th>Source URL(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dbt</td>
+<td><strong>CORE</strong> — still the transformation standard, now inside a much bigger company</td>
+<td>80,000+ teams; Fivetran + dbt Labs merger completed June 1, 2026 (~$600M ARR combined); dbt Core v2.0 with Rust-based Fusion engine released Apache 2.0</td>
+<td>https://www.getdbt.com/blog/fivetran-dbt-labs-complete-merger-to-create-the-data-infrastructure-for-trusted-ai-agents ; https://www.getdbt.com/resources/state-of-analytics-engineering-2026</td>
+</tr>
+<tr>
+<td>dbt Fusion engine</td>
+<td><strong>AWARE</strong> — it arrives with dbt; know why it matters (speed, static SQL analysis)</td>
+<td>GA for Snowflake projects mid-2026, preview on other adapters (Athena/Redshift planned by full GA); new dbt platform projects default to Fusion</td>
+<td>https://docs.getdbt.com/blog/dbt-fusion-engine-path-to-ga ; https://github.com/dbt-labs/dbt-fusion/discussions/1535</td>
+</tr>
+<tr>
+<td>SQLMesh</td>
+<td><strong>AWARE</strong> — credible #2 with clean governance; watch it, don't bet the year on it</td>
+<td>Fivetran acquired Tobiko Sept 2025, then donated SQLMesh to the Linux Foundation (2026); wins greenfield/"stricter change semantics" deployments while dbt keeps the installed base</td>
+<td>https://www.businesswire.com/news/home/20250903275106/en/Fivetran-Acquires-Tobiko-Data-to-Power-the-Next-Generation-of-Advanced-AI-Ready-Data-Transformation ; https://thenewstack.io/fivetran-donates-sqlmesh-lf/</td>
+</tr>
+<tr>
+<td>dbt tests (built-in)</td>
+<td><strong>CORE</strong> — the first line of data quality; free with dbt</td>
+<td>Warehouse-native testing is the 2026 default starting point in every quality-framework comparison</td>
+<td>https://pipecode.ai/blogs/data-quality-frameworks-great-expectations-vs-dbt-tests-vs-soda-core</td>
+</tr>
+<tr>
+<td>Great Expectations (GX Core)</td>
+<td><strong>AWARE</strong> — still in job specs, but the API reset + lighter rivals cost it momentum</td>
+<td>GX Core 1.0 rewrote the API; pre-1.0 versions sunset Oct 1, 2025 — older tutorials are now wrong; still recommended for pipeline-embedded validation on small teams</td>
+<td>https://greatexpectations.io/blog/retiring-gx-0-18/ ; https://greatexpectations.io/blog/changes-to-know-for-gx-core-1-0/</td>
+</tr>
+<tr>
+<td>Pandera</td>
+<td><strong>AWARE</strong> — lightweight DataFrame validation (pandas/Polars/PySpark)</td>
+<td>2026 pattern: Pandera inside Python/ML code, dbt tests/Elementary in the warehouse; right-sized where GX is overkill</td>
+<td>https://medium.com/data-science-collective/stop-ml-model-failures-complete-guide-to-data-validation-with-pandera-great-expectations-dbt-d7656eeadfae</td>
+</tr>
+<tr>
+<td>Elementary</td>
+<td><strong>CORE</strong> — cheapest high-signal observability for a dbt lakehouse; great portfolio ROI</td>
+<td>"Most common starting point for production observability among dbt teams" — installs as a dbt package, adds anomaly detection + test history</td>
+<td>https://atlan.com/know/data-observability-tools/ ; https://datacoves.com/post/dbt-data-quality-tools</td>
+</tr>
+<tr>
+<td>Soda (Core/Cloud)</td>
+<td><strong>AWARE</strong> — YAML-first, multi-source checks; know the pattern</td>
+<td>Solid OSS+commercial hybrid in 2026 comparisons; overlaps what dbt tests + Elementary give you</td>
+<td>https://pipecode.ai/blogs/data-quality-frameworks-great-expectations-vs-dbt-tests-vs-soda-core</td>
+</tr>
+<tr>
+<td>Monte Carlo</td>
+<td><strong>AWARE (concepts only)</strong> — category-defining but $50K–200K+/yr, can't self-host</td>
+<td>2025: launched AI Observability Agents (auto-deployed monitors, root-cause troubleshooting); know the vocabulary for interviews</td>
+<td>https://atlan.com/know/data-observability-tools/ ; https://www.getorchestra.io/blog/best-data-observability-tools-2026-ranked</td>
+</tr>
+<tr>
+<td>dbt Semantic Layer / MetricFlow</td>
+<td><strong>AWARE</strong> — semantic layers just became AI-agent infrastructure</td>
+<td>MetricFlow open-sourced under Apache 2.0 (Coalesce, Oct 2025) to align with the Open Semantic Interchange; OSI v1.0 spec shipped Jan 2026 with Snowflake, Databricks, Salesforce</td>
+<td>https://www.getdbt.com/blog/open-source-metricflow-governed-metrics ; https://getbruin.com/blog/semantic-layer-tools/</td>
+</tr>
+<tr>
+<td>Cube</td>
+<td><strong>AWARE</strong> — the leading independent semantic layer, now MCP-fronted</td>
+<td>Cube Core exposes governed metrics over SQL/REST/GraphQL/MCP; positioned as "agentic analytics" in 2026</td>
+<td>https://cube.dev/articles/best-semantic-layer-for-ai-and-bi-2026</td>
+</tr>
+</tbody>
+</table>
+<h2 id="orchestration--iac">Orchestration &amp; IaC<a class="headerlink" href="#orchestration--iac" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Verdict</th>
+<th>2026 status evidence</th>
+<th>Source URL(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apache Airflow (3.x)</td>
+<td><strong>CORE</strong> — still the industry standard; learn 3.x, not 2.x</td>
+<td>Airflow 3.0 (Apr 2025) was the biggest release since 2.0: React UI, DAG versioning, assets/event-driven scheduling, Task SDK, task isolation; 3.x line now at 3.3; State of Airflow surveys draw 5,000+ respondents</td>
+<td>https://airflow.apache.org/announcements/ ; https://www.astronomer.io/blog/state-of-airflow-2026/ ; https://airflow.apache.org/blog/airflow-survey-2025/</td>
+</tr>
+<tr>
+<td>Dagster</td>
+<td><strong>AWARE</strong> — strongest challenger, especially with dbt; worth a taste in a satellite project</td>
+<td>2026 comparisons: Dagster wins greenfield dbt-heavy teams with highest satisfaction; Airflow still dominates enterprise (and AWS via MWAA)</td>
+<td>https://www.getorchestra.io/blog/dagster-vs-prefect-vs-airflow-complete-data-orchestration-comparison-2026 ; https://datastackx.com/insights/airflow-vs-prefect-vs-dagster/</td>
+</tr>
+<tr>
+<td>Prefect</td>
+<td><strong>SKIP</strong> — fine product, but a third Python orchestrator adds no employability</td>
+<td>Occupies the "just-works for 20–100-person Python teams" niche; rarely a job-spec requirement where Airflow/Dagster aren't</td>
+<td>https://www.getorchestra.io/blog/dagster-vs-prefect-vs-airflow-complete-data-orchestration-comparison-2026</td>
+</tr>
+<tr>
+<td>Kestra</td>
+<td><strong>SKIP</strong> — YAML/declarative niche, less prominent in 2026 adoption discussions</td>
+<td>Positioned as the polyglot declarative alternative; low presence in DE job specs</td>
+<td>https://kestra.io/resources/data/prefect-alternatives ; https://www.getorchestra.io/blog/top-dagster-alternatives-in-2026-data-orchestration-primer</td>
+</tr>
+<tr>
+<td>Terraform</td>
+<td><strong>CORE</strong> — still the IaC hiring standard, with an asterisk</td>
+<td>~33% IaC share in 2026 (slowly ceding to OpenTofu after IBM's Feb 2025 HashiCorp close); OpenTofu is command-compatible, so skills transfer 1:1</td>
+<td>https://hexamatic.com.au/posts/infrastructure_as_code_in_2026/ ; https://dev.to/mechcloud_academy/opentofu-vs-terraform-in-2026-is-the-fork-finally-worth-it-3nd1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="streaming--cdc">Streaming &amp; CDC<a class="headerlink" href="#streaming--cdc" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Verdict</th>
+<th>2026 status evidence</th>
+<th>Source URL(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apache Kafka</td>
+<td><strong>CORE</strong> — learn the 4.x world: KRaft-only, no ZooKeeper</td>
+<td>Kafka 4.0 (Mar 18, 2025) removed ZooKeeper entirely, made KRaft the only mode, added Share Groups (queue semantics) and the new consumer rebalance protocol</td>
+<td>https://kafka.apache.org/blog/2025/03/18/apache-kafka-4.0.0-release-announcement/ ; https://www.confluent.io/blog/latest-apache-kafka-release/</td>
+</tr>
+<tr>
+<td>Debezium</td>
+<td><strong>CORE</strong> — still the de facto OSS CDC engine; one hands-on CDC project is high-value</td>
+<td>3.x line actively shipping (3.2.1 Aug 2025); CDC remains a top job-spec skill; pairs with MSK Connect on AWS</td>
+<td>https://debezium.io/blog/2025/08/13/debezium-3-2-1-final-released/</td>
+</tr>
+<tr>
+<td>Apache Flink</td>
+<td><strong>AWARE</strong> — know streaming semantics + when Flink; hands-on depth is a specialization</td>
+<td>Flink 2.0 (Mar 2025) shipped disaggregated state (ForSt on object storage, VLDB 2025 paper) — major cloud-native rearchitecture; ~60% of new pipelines have real-time requirements</td>
+<td>https://flink.apache.org/2025/03/24/apache-flink-2.0.0-a-new-era-of-real-time-data-processing/ ; https://data.folio3.com/blog/data-engineering-stats/</td>
+</tr>
+<tr>
+<td>Redpanda</td>
+<td><strong>AWARE</strong> — use it as your local Kafka substitute; know Redpanda Connect</td>
+<td>Mature Kafka-compatible single binary; Redpanda Cloud + Connect (ex-Benthos) grew enterprise share in 2025-26</td>
+<td>https://www.automq.com/blog/kafka-alternatives-compared-2026</td>
+</tr>
+<tr>
+<td>WarpStream</td>
+<td><strong>AWARE (concept only)</strong> — learn the "diskless Kafka on S3" architecture, not the product</td>
+<td>Diskless/object-storage-first streaming went from experiment to default for new high-volume workloads in ~18 months; Confluent (now IBM-owned, deal closed Mar 17, 2026) owns WarpStream</td>
+<td>https://www.automq.com/blog/diskless-kafka-alternatives-to-warpstream-what-architecture-should-you-trust ; https://insights.nomadlab.cc/blog/2026/05/kafka-alternatives-automq-warpstream-redpanda-nats-2026</td>
+</tr>
+<tr>
+<td>Estuary Flow</td>
+<td><strong>SKIP</strong> — managed CDC vendor; adoption evidence is mostly self-published</td>
+<td>Marketing push positions it as a Debezium replacement, but independent adoption data is thin; concepts covered by Debezium + Kafka</td>
+<td>https://estuary.dev/blog/debezium-alternatives/</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ingestion">Ingestion<a class="headerlink" href="#ingestion" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Verdict</th>
+<th>2026 status evidence</th>
+<th>Source URL(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dlt (dltHub)</td>
+<td><strong>CORE</strong> — the breakout ingestion tool of this cycle, and AI-agent-native</td>
+<td>3M monthly downloads, 10,000+ companies in production (up from 3,000 a year prior); by Jan 2026 ~91% of new dlt pipelines are built by coding agents (81K pipelines/month vs 2.4K in Jan 2025)</td>
+<td>https://dlthub.com/blog/introducing-dlthub ; https://venturebeat.com/data-infrastructure/ai-coding-transforms-data-engineering-how-dlthubs-open-source-python-library</td>
+</tr>
+<tr>
+<td>Airbyte</td>
+<td><strong>AWARE</strong> — huge install base, but heavy to run and ELv2-licensed</td>
+<td>200K+ company installs, 10K+ connectors; moved MIT → Elastic License 2.0; being displaced at the light end by dlt/Sling/ingestr</td>
+<td>https://airbyte.com/blog/update-on-airbytes-license ; https://getbruin.com/blog/dlt-alternatives/</td>
+</tr>
+<tr>
+<td>Fivetran</td>
+<td><strong>AWARE (concepts)</strong> — now the center of gravity of commercial data movement</td>
+<td>Post-merger with dbt Labs (completed June 1, 2026), owns SQLMesh lineage too; know its ELT model for interviews, don't train on it</td>
+<td>https://www.fivetran.com/press/fivetran-dbt-labs-complete-merger-to-create-the-data-infrastructure-for-trusted-ai-agents</td>
+</tr>
+<tr>
+<td>Sling</td>
+<td><strong>AWARE</strong> — 1-day CLI for database-to-database/file replication</td>
+<td>2026 ingestion roundups: Sling/ingestr for raw DB throughput, dlt for API/Python-native pipelines (dlt also benchmarked 3-4x cheaper CPU on SQL loads)</td>
+<td>https://getbruin.com/blog/best-data-ingestion-tools-2026/ ; https://dlthub.com/blog/dlt-and-sling-comparison</td>
+</tr>
+</tbody>
+</table>
+<h2 id="query-serving--bi">Query, Serving &amp; BI<a class="headerlink" href="#query-serving--bi" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Verdict</th>
+<th>2026 status evidence</th>
+<th>Source URL(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Trino / Athena</td>
+<td><strong>CORE</strong> — the SQL front door of your AWS lakehouse</td>
+<td>Athena engine v3 is Trino-derived and is the standard Iceberg query path on AWS; caveat: Athena does not yet support Iceberg v3 tables (Trino/Starburst Galaxy do)</td>
+<td>https://aws.amazon.com/blogs/big-data/upgrade-to-athena-engine-version-3-to-increase-query-performance-and-access-more-analytics-features ; https://www.ryft.io/blog/apache-iceberg-v3-is-it-ready</td>
+</tr>
+<tr>
+<td>ClickHouse</td>
+<td><strong>AWARE</strong> — the dominant real-time "serving/speed layer"; know when to reach for it</td>
+<td>2026 pattern is augmentation: replicate hot datasets from the lakehouse into ClickHouse for sub-second customer-facing analytics (Uber, Cloudflare, eBay)</td>
+<td>https://clickhouse.com/resources/engineering/how-to-choose-a-database-for-real-time-analytics-in-2026 ; https://www.tinybird.co/blog/clickhouse-alternatives</td>
+</tr>
+<tr>
+<td>StarRocks</td>
+<td><strong>SKIP</strong> — real momentum (Coinbase, Pinterest; Linux Foundation) but a second OLAP engine adds nothing at entry level</td>
+<td>Strong Iceberg-native lakehouse querying; category understanding covered by the ClickHouse row</td>
+<td>https://www.starrocks.io/blog/starrocks-2025-year-in-review/index.html</td>
+</tr>
+<tr>
+<td>Apache Doris</td>
+<td><strong>SKIP</strong> — same category, mostly APAC-weighted adoption</td>
+<td>Compute-storage decoupling (3.0) and Iceberg write-back exist, but not an AWS-market hiring signal</td>
+<td>https://www.pracdata.io/p/state-of-open-source-read-time-olap-2025</td>
+</tr>
+<tr>
+<td>Apache Superset</td>
+<td><strong>CORE (pick one BI tool; this one)</strong> — the data-team-standard OSS BI on Athena/Trino</td>
+<td>41% of orgs run OSS BI in production (Dresner 2025, up from 28% in 2022); 63K+ GitHub stars, SQL Lab IDE, 40+ chart types</td>
+<td>https://www.basedash.com/blog/best-open-source-bi-tools-compared-2026 ; https://blog.elest.io/apache-superset-vs-metabase-vs-redash-which-open-source-bi-tool-to-self-host-in-2026/</td>
+</tr>
+<tr>
+<td>Metabase</td>
+<td><strong>AWARE</strong> — the self-serve alternative; converging with Superset on capability</td>
+<td>60K+ orgs; wins time-to-value for business users; choice is becoming taste, so one hands-on BI tool suffices</td>
+<td>https://fastero.com/blog/metabase-vs-superset-open-source-bi-compared</td>
+</tr>
+<tr>
+<td>Evidence</td>
+<td><strong>AWARE</strong> — code-first, Git-native BI; nice for a portfolio's public reports</td>
+<td>Pioneered SQL+Markdown reports deployed as static sites; niche but growing among code-first teams</td>
+<td>https://trybuildpilot.com/677-evidence-vs-metabase-vs-apache-superset-2026</td>
+</tr>
+<tr>
+<td>MotherDuck</td>
+<td><strong>AWARE</strong> — cheap serverless DuckDB warehouse, ideal for satellite projects</td>
+<td>Now runs DuckLake 1.0 as a managed lakehouse; not yet a common job-spec line item</td>
+<td>https://motherduck.com/blog/announcing-ducklake-1-0-on-motherduck/</td>
+</tr>
+</tbody>
+</table>
+<h2 id="aws-platform-services">AWS Platform Services<a class="headerlink" href="#aws-platform-services" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Verdict</th>
+<th>2026 status evidence</th>
+<th>Source URL(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AWS Glue</td>
+<td><strong>CORE</strong> — the AWS-native Spark/ETL + catalog workhorse</td>
+<td>Glue 5.1 (Nov 2025): Spark 3.5.6, Iceberg v3 support (deletion vectors, row lineage), Lake Formation write support</td>
+<td>https://aws.amazon.com/about-aws/whats-new/2025/11/aws-glue-5-1</td>
+</tr>
+<tr>
+<td>Lake Formation</td>
+<td><strong>CORE (scoped)</strong> — you can't ship a <em>governed</em> AWS lakehouse without it</td>
+<td>Central to permissions across Glue/Athena/S3 Tables; Glue 5.1 added LF write support; also the governance plane of SageMaker Lakehouse</td>
+<td>https://aws.amazon.com/about-aws/whats-new/2025/11/aws-glue-5-1 ; https://docs.aws.amazon.com/prescriptive-guidance/latest/apache-iceberg-on-aws/introduction.html</td>
+</tr>
+<tr>
+<td>MWAA</td>
+<td><strong>AWARE</strong> — thin layer once you know Airflow; verify version currency</td>
+<td>Supports Airflow 3.x (3.0.6 since Oct 2025, 3.2.1 since May 2026) — older "MWAA lags years behind" advice is stale</td>
+<td>https://aws.amazon.com/about-aws/whats-new/2025/10/apache-airflow-3-amazon-mwaa ; https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html</td>
+</tr>
+<tr>
+<td>EMR</td>
+<td><strong>AWARE</strong> — know when EMR (scale/cost control) vs Glue (serverless simplicity)</td>
+<td>Remains one of four interchangeable engines (Athena/Redshift/Glue/EMR) over the SageMaker Lakehouse architecture</td>
+<td>https://aws.amazon.com/blogs/big-data/navigating-architectural-choices-for-a-lakehouse-using-amazon-sagemaker/</td>
+</tr>
+<tr>
+<td>MSK</td>
+<td><strong>AWARE</strong> — deployment vehicle for your Kafka skills, not a separate skill</td>
+<td>Express Brokers matured through 2025 (20K partitions/broker, KRaft with Kafka 3.9 in Dec 2025 — note MSK still trails OSS Kafka 4.0)</td>
+<td>https://aws.amazon.com/about-aws/whats-new/2025/12/aws-msk-express-brokers-support-kraft</td>
+</tr>
+<tr>
+<td>Redshift</td>
+<td><strong>AWARE</strong> — repositioned as the high-performance SQL engine <em>inside</em> the lakehouse</td>
+<td>Redshift Managed Storage now surfaces as Iceberg via SageMaker Lakehouse catalogs; Athena+Iceberg covers your build, but Redshift stays in AWS job specs (and is heavy on DEA-C01)</td>
+<td>https://docs.aws.amazon.com/sagemaker-lakehouse-architecture/latest/userguide/rms-integration.html</td>
+</tr>
+<tr>
+<td>SageMaker Lakehouse <em>(new)</em></td>
+<td><strong>AWARE</strong> — AWS's umbrella re-architecture of Glue/Athena/Redshift; know the branding</td>
+<td>Announced Dec 2024, built out through 2025-26: unified Iceberg-compatible access over S3 (incl. S3 Tables) and Redshift with zero-ETL ingestion</td>
+<td>https://aws.amazon.com/sagemaker/lakehouse/ ; https://docs.aws.amazon.com/sagemaker-lakehouse-architecture/latest/userguide/lakehouse-s3-tables-integration.html</td>
+</tr>
+<tr>
+<td>DMS</td>
+<td><strong>AWARE</strong> — AWS-native CDC/migration; one exercise's worth</td>
+<td>Still the AWS prescribed path for DB→lake CDC where Debezium isn't run; stable, no major 2025-26 shifts found</td>
+<td>https://docs.aws.amazon.com/prescriptive-guidance/latest/apache-iceberg-on-aws/introduction.html</td>
+</tr>
+<tr>
+<td>AppFlow</td>
+<td><strong>SKIP</strong> — alive but stagnant; not how 2026 ingestion is done</td>
+<td>Not on AWS's sunset list, but no meaningful 2025-26 investment and weak third-party reviews; dlt/Fivetran own this space</td>
+<td>https://docs.aws.amazon.com/general/latest/gr/sunset_services.html ; https://www.productowl.io/etl-tools/amazon-appflow</td>
+</tr>
+<tr>
+<td>EventBridge</td>
+<td><strong>AWARE</strong> — event-driven glue; pairs with Airflow 3 event scheduling</td>
+<td>Standard fabric for event-driven AWS pipelines; small learning surface</td>
+<td>https://aws.amazon.com/blogs/big-data/introducing-apache-airflow-3-on-amazon-mwaa-new-features-and-capabilities</td>
+</tr>
+<tr>
+<td>Lambda</td>
+<td><strong>CORE</strong> — the ubiquitous serverless building block in AWS data platforms</td>
+<td>Appears in virtually every AWS DE architecture (triggers, light transforms, ops automation); table stakes in job specs</td>
+<td>https://docs.aws.amazon.com/prescriptive-guidance/latest/apache-iceberg-on-aws/introduction.html</td>
+</tr>
+<tr>
+<td>Step Functions</td>
+<td><strong>AWARE</strong> — know when it beats Airflow (serverless, AWS-native micro-orchestration)</td>
+<td>Common in AWS-heavy specs; one state machine build is enough alongside a real orchestrator</td>
+<td>https://aws.amazon.com/blogs/big-data/navigating-architectural-choices-for-a-lakehouse-using-amazon-sagemaker/</td>
+</tr>
+</tbody>
+</table>
+<h2 id="lineage--ai-era-de">Lineage &amp; AI-era DE<a class="headerlink" href="#lineage--ai-era-de" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Verdict</th>
+<th>2026 status evidence</th>
+<th>Source URL(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenLineage</td>
+<td><strong>AWARE</strong> — the lineage standard; free via the Airflow provider</td>
+<td>Built-in Airflow provider (actively updated through 2026), plus Spark/dbt/Flink integrations; turn it on in your platform, understand run/job/dataset model</td>
+<td>https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/guides/structure.html ; https://github.com/OpenLineage/openlineage</td>
+</tr>
+<tr>
+<td>LLM-assisted DE + MCP <em>(practice, not a tool)</em></td>
+<td><strong>CORE</strong> — 2026 job specs now assume it</td>
+<td>2026 hiring checklists list MCP integration, agent orchestration, RAG/vector DBs alongside SQL/Airflow; agents author ~91% of new dlt pipelines; MCP "becoming the enterprise standard for AI interoperability"; semantic layers/catalogs now ship MCP servers</td>
+<td>https://www.digitalapplied.com/blog/ai-developer-hiring-skills-that-matter-2026 ; https://dlthub.com/blog/introducing-dlthub ; https://cube.dev/articles/semantic-layer-for-ai-agents-2026</td>
+</tr>
+<tr>
+<td>Vector databases (pgvector / LanceDB class)</td>
+<td><strong>AWARE</strong> — DE pipelines increasingly <em>feed</em> RAG; know one embedding-load pattern</td>
+<td>Vector DB/RAG appears on 2026 DE-adjacent hiring checklists; Lance format called the fastest-growing format for multimodal/AI data (LanceDB $30M Series A, Netflix usage)</td>
+<td>https://www.mockexperts.com/blog/2026-ai-engineer-interview-roadmap-rag-llms ; https://lancedb.substack.com/p/june-2025-30m-series-a-multimodal</td>
+</tr>
+<tr>
+<td>Confluent Tableflow <em>(new, concept)</em></td>
+<td><strong>AWARE</strong> — emblem of the Kafka→Iceberg "zero-ETL" convergence</td>
+<td>GA March 2025; materializes Kafka topics directly as Iceberg/Delta tables in S3 with catalog sync — the pattern is replacing hand-built streaming-to-lake jobs</td>
+<td>https://www.confluent.io/blog/tableflow-ga-kafka-snowflake-iceberg/</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="what-changed-recently-that-older-guides-miss">What changed recently that older guides miss<a class="headerlink" href="#what-changed-recently-that-older-guides-miss" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>The dbt/Fivetran consolidation</strong>: Fivetran acquired Tobiko/SQLMesh (Sept 2025), announced merger with dbt Labs (Oct 13, 2025), completed it June 1, 2026; SQLMesh went to the Linux Foundation. "dbt vs SQLMesh" is now an intra-company product question. https://www.fivetran.com/press/fivetran-dbt-labs-complete-merger-to-create-the-data-infrastructure-for-trusted-ai-agents ; https://thenewstack.io/fivetran-donates-sqlmesh-lf/</li>
+<li><strong>dbt Core v2.0 / Fusion</strong>: the Rust engine is GA on Snowflake and the default for new dbt platform projects — guides teaching only the Python dbt-core 1.x workflow are aging fast. https://docs.getdbt.com/blog/dbt-fusion-engine-path-to-ga</li>
+<li><strong>Airflow 3.x is a different product</strong>: React UI, DAG versioning, assets/event-driven scheduling, Task SDK, isolated task execution (Apr 2025); and MWAA now runs 3.x — 2.x-only tutorials mislead. https://airflow.apache.org/announcements/ ; https://aws.amazon.com/about-aws/whats-new/2025/10/apache-airflow-3-amazon-mwaa</li>
+<li><strong>Kafka 4.0 killed ZooKeeper</strong> (Mar 2025): KRaft-only, Share Groups/queues, new rebalance protocol; anything teaching ZooKeeper ops is obsolete. https://kafka.apache.org/blog/2025/03/18/apache-kafka-4.0.0-release-announcement/</li>
+<li><strong>Iceberg won, and v3 landed</strong> (ratified June 2025: deletion vectors, variant, row lineage) — but engine support is uneven; Athena notably lacks v3 while Glue 5.1 supports it. https://opensource.googleblog.com/2025/08/whats-new-in-iceberg-v3.html ; https://www.ryft.io/blog/apache-iceberg-v3-is-it-ready</li>
+<li><strong>S3 Tables became a real platform</strong>: Iceberg REST Catalog API (Mar 2025), replication + Intelligent-Tiering + new compaction (late 2025) — older "it's half-baked" takes (e.g., Dec 2024 reviews) are outdated. https://aws.amazon.com/blogs/aws/announcing-replication-support-and-intelligent-tiering-for-amazon-s3-tables/</li>
+<li><strong>AWS rebranded its analytics stack around SageMaker Lakehouse</strong> — Glue/Athena/Redshift/EMR are now framed as engines over one Iceberg-compatible lakehouse. https://aws.amazon.com/sagemaker/lakehouse/</li>
+<li><strong>DuckLake appeared and hit 1.0</strong> (Apr 2026), challenging Iceberg's file-based metadata design with a SQL-database catalog. https://ducklake.select/2026/04/13/ducklake-10/</li>
+<li><strong>Iceberg REST catalogs became their own layer</strong>: Apache Polaris (TLP Feb 2026) and Gravitino (TLP June 2025) — "catalog" no longer just means Glue/Hive metastore. https://amdatalakehouse.substack.com/p/the-state-of-apache-polaris-in-july</li>
+<li><strong>Agent-built pipelines went mainstream</strong>: ~91% of new dlt pipelines are authored by AI coding agents; MCP servers are shipping across the stack; "LLM integration" now appears in DE job specs at unchanged pay. https://dlthub.com/blog/introducing-dlthub</li>
+<li><strong>GX pre-1.0 sunset</strong> (Oct 1, 2025): the vast majority of Great Expectations tutorials online target a dead API. https://greatexpectations.io/blog/retiring-gx-0-18/</li>
+<li><strong>Streaming infra consolidated under IBM</strong>: IBM closed the Confluent acquisition (Mar 17, 2026) after Confluent had absorbed WarpStream; "diskless Kafka on S3" is the new architecture default for high-volume workloads. https://www.automq.com/blog/kafka-alternatives-compared-2026</li>
+<li><strong>Semantic layers standardized for AI</strong>: MetricFlow open-sourced (Apache 2.0), Open Semantic Interchange v1.0 spec (Jan 2026) with Snowflake/Databricks/Salesforce. https://www.getdbt.com/blog/open-source-metricflow-governed-metrics</li>
+</ul>
+<h2 id="contested-calls">Contested calls<a class="headerlink" href="#contested-calls" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Iceberg CORE despite low production penetration</strong>: the 2026 Practical Data survey (n=1,101) shows &gt;25% of teams exploring Iceberg but &lt;10% in production. Still CORE — the direction is unanimous and AWS is building its storage roadmap around it — but a hiring manager may care more about Spark/SQL than Iceberg internals. https://joereis.github.io/practical_data_data_eng_survey/</li>
+<li><strong>Dagster AWARE vs CORE</strong>: Dagster wins greenfield dbt-centric teams with top satisfaction scores; Airflow's enterprise dominance and MWAA alignment tipped this AWS-weighted call to Airflow-CORE/Dagster-AWARE. A non-AWS-weighted framework could defensibly flip it. https://datastackx.com/insights/airflow-vs-prefect-vs-dagster/</li>
+<li><strong>SQLMesh AWARE vs CORE</strong>: LF governance and "sophisticated new deployments picking SQLMesh" argue for more investment; dbt's 80K-team installed base argues the market will meet in the middle. Evidence genuinely mixed on whether SQLMesh skills yet convert to interviews. https://pdpspectra.com/blog/sqlmesh-vs-dbt-2026/ ; https://smallbigdata.substack.com/p/sqlmesh-dbt-and-fivetran-whats-next</li>
+<li><strong>Great Expectations AWARE vs SKIP</strong>: still in job specs, but the 1.0 API break plus the dbt-tests+Elementary pattern eroded its default status. If time is tight, dbt tests + Elementary + Pandera cover the same interview ground. https://pipecode.ai/blogs/data-quality-frameworks-great-expectations-vs-dbt-tests-vs-soda-core</li>
+<li><strong>Debezium CORE vs AWARE</strong>: on pure AWS-employability, DMS/zero-ETL may be what you actually use at work; Debezium got CORE because a Kafka+Debezium CDC portfolio project demonstrates transferable CDC mechanics no managed service shows. Reasonable people would demote it to AWARE and lean on DMS + Tableflow concepts. https://debezium.io/blog/2025/08/13/debezium-3-2-1-final-released/</li>
+<li><strong>DuckLake's trajectory</strong>: production-ready, top-10 extension, multi-engine clients — but it's one year old against an Iceberg ecosystem that AWS, Snowflake, and Databricks have all standardized on. AWARE now; revisit in 12 months. https://ducklake.select/2026/04/13/ducklake-10/</li>
+<li><strong>Estuary SKIP</strong>: nearly all discoverable evidence is Estuary's own content marketing; stays SKIP pending third-party signals. https://estuary.dev/blog/debezium-alternatives/</li>
+</ul>
+<p><em>Distinct sources used: 45+ across official release notes (Apache Kafka/Flink/Iceberg/Airflow, AWS What's New, Debezium, Delta, DuckLake, GX, dbt), surveys (Practical Data 2026, State of Airflow 2025/2026, dbt State of Analytics Engineering 2026, Dresner via Basedash, Pracdata OLAP 2025, Iceberg Ecosystem 2025), press releases, and independent engineering blogs.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.top", "search.suggest", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

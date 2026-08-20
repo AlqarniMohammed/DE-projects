@@ -1,0 +1,1370 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../phase-3-spark-databricks/">
+      
+      
+        <link rel="next" href="../phase-5-streaming/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Phase 4 — Orchestration & Ingestion - The Data Engineer Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#phase-4--orchestration--ingestion" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="The Data Engineer Framework" class="md-header__button md-logo" aria-label="The Data Engineer Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The Data Engineer Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Phase 4 — Orchestration & Ingestion
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="The Data Engineer Framework" class="md-nav__button md-logo" aria-label="The Data Engineer Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    The Data Engineer Framework
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phases
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-0-orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Orientation & Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-1-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Foundations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-2-aws-lakehouse-core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — AWS Lakehouse Core
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-3-spark-databricks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Spark & Databricks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Orchestration & Ingestion
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Orchestration & Ingestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-terminology--glossarymd-p4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New terminology → GLOSSARY.md [P4]
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learn-20-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learn (~20 h)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build--platform-v2-orchestrated-multi-mode-ingestion-38-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build — Platform v2: orchestrated, multi-mode ingestion (~38 h)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Build — Platform v2: orchestrated, multi-mode ingestion (~38 h)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prove-it-assignment-23-h-dag-integrity-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prove-it assignment (2–3 h): DAG integrity tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build--satellites-12-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build — Satellites (~12 h)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#competency-gate-g4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Competency gate G4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publish-checkpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Publish checkpoint
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-yourself--questions-you-can-now-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check yourself — questions you can now answer
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-5-streaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 5 — Streaming & CDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-6-production-serving/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 6 — Production, Serving & Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GLOSSARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PROGRESS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progress tracker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/WHY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why it looks this way
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/TOOLS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/DATASETS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datasets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/CERTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Certifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/COURSES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Video courses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/LEARNERS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learners & placement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/SOURCES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-terminology--glossarymd-p4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New terminology → GLOSSARY.md [P4]
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learn-20-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learn (~20 h)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build--platform-v2-orchestrated-multi-mode-ingestion-38-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build — Platform v2: orchestrated, multi-mode ingestion (~38 h)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Build — Platform v2: orchestrated, multi-mode ingestion (~38 h)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prove-it-assignment-23-h-dag-integrity-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prove-it assignment (2–3 h): DAG integrity tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build--satellites-12-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build — Satellites (~12 h)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#competency-gate-g4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Competency gate G4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publish-checkpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Publish checkpoint
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-yourself--questions-you-can-now-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check yourself — questions you can now answer
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="phase-4--orchestration--ingestion">Phase 4 — Orchestration &amp; Ingestion<a class="headerlink" href="#phase-4--orchestration--ingestion" title="Permanent link">&para;</a></h1>
+<p><strong>Duration:</strong> months 7–8 · <strong>Budget:</strong> ~72 hours · <strong>AWS cost:</strong> ≤ $25/mo discipline: Airflow runs <strong>locally</strong>, RDS/DMS/Kinesis labs are short-lived with <code>make destroy</code> and per-lab caps below</p>
+<p>No exam this phase — you already passed both. Kinesis, DMS, and Redshift arrive as services you've answered exam questions about and now operate for real, with no prep clock running. The platform grows a real orchestrator and three ingestion modes (API, CDC, streaming-lite); this is where it starts reading as production.</p>
+<h2 id="objectives">Objectives<a class="headerlink" href="#objectives" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Airflow 3.x</strong> production patterns: assets, DAG versioning, sensors, retries, alerts — many small idempotent DAGs, never a mega-DAG.</li>
+<li>Declarative ingestion with <strong>dlt</strong> (API sources, incremental cursors, merge dispositions).</li>
+<li><strong>CDC on AWS</strong> with DMS from a live RDS Postgres into the lakehouse.</li>
+<li>AWS streaming ingest: <strong>Kinesis Data Streams vs Firehose</strong>, landing into Iceberg — deepening the P2 mini-lab into a real pipeline.</li>
+<li>Redshift + Spectrum working knowledge (the satellite goes deeper than the P2 taste lab).</li>
+<li><strong>Secrets handled like production:</strong> no credential in code or git, ever.</li>
+</ol>
+<h2 id="new-terminology--glossarymd-p4">New terminology → <a href="../../GLOSSARY/">GLOSSARY.md</a> <code>[P4]</code><a class="headerlink" href="#new-terminology--glossarymd-p4" title="Permanent link">&para;</a></h2>
+<p>Orchestrator vs cron · DAG · Airflow 3 (assets, DAG versioning) · task-based vs asset-based · sensor/trigger · XCom · MWAA · dlt · <strong>CDC</strong> · DMS · Kinesis Streams vs Firehose · Step Functions/EventBridge · Redshift/Spectrum/Serverless · DISTKEY/SORTKEY · secrets backend.</p>
+<h2 id="learn-20-h">Learn (~20 h)<a class="headerlink" href="#learn-20-h" title="Permanent link">&para;</a></h2>
+<p>Every resource is <strong>pinned</strong> to an exercise — nothing here is learn-only.</p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Scope</th>
+<th>Hours</th>
+<th>Pinned by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://academy.astronomer.io/path/airflow-101">Astronomer Academy Airflow 101</a> + <a href="https://academy.astronomer.io/path/airflow-dag-authoring">DAG Authoring path</a> (free, Airflow-3-native)</td>
+<td>Both paths</td>
+<td>12</td>
+<td>Build step 1 (the small-DAGs migration) + the DAG-integrity test assignment</td>
+</tr>
+<tr>
+<td><a href="https://dlthub.com/docs/intro">dlt docs</a> — REST source tutorial + incremental loading</td>
+<td>Working level</td>
+<td>4</td>
+<td>Build step 3: the dlt source + the written dlt-vs-hand-rolled comparison</td>
+</tr>
+<tr>
+<td>Connector-ELT positioning: skim <a href="https://docs.airbyte.com/">Airbyte</a> / <a href="https://fivetran.com/docs/getting-started">Fivetran</a> / <a href="https://docs.slingdata.io/">Sling</a> landing docs</td>
+<td>Where managed connectors beat code, and vice versa</td>
+<td>0.5</td>
+<td>One-paragraph positioning note in <code>notes/</code>, written next to the dlt comparison</td>
+</tr>
+<tr>
+<td><a href="https://docs.aws.amazon.com/emr/">Glue vs EMR</a> — when a team picks EMR/EMR Serverless</td>
+<td>1-hour read; Glue stays the hands-on vehicle</td>
+<td>1</td>
+<td>A written Glue-vs-EMR decision note in <code>notes/</code></td>
+</tr>
+<tr>
+<td>MWAA current state reading</td>
+<td>Now runs Airflow 3.x — know the managed trade-offs + cost</td>
+<td>1</td>
+<td>The MWAA lab (build step 7) + its ops-differences note</td>
+</tr>
+<tr>
+<td><a href="https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/secrets-backends/aws-ssm-parameter-store.html">Airflow secrets backend docs</a> — SSM Parameter Store</td>
+<td>Read before build step 2</td>
+<td>1</td>
+<td>Build step 2: the SSM-backed connections wiring</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Video lane — optional swap.</strong> Each row below <strong>replaces</strong> the default row it names: same "Pinned by" exercise, hours swap rather than add. Pick one lane per row before starting (<a href="../../GUIDE/#the-phase-loop">the rule</a>); prices, details, and the rows with no video twin: <a href="../../reference/COURSES/">COURSES.md</a>. <em>(Most default rows above are already video — this swap changes the provider or the price, not the format.)</em></p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Scope</th>
+<th>Hours</th>
+<th>Pinned by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Marc Lamberti Udemy: <a href="https://www.udemy.com/course/the-complete-hands-on-course-to-master-apache-airflow/">Airflow 3 intro</a> + <a href="https://www.udemy.com/course/apache-airflow-3-advanced-dag-authoring/">Advanced DAG Authoring</a> (~$15–20 each; Airflow-3-current)</td>
+<td>Swaps the <em>Astronomer Academy</em> row. Honest note: the free default covers the same ground and is shorter — pick this only if the Academy format doesn't stick</td>
+<td>20–30 (vs 12 — noticeably longer)</td>
+<td>Build step 1 (the small-DAGs migration) + the DAG-integrity test assignment</td>
+</tr>
+</tbody>
+</table>
+<p><em>Before starting, re-verify:</em> Airflow current minor (3.3.x at research date), MWAA supported versions, Redshift Serverless free-credit terms.</p>
+<h2 id="build--platform-v2-orchestrated-multi-mode-ingestion-38-h">Build — Platform v2: orchestrated, multi-mode ingestion (~38 h)<a class="headerlink" href="#build--platform-v2-orchestrated-multi-mode-ingestion-38-h" title="Permanent link">&para;</a></h2>
+<p>Each chargeable lab lists its <strong>cost cap and teardown deadline</strong> — check the AWS billing page mid-phase, not just at the gate.</p>
+<ol>
+<li><strong>Airflow 3 locally</strong> (Astro CLI or Docker Compose). Migrate the GitHub-Actions schedule into <strong>small, single-purpose DAGs</strong>: <code>ingest_taxi</code>, <code>dbt_build</code>, <code>data_checks</code> — retries, a <strong>Deadline Alert</strong> (Airflow 3's replacement for the removed SLA feature: a freshness expectation with a callback), Slack (or email) failure alerts, one asset-triggered dependency (dbt runs when ingest's asset updates). Pass one small value (the processed date/path) between <code>ingest_taxi</code> and <code>dbt_build</code> via <strong>XCom</strong> — and assert it in the DAG-integrity suite below (XCom is for values, never datasets). Keep the Actions workflow as CI only.</li>
+<li><strong>Secrets increment (~2–3 h):</strong> wire Airflow's connections to the <strong>AWS SSM Parameter Store secrets backend</strong> — RDS password, Slack webhook, API keys all live there, none in <code>airflow.cfg</code>, env files, or git. The P0 <code>gitleaks</code> pre-commit hook has guarded the repo since day one; this is where the <em>runtime</em> side becomes production-shaped. A question you can now answer cold: "how do your DAGs get credentials?"</li>
+<li><strong>dlt increment:</strong> add a second source to the platform — a public REST API (weather for taxi-demand enrichment works nicely) — via <strong>dlt</strong> with incremental cursor + merge disposition, landing in raw and flowing through dbt. Compare: dlt config vs the hand-rolled Phase-1 downloader (line count, schema handling, retries).</li>
+<li><strong>CDC increment</strong> <em>(cap ≤ $8 · teardown ≤ 5 days after first CDC event — the demo records in 2–3 days, and 10 days of RDS+DMS blows the cap)</em>: seed a small <strong>RDS Postgres</strong> OLTP database → <strong>DMS</strong> full-load + CDC to S3 → MERGE into an Iceberg silver table (Glue job or Athena MERGE) → downstream dbt marts. Prove: an UPDATE in Postgres is visible in Athena in minutes. <strong>Record the demo, then tear down RDS/DMS.</strong>
+   <strong>The seeded OLTP spec (P5 reuses this unchanged — build it to spec):</strong> ≥3 related tables (e.g., bookings, customers, listings); a generator emitting a steady transaction mix of roughly <strong>70% inserts / 20% updates / 10% deletes</strong>; one command that adds a column mid-run (the schema-change drill); keep generator + schema in the platform repo. Menu of scenario flavors: the S5 section of <a href="../../reference/DATASETS/"><code>DATASETS.md</code></a>.</li>
+<li><strong>Streaming-lite increment</strong> <em>(cap ≤ $5 · teardown same day as demo)</em>: EventBridge-scheduled Lambda polls a live feed (Citi Bike GBFS or similar) → <strong>Kinesis Data Streams → Firehose → Iceberg/S3</strong>, partitioned; Athena queries fresh rows. The P2 mini-lab configured the plumbing once; this time it's a real pipeline with a consumer.</li>
+<li><strong>AWS micro-orchestration lab (1 day, ~$1):</strong> one Step Functions state machine + EventBridge rule doing a mini-pipeline — know when this beats Airflow.</li>
+<li><strong>MWAA lab</strong> <em>(cap ~$10–15 · teardown same day)</em>: spin up the smallest MWAA env, deploy one DAG, note the ops differences.</li>
+</ol>
+<p><strong>AI rule:</strong> your assistant may generate operator boilerplate and setup scripts; hand-write DAG structure, dlt source config, the secrets-backend wiring, and the MERGE logic.</p>
+<h3 id="prove-it-assignment-23-h-dag-integrity-tests">Prove-it assignment (2–3 h): DAG integrity tests<a class="headerlink" href="#prove-it-assignment-23-h-dag-integrity-tests" title="Permanent link">&para;</a></h3>
+<p>A pytest suite CI runs on every PR: all DAGs import cleanly (no top-level heavy code), every DAG has retries + owner set, no task is orphaned, the XCom handoff from build step 1 carries the expected value, and one DAG-level unit test with a mocked operator. The standard Airflow testing pattern — and the reason a broken DAG never reaches the scheduler.</p>
+<h2 id="build--satellites-12-h">Build — Satellites (~12 h)<a class="headerlink" href="#build--satellites-12-h" title="Permanent link">&para;</a></h2>
+<p><strong>S4a — Redshift + Spectrum hybrid</strong> <em>(cap = free credits · teardown after demo)</em>: Redshift <strong>Serverless</strong> + Spectrum external schema over your S3 curated data; dbt-redshift builds one mart joining native + Spectrum tables; <code>EXPLAIN</code> screenshot proving the federated plan; cost note vs all-Redshift.</p>
+<p><strong>S4b — Dagster vs Airflow</strong>: <a href="https://courses.dagster.io/">Dagster University Essentials</a> (free, ~6 h) → rebuild ONE platform pipeline as software-defined assets with <code>dagster-dbt</code> → <code>COMPARISON.md</code> across <strong>four fixed axes, one concrete code-diff example each</strong>: authoring model (task graph vs asset graph) · backfill story · local dev loop · dbt integration. A senior-level conversation piece.</p>
+<p>Unique briefs for either satellite: the <code>/satellite-brief</code> skill or <a href="../../prompts/generate-satellite-requirements/"><code>prompts/generate-satellite-requirements.md</code></a>.</p>
+<h2 id="competency-gate-g4">Competency gate G4<a class="headerlink" href="#competency-gate-g4" title="Permanent link">&para;</a></h2>
+<ul>
+<li>[ ] <strong>Named artifact:</strong> the orchestrated platform — Airflow UI showing green multi-DAG runs with a deliberate failure + retry + alert demonstrated on video.</li>
+<li>[ ] Secrets demo: a DAG pulls its credentials from SSM Parameter Store; <code>gitleaks</code> pre-commit shown catching a planted secret.</li>
+<li>[ ] dlt source live in the platform (weather flowing through dbt) + the written dlt-vs-hand-rolled comparison.</li>
+<li>[ ] CDC demo recorded: Postgres UPDATE → visible in Athena · RDS/DMS torn down on deadline.</li>
+<li>[ ] Kinesis path demo recorded · torn down.</li>
+<li>[ ] DAG-integrity pytest suite green in CI.</li>
+<li>[ ] Both satellites' artifacts published (<code>EXPLAIN</code> proof · <code>COMPARISON.md</code>).</li>
+<li>[ ] Bill check: the month's AWS spend ≤ $25 despite the labs (evidence in PROGRESS.md) · mid-phase billing check done.</li>
+<li>[ ] <strong>External critique requested:</strong> comparison or CDC artifact posted — request thread linked.</li>
+<li>[ ] <code>SELF-CHECK.md</code> updated with this phase's written answers.</li>
+<li>[ ] <strong>Retrieval checkpoint:</strong> all <code>[P4]</code> terms + 10 random earlier terms, ≥80%.</li>
+<li>[ ] Comparison post published (see below).</li>
+</ul>
+<h2 id="publish-checkpoint">Publish checkpoint<a class="headerlink" href="#publish-checkpoint" title="Permanent link">&para;</a></h2>
+<p>Post (any public platform): "I built the same pipeline in Airflow and Dagster — task graphs vs asset graphs, honestly compared."</p>
+<h2 id="check-yourself--questions-you-can-now-answer">Check yourself — questions you can now answer<a class="headerlink" href="#check-yourself--questions-you-can-now-answer" title="Permanent link">&para;</a></h2>
+<ul>
+<li>"Design CDC from an operational Postgres into a lakehouse — managed and open-source options."</li>
+<li>"Kinesis Data Streams vs Firehose vs MSK — when each?"</li>
+<li>"How do you make a DAG safe to re-run?"</li>
+<li>"How do your DAGs get credentials?"</li>
+<li>"Airflow vs Dagster — what's actually different?"</li>
+<li>"When would you keep data in Redshift vs S3 + Spectrum?"</li>
+</ul>
+<hr />
+<p>← <a href="../phase-3-spark-databricks/">Phase 3 — Spark &amp; Databricks</a> · <a href="../../">Route map</a> · <a href="../../GUIDE/">Guide</a> · <a href="../../PROGRESS/">Progress</a> · <strong>Next: <a href="../phase-5-streaming/">Phase 5 — Streaming &amp; CDC →</a></strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

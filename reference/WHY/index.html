@@ -1,0 +1,1361 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../PROGRESS/">
+      
+      
+        <link rel="next" href="../TOOLS/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Why it looks this way - The Data Engineer Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#why-the-framework-looks-the-way-it-does" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="The Data Engineer Framework" class="md-header__button md-logo" aria-label="The Data Engineer Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The Data Engineer Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Why it looks this way
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="The Data Engineer Framework" class="md-nav__button md-logo" aria-label="The Data Engineer Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    The Data Engineer Framework
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phases
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../phases/phase-0-orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Orientation & Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../phases/phase-1-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Foundations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../phases/phase-2-aws-lakehouse-core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — AWS Lakehouse Core
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../phases/phase-3-spark-databricks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Spark & Databricks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../phases/phase-4-orchestration-ingestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Orchestration & Ingestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../phases/phase-5-streaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 5 — Streaming & CDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../phases/phase-6-production-serving/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 6 — Production, Serving & Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GLOSSARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PROGRESS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progress tracker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why it looks this way
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why it looks this way
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-destination-a-full-data-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The destination: a full data stack
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-the-12-months-go--the-honest-hour-math" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where the 12 months go — the honest hour math
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-one-platform-not-30-projects--the-design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why one platform, not 30 projects — the design decisions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-nine-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The nine principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-we-deliberately-skip-and-why" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What we deliberately skip, and why
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-both-certs-land-by-month-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why both certs land by month 7
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-each-phase-opens-the-way-it-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why each phase opens the way it does
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-build-in-public" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why build in public
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-the-evidence-comes-from" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where the evidence comes from
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TOOLS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATASETS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datasets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CERTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Certifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../COURSES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Video courses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LEARNERS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learners & placement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SOURCES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-destination-a-full-data-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The destination: a full data stack
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-the-12-months-go--the-honest-hour-math" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where the 12 months go — the honest hour math
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-one-platform-not-30-projects--the-design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why one platform, not 30 projects — the design decisions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-nine-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The nine principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-we-deliberately-skip-and-why" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What we deliberately skip, and why
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-both-certs-land-by-month-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why both certs land by month 7
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-each-phase-opens-the-way-it-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why each phase opens the way it does
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-build-in-public" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why build in public
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-the-evidence-comes-from" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where the evidence comes from
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="why-the-framework-looks-the-way-it-does">Why the Framework Looks the Way It Does<a class="headerlink" href="#why-the-framework-looks-the-way-it-does" title="Permanent link">&para;</a></h1>
+<p>Nothing in this file is required to follow the framework. This is where the reasoning lives, so the learner-facing files can stay short.</p>
+<p>Jump: <a href="#the-destination-a-full-data-stack">The destination</a> · <a href="#where-the-12-months-go--the-honest-hour-math">Hour math</a> · <a href="#why-one-platform-not-30-projects--the-design-decisions">Design decisions</a> · <a href="#the-nine-principles">Principles</a> · <a href="#what-we-deliberately-skip-and-why">Skip-list</a> · <a href="#why-both-certs-land-by-month-7">Certs</a> · <a href="#why-each-phase-opens-the-way-it-does">Phase rationale</a> · <a href="#why-build-in-public">Build in public</a> · <a href="#where-the-evidence-comes-from">Evidence</a></p>
+<h2 id="the-destination-a-full-data-stack">The destination: a full data stack<a class="headerlink" href="#the-destination-a-full-data-stack" title="Permanent link">&para;</a></h2>
+<p>The framework ends with something big: a <strong>complete data platform</strong> covering the whole lifecycle — ingestion (batch, API, CDC, streaming), lakehouse storage, transformation, orchestration, quality and contracts, IaC, and a serving layer — plus a written <strong>platform journey</strong> telling its story. That is the kind of system real data teams publish engineering posts about; <a href="https://engineering.tweeq.sa/tweeq-data-platform-journey-and-lessons-learned-clickhouse-dbt-dagster-and-superset-fa27a4a61904">Tweeq's journey</a> is one example of the <em>scale and completeness</em> being aimed at — not a stack to copy. No tool combination is "the right one"; the default path's choices are defaults, each with reasons below.</p>
+<h2 id="where-the-12-months-go--the-honest-hour-math">Where the 12 months go — the honest hour math<a class="headerlink" href="#where-the-12-months-go--the-honest-hour-math" title="Permanent link">&para;</a></h2>
+<p>The phase budgets sum to <strong>~483 hours</strong> (18 + 70 + 95 + 75 + 72 + 65 + 88). Practice-exam time and labs are counted, not hidden. (The optional <a href="../COURSES/">video lane</a> swaps rows one-for-one inside these budgets — where a twin runs longer, its row says so; budget the printed hours for whichever lane you pick, never both.) Against the stated pace:</p>
+<table>
+<thead>
+<tr>
+<th>Weekly pace</th>
+<th>Total duration</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9–10 h/week</td>
+<td>~12 months</td>
+<td>The 12-month arc, with modest slack</td>
+</tr>
+<tr>
+<td>8 h/week</td>
+<td>~15 months</td>
+<td>Fine — gates don't care about calendars</td>
+</tr>
+<tr>
+<td>6 h/week</td>
+<td>~20 months</td>
+<td>Also a win — same destination, later arrival</td>
+</tr>
+</tbody>
+</table>
+<p>The title says 12 months; the gates say "when you're ready." Two <strong>buffer weeks per half-year</strong> are planned in (slack is scheduled, not stolen).</p>
+<p><strong>The pre-authorized trim path.</strong> If time runs short, cut in this order, nothing else: ① satellite S4a (Redshift hybrid — the P2 taste lab + exam theory already cover it), ② the Polars and Flink labs, ③ satellite S1 (the platform already teaches dbt from zero). <strong>Trimming an item also strikes its line from the gate</strong> — record it in <code>PROGRESS.md</code> as "(trimmed per the pre-authorized path)" so the evidence trail stays honest. <strong>The platform and both certs are never trimmed.</strong></p>
+<h2 id="why-one-platform-not-30-projects--the-design-decisions">Why one platform, not 30 projects — the design decisions<a class="headerlink" href="#why-one-platform-not-30-projects--the-design-decisions" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Design choice</th>
+<th>Evidence behind it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One evolving platform, not 30 disconnected weekly projects</td>
+<td>Every roadmap failure-mode study flags the "capstone cliff" and tutorial hell; every real team builds one platform incrementally (<a href="../../sources/research/roadmap-benchmarks/">roadmap benchmarks</a>, <a href="../../sources/research/platform-journeys/">platform journeys</a>).</td>
+</tr>
+<tr>
+<td>Competency gates, not deadlines</td>
+<td>Calendar-gated plans cascade when life happens. Gates are named artifacts + retrieval checks; slipping 2 weeks costs nothing.</td>
+</tr>
+<tr>
+<td>Both certs in the first half of the year</td>
+<td>Each exam's core surface is exactly what its phase builds (P2 = DEA's S3/Glue/Athena/Lake Formation; P3 = the Databricks environment itself), so prep and build align instead of competing. Sitting early also shrinks the blueprint-revision risk window. Full reasoning: <a href="../CERTS/">CERTS.md</a>.</td>
+</tr>
+<tr>
+<td>A terminology on-ramp in every phase</td>
+<td>The #1 reported problem with tool-dense plans is terminology overwhelm. Every phase lists its new terms first, linked to the glossary, taught as contrast pairs.</td>
+</tr>
+<tr>
+<td>Every learn-resource pinned to an exercise</td>
+<td>Passive watching is the other half of tutorial hell. Each Learn row names the drill, assignment, or written artifact that exercises it.</td>
+</tr>
+<tr>
+<td>An optional video lane — swap, not add</td>
+<td>Learners split on format, and the vetted catalog (<a href="../../sources/research/courses/">courses</a>) has strong video twins for several Learn rows — surfaced in <a href="../COURSES/">COURSES.md</a>. Same verdict as the Zoomcamp evaluation (<a href="../SOURCES/">SOURCES.md</a>): running two paths in parallel recreates the overwhelm this framework exists to fix — so a video twin <em>replaces</em> its default row, inherits its pinned exercise, and the phase budgets don't move.</td>
+</tr>
+<tr>
+<td>AWS-first, Databricks second, open-source satellites</td>
+<td>AWS leads DE tool demand globally (40.3% of postings) and regionally; many regional postings pair Databricks + PySpark (<a href="../../sources/research/job-market/">job market</a>).</td>
+</tr>
+<tr>
+<td>Airflow deep, Dagster taste</td>
+<td>Airflow is #1 in every demand source; Dagster is the credible challenger worth one satellite (<a href="../../sources/research/tool-landscape/">tools</a>).</td>
+</tr>
+<tr>
+<td>Streaming late, batch first</td>
+<td>"Default to batch, justify streaming" — and every surveyed roadmap puts Kafka/streaming last of the core topics.</td>
+</tr>
+<tr>
+<td>Platform &gt; certs</td>
+<td>Certs appear in only ~4% of postings; a built, explained, measured platform is the differentiator. The two certs are milestones, not the goal — which is also why there are 2, not 4.</td>
+</tr>
+<tr>
+<td>External feedback built into the gates</td>
+<td>Solo learners systematically miss their own gaps. From G2 every gate requires requesting community critique — the framework never grades itself alone.</td>
+</tr>
+<tr>
+<td>An AI-data module at the end</td>
+<td>LLM-pipeline skills jumped ~3% → ~12% of DE postings in one year — a differentiator, not the core.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-nine-principles">The nine principles<a class="headerlink" href="#the-nine-principles" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>SQL and Python are the permanent spine</strong> — they appear in 70–94% of postings; every phase keeps exercising them.</li>
+<li><strong>Idempotency + retries is the reliability model.</strong> Re-runnable jobs, MERGE-upsert semantics, orchestrator retries, alerts. The highest lesson-density skill across all seven real-platform case studies.</li>
+<li><strong>Many small jobs, never a mega-DAG.</strong> Two teams independently regretted the monolith DAG within a year.</li>
+<li><strong>Three modeling layers from day one</strong> (staging → intermediate → marts). Two teams independently regretted two.</li>
+<li><strong>Table maintenance is the lakehouse's hidden cost</strong> — compaction, snapshot expiry, schema evolution are first-class learning objectives, not footnotes.</li>
+<li><strong>Concepts are the skeleton; tools are replaceable leaves.</strong> When a tool churns (they will), the phase objective survives.</li>
+<li><strong>Anything you build must survive weeks of your inattention</strong> — prefer serverless over self-hosted; the framework never asks you to run Kubernetes.</li>
+<li><strong>Nothing is learn-only.</strong> Every piece of information is pinned to an exercise, assignment, or written artifact — unexercised knowledge evaporates.</li>
+<li><strong>Ship the phase, then improve it.</strong> A gate passed at "good" beats a phase polished forever.</li>
+</ol>
+<h2 id="what-we-deliberately-skip-and-why">What we deliberately skip, and why<a class="headerlink" href="#what-we-deliberately-skip-and-why" title="Permanent link">&para;</a></h2>
+<p>Full verdicts in <a href="../TOOLS/">TOOLS.md</a>:
+- <strong>Hadoop/HDFS ops, Hive-only patterns</strong> — legacy; concepts arrive via Spark/Glue anyway.
+- <strong>Prefect, Kestra</strong> — a third Python orchestrator adds nothing over Airflow + Dagster.
+- <strong>Apache Hudi</strong> — niche upsert estates; Iceberg + Delta cover the concepts.
+- <strong>StarRocks/Doris</strong> — a second OLAP engine adds nothing at this level; ClickHouse covers the category.
+- <strong>Kubernetes administration</strong> — not a DE entry requirement; serverless covers this year.
+- <strong>Scala</strong> — PySpark first; revisit only if a specific need demands it.
+- <strong>Deep Flink</strong> — one Flink SQL lab (Phase 5); stateful streaming depth is a later specialization.
+- <strong>A third cloud</strong> — one light Azure-vocabulary pass (Phase 6) as a regional-enterprise hedge; no Azure builds.
+- Also skipped as credentials: a third certificate and pre-P1 SQL video courses — reasoning in <a href="../CERTS/">CERTS.md</a>.</p>
+<h2 id="why-both-certs-land-by-month-7">Why both certs land by month 7<a class="headerlink" href="#why-both-certs-land-by-month-7" title="Permanent link">&para;</a></h2>
+<p>Sitting DEA-C01 at gate G2 means the exam lands while the P2 build (its exact hands-on surface) is freshest; the Databricks exam at G3 works the same way — the phase <em>is</em> the prep. Doing both in the first half leaves the second half free for the platform's hardest engineering (orchestration, streaming, production hardening) with no prep clock running. The exams' hands-on gaps (Kinesis/DMS/Redshift depth) are bought down with P2 mini-labs, then genuinely closed in P4 — after the exam, when operating them is pure learning. Full blueprints and prep plans: <a href="../CERTS/">CERTS.md</a>.</p>
+<h2 id="why-each-phase-opens-the-way-it-does">Why each phase opens the way it does<a class="headerlink" href="#why-each-phase-opens-the-way-it-does" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>P0 is only setup</strong> because the single most-reported failure mode of public DE courses is the "week-1 setup wall" — Docker + cloud + IaC landing on top of new concepts. Isolating setup means Phase 1 starts with everything working.</li>
+<li><strong>P1 gets two full months</strong> for what many plans cram into a week: foundations deserve a learn-first rhythm and one dataset carried end-to-end.</li>
+<li><strong>P2's stack (S3 + Iceberg + Athena + dbt)</strong> is a production pattern — the same stack a UK-government data platform runs (<a href="../../sources/research/platform-journeys/">platform journeys</a>), not a teaching toy.</li>
+<li><strong>P4 is deliberately exam-free</strong>: Kinesis, DMS, and Redshift arrive as services already studied, now operated for real — theory first, then practice with no pressure, is the cheap order.</li>
+<li><strong>P5 goes open-source</strong> because Kafka's mechanics transfer everywhere; the AWS way was already learned in P4.</li>
+<li><strong>P6 packages instead of building from scratch</strong> — the platform <em>is</em> the capstone, built all year instead of assembled in week 30.</li>
+</ul>
+<h2 id="why-build-in-public">Why build in public<a class="headerlink" href="#why-build-in-public" title="Permanent link">&para;</a></h2>
+<p>One post per phase, drafted from that phase's publish checkpoint — the year's arc in ~9 posts, from the local lakehouse to the platform-journey finale. Writing about a build sharpens the understanding of it, creates a public record of steady progress, and each post pairs with one interactive act (answer a community question, comment substantively) so it's participation, not broadcasting. Platform choice is yours — a blog, dev.to, LinkedIn, anywhere public.</p>
+<h2 id="where-the-evidence-comes-from">Where the evidence comes from<a class="headerlink" href="#where-the-evidence-comes-from" title="Permanent link">&para;</a></h2>
+<p>The framework was compiled 2026-08-20 from six parallel deep-research reports (tool landscape, cert blueprints, courses, platform case studies, roadmap benchmarks, market signals — indexed in <a href="../SOURCES/">SOURCES.md</a>), then independently audited and revised twice (<a href="../../CHANGELOG/">CHANGELOG.md</a>). Tool versions and cert blueprints churn — each phase README lists what to re-verify before starting it, a weekly link-check Action guards the references, and the structure is concept-keyed precisely so tool churn doesn't invalidate it.</p>
+<hr />
+<p><a href="../../">README</a> · <a href="../../GUIDE/">Guide</a> · <a href="../SOURCES/">Sources</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

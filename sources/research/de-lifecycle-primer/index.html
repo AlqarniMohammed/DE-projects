@@ -1,0 +1,1350 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>The Data Engineering Lifecycle — a Primer - The Data Engineer Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-data-engineering-lifecycle--a-primer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="The Data Engineer Framework" class="md-header__button md-logo" aria-label="The Data Engineer Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The Data Engineer Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              The Data Engineering Lifecycle — a Primer
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="The Data Engineer Framework" class="md-nav__button md-logo" aria-label="The Data Engineer Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    The Data Engineer Framework
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phases
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-0-orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Orientation & Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-1-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Foundations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-2-aws-lakehouse-core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — AWS Lakehouse Core
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-3-spark-databricks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Spark & Databricks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-4-orchestration-ingestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Orchestration & Ingestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-5-streaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 5 — Streaming & CDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/phase-6-production-serving/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 6 — Production, Serving & Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../GLOSSARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../PROGRESS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progress tracker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/WHY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why it looks this way
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/TOOLS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/DATASETS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datasets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/CERTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Certifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/COURSES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Video courses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/LEARNERS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learners & placement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/SOURCES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-lifecycle-at-a-glance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Lifecycle at a Glance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-1--understand-the-data-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 1 — Understand the Data (Generation)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-2--design-the-architecture--model-the-data-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 2 — Design the Architecture &amp; Model the Data (Storage)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-3--ingest-ingestion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 3 — Ingest (Ingestion)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-4--transform-transformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 4 — Transform (Transformation)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-5--validate--assure-quality-dataops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 5 — Validate &amp; Assure Quality (DataOps)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-6--optimize--serve-serving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 6 — Optimize &amp; Serve (Serving)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-7--govern-document--evolve-data-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 7 — Govern, Document &amp; Evolve (Data Management)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#undercurrents--present-at-every-stage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Undercurrents — Present at Every Stage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-worked-mini-scenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A Worked Mini-Scenario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#say-it-out-loud--the-g0-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Say It Out Loud — the G0 Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="the-data-engineering-lifecycle--a-primer">The Data Engineering Lifecycle — a Primer<a class="headerlink" href="#the-data-engineering-lifecycle--a-primer" title="Permanent link">&para;</a></h1>
+<p><em>The data engineering lifecycle is the chain every data platform runs — data is generated, ingested, stored, transformed, and served, with security, orchestration, and DataOps running underneath every stage; Phase 0 of this framework pins this primer to a spoken walkthrough (the G0 voice memo), so read it until you can explain each stage out loud with no notes.</em></p>
+<h2 id="the-lifecycle-at-a-glance">The Lifecycle at a Glance<a class="headerlink" href="#the-lifecycle-at-a-glance" title="Permanent link">&para;</a></h2>
+<p>A real project meets the stages in this order:</p>
+<div class="highlight"><pre><span></span><code>flowchart TD
+    S1["1 · Understand the data"] --&gt; S2["2 · Design architecture &amp; model"]
+    S2 --&gt; S3["3 · Ingest"] --&gt; S4["4 · Transform"] --&gt; S5["5 · Validate quality"]
+    S5 --&gt; S6["6 · Optimize &amp; serve"] --&gt; S7["7 · Govern &amp; evolve"]
+    S7 -. "requirements change, new sources appear" .-&gt; S1
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Lifecycle term</th>
+<th>Key question</th>
+<th>Typical AWS services</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Understand the data</td>
+<td>Generation</td>
+<td>What types, how much, how fast?</td>
+<td>— (analysis, not tools)</td>
+</tr>
+<tr>
+<td>2. Design &amp; model</td>
+<td>Storage</td>
+<td>Warehouse, lake, or both? What schema? What file format?</td>
+<td>S3, Redshift, Lake Formation, Glue Schema Registry</td>
+</tr>
+<tr>
+<td>3. Ingest</td>
+<td>Ingestion</td>
+<td>How does data enter the platform?</td>
+<td>Kinesis, DMS, Glue, AppFlow</td>
+</tr>
+<tr>
+<td>4. Transform</td>
+<td>Transformation</td>
+<td>How does raw become useful?</td>
+<td>Glue, EMR, Lambda, Step Functions, MWAA</td>
+</tr>
+<tr>
+<td>5. Validate quality</td>
+<td>DataOps undercurrent</td>
+<td>Can the output be trusted?</td>
+<td>Glue Data Quality, Glue DataBrew</td>
+</tr>
+<tr>
+<td>6. Optimize &amp; serve</td>
+<td>Serving</td>
+<td>Is it fast and cheap to query?</td>
+<td>Redshift, Athena, S3 partitioning</td>
+</tr>
+<tr>
+<td>7. Govern &amp; evolve</td>
+<td>Data-management undercurrent</td>
+<td>Can I trace it? Can I change it safely?</td>
+<td>Glue Schema Registry, DataZone, Neptune</td>
+</tr>
+</tbody>
+</table>
+<p>Decisions cascade. The type and properties of the data (Stage 1) decide lake vs. warehouse (Stage 2), which decides ETL vs. ELT (Stage 4), which decides what gets optimized (Stage 6). Jumping straight to tools without Stage 1 is the classic beginner mistake.</p>
+<h2 id="stage-1--understand-the-data-generation">Stage 1 — Understand the Data (Generation)<a class="headerlink" href="#stage-1--understand-the-data-generation" title="Permanent link">&para;</a></h2>
+<p>Before choosing any technology, characterize what you are dealing with.</p>
+<p><strong>Three types of data:</strong></p>
+<ul>
+<li><strong>Structured</strong> — organized in a defined schema, rows and columns, easily queryable. Examples: database tables, consistent CSV files, spreadsheets.</li>
+<li><strong>Semi-structured</strong> — has some structure through tags or hierarchies, but no rigid schema. Examples: JSON, XML, log files, email headers.</li>
+<li><strong>Unstructured</strong> — no predefined structure; needs preprocessing before it is queryable. Examples: free text, images, audio, video.</li>
+</ul>
+<p>First task on any project: inventory every source and label it. Mostly structured → a warehouse can work. Any mix → you need a lake (or lakehouse). Unstructured data always means more transformation work ahead.</p>
+<p><strong>Three properties — the "3 Vs":</strong></p>
+<ul>
+<li><strong>Volume</strong> — how much. Gigabytes to petabytes. Drives storage choice, cost planning, and partitioning strategy.</li>
+<li><strong>Velocity</strong> — how fast it arrives. This is the biggest fork in the road: low velocity → batch pipelines; high velocity → streaming pipelines. Decide early — the two architectures look very different.</li>
+<li><strong>Variety</strong> — how many types and sources. High variety reinforces the lake decision.</li>
+</ul>
+<p>On AWS: structured → RDS, Redshift; semi-structured → DynamoDB, S3 + Athena; unstructured → S3. Volume → S3 scales without practical limits. Velocity → Kinesis for streams, Glue for batch.</p>
+<h2 id="stage-2--design-the-architecture--model-the-data-storage">Stage 2 — Design the Architecture &amp; Model the Data (Storage)<a class="headerlink" href="#stage-2--design-the-architecture--model-the-data-storage" title="Permanent link">&para;</a></h2>
+<p>These are design-time decisions. They are expensive to reverse, so they come before any building.</p>
+<p><strong>Warehouse vs. lake:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Data Warehouse</th>
+<th>Data Lake</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Schema</td>
+<td>Schema-on-<strong>write</strong> (defined before loading) → ETL</td>
+<td>Schema-on-<strong>read</strong> (defined at query time) → ELT</td>
+</tr>
+<tr>
+<td>Data types</td>
+<td>Primarily structured</td>
+<td>Structured and unstructured</td>
+</tr>
+<tr>
+<td>Agility</td>
+<td>Lower — schema is fixed up front</td>
+<td>Higher — accepts raw data as-is</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>Higher; optimized for complex queries</td>
+<td>Cheap storage; cost shifts to processing</td>
+</tr>
+</tbody>
+</table>
+<p>Choose a <strong>warehouse</strong> when sources are structured and BI is the main use case. Choose a <strong>lake</strong> when data is mixed, volume is large, or future needs are uncertain. In practice most platforms use <strong>both</strong>: raw data lands in the lake, refined data moves to the warehouse. Write the decision down — every later stage references it.</p>
+<p>On AWS: lake → S3 + Glue Data Catalog + Athena; warehouse → Redshift; combined → S3 lake feeding Redshift.</p>
+<p><strong>Two related patterns:</strong></p>
+<ul>
+<li><strong>Lakehouse</strong> — one architecture with both behaviors: lake flexibility plus warehouse reliability (ACID transactions on lake storage, via table formats like Delta Lake or Apache Iceberg). Pick it when ML teams need raw files and analysts need fast, transactional SQL on the same data. On AWS: Lake Formation over S3, queried via Athena or Redshift Spectrum.</li>
+<li><strong>Data mesh</strong> — a management paradigm, not a technology: domain teams own "data products," under federated governance with central standards. Relevant when organizing many teams, not one pipeline. On AWS: Amazon DataZone, plus Lake Formation permissions.</li>
+</ul>
+<p><strong>Data modeling.</strong> In a warehouse, model before loading. The standard shape is the <strong>star schema</strong>: <strong>fact tables</strong> hold measurable events (sales, clicks — one row per event); <strong>dimension tables</strong> hold descriptive context (customer, product, date); primary/foreign keys link them. Derive the model from the business questions ("revenue per product per month" → sales fact + product and date dimensions). In a pure lake, modeling is deferred until you shape curated tables.</p>
+<p><strong>File formats.</strong> Chosen at design time, per zone of the platform, because format drives cost and speed everywhere downstream:</p>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Pick</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Humans open/edit it; small data; spreadsheet exchange</td>
+<td>CSV</td>
+<td>Universal, readable</td>
+</tr>
+<tr>
+<td>API payloads, configs, nested or flexible records</td>
+<td>JSON</td>
+<td>Flexible schema, nesting</td>
+</tr>
+<tr>
+<td>Data in motion between systems; schema will change</td>
+<td><a href="https://avro.apache.org/">Avro</a></td>
+<td>Row-oriented binary with embedded schema</td>
+</tr>
+<tr>
+<td>Data at rest for analytics; big scans of few columns</td>
+<td><a href="https://parquet.apache.org/">Parquet</a></td>
+<td>Columnar → less I/O, better compression</td>
+</tr>
+</tbody>
+</table>
+<p>Common pipeline: ingest as JSON/CSV into the raw zone → transform → store the curated zone as Parquet. Athena and Redshift Spectrum are dramatically cheaper and faster on Parquet because they scan fewer bytes.</p>
+<p><strong>Schema evolution — plan it now.</strong> Schemas will change. Pick formats that tolerate change (Avro, Parquet) and plan a schema registry from day one; retrofitting evolution onto a frozen-schema pipeline is painful. On AWS: Glue Schema Registry (discovery, compatibility checking, validation). The operational side is Stage 7.</p>
+<h2 id="stage-3--ingest-ingestion">Stage 3 — Ingest (Ingestion)<a class="headerlink" href="#stage-3--ingest-ingestion" title="Permanent link">&para;</a></h2>
+<p>The design exists; now connect real sources and land the data. For each source from Stage 1, pick a connection method:</p>
+<ul>
+<li>Relational databases → <strong>JDBC</strong> (platform-independent, Java-based) or <strong>ODBC</strong> (driver-based, language-independent) connectors</li>
+<li>SaaS tools and web services → <strong>APIs</strong></li>
+<li>Servers and applications → ship their <strong>raw logs</strong></li>
+<li>Real-time events (clicks, IoT, transactions) → <strong>streams</strong></li>
+</ul>
+<p>Then apply the velocity decision per source: <strong>batch</strong> (nightly or hourly loads — simpler, cheaper) or <strong>streaming</strong> (continuous — only when consumers genuinely need fresh data).</p>
+<p>On AWS: databases → Glue connections, DMS; APIs → AppFlow, Lambda; logs → Kinesis Data Firehose, CloudWatch Logs; streams → Kinesis Data Streams, MSK (Kafka).</p>
+<h2 id="stage-4--transform-transformation">Stage 4 — Transform (Transformation)<a class="headerlink" href="#stage-4--transform-transformation" title="Permanent link">&para;</a></h2>
+<p>Raw data has landed; turn it into something clean, consistent, and shaped for analysis. This is where data engineers spend most of their time.</p>
+<p><strong>ETL = Extract, Transform, Load.</strong> Extract raw data from sources while preserving integrity. Transform it: cleanse (dedupe, fix errors), enrich from other sources, reformat dates and strings, aggregate, handle missing values. Load into the target, in batches or as a stream.</p>
+<p><strong>ETL vs. ELT is already decided</strong> by Stage 2: warehouse (schema-on-write) → ETL, transform before loading; lake (schema-on-read) → ELT, load raw first, transform inside the platform. The combined pattern does both: EL into the lake, then T on the way to the warehouse.</p>
+<p>Build one pipeline per source or per target table: define the extract (Stage 3 connection), the transform list, and the load target and mode.</p>
+<p>On AWS: Glue is the flagship ETL service; EMR (Spark) for heavy lifting; Lambda for light event-driven transforms.</p>
+<p><strong>Orchestration (undercurrent — set it up as you build).</strong> Pipelines must run automatically, never by hand. More than one step means you need scheduling, dependencies ("load only after transform succeeds"), retries, and failure alerts. On AWS: EventBridge for schedules and event triggers; Step Functions for state machines; MWAA (managed Airflow) for complex DAGs; Glue Workflows for Glue-only pipelines.</p>
+<p><strong>Sampling.</strong> Profile a sample of a huge dataset instead of scanning it all, and develop transforms against a sample before full runs. <strong>Random</strong> sampling when data is uniform; <strong>stratified</strong> (sample within subgroups) when small-but-important groups must not be missed; <strong>systematic</strong> (every n-th record) as a cheap approximation. Glue DataBrew and Athena (<code>TABLESAMPLE</code>) support this.</p>
+<p><strong>Data skew.</strong> Unequal distribution of data across partitions or nodes in a distributed system — the "celebrity problem": one hot key overloads one partition while others idle. Symptom: nine workers finish in minutes, one runs for hours. Remedies: <strong>salting</strong> (add a random factor to hot keys — the classic first move), adaptive or custom partitioning, repartitioning, sampling to understand the distribution. On AWS this matters in Glue/EMR Spark jobs and in choosing Redshift distribution keys — a bad DISTKEY is built-in skew.</p>
+<h2 id="stage-5--validate--assure-quality-dataops">Stage 5 — Validate &amp; Assure Quality (DataOps)<a class="headerlink" href="#stage-5--validate--assure-quality-dataops" title="Permanent link">&para;</a></h2>
+<p>The pipeline runs — but is the output right? Four dimensions of data quality:</p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Meaning</th>
+<th>Typical checks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Completeness</strong></td>
+<td>All required data is present</td>
+<td>Null counts, % populated fields</td>
+</tr>
+<tr>
+<td><strong>Consistency</strong></td>
+<td>Values agree across datasets and periods</td>
+<td>Cross-field and cross-source comparison</td>
+</tr>
+<tr>
+<td><strong>Accuracy</strong></td>
+<td>Data is correct and represents reality</td>
+<td>Validation against trusted sources and rules</td>
+</tr>
+<tr>
+<td><strong>Integrity</strong></td>
+<td>Relationships stay correct over the lifecycle</td>
+<td>Referential (foreign-key) checks</td>
+</tr>
+</tbody>
+</table>
+<p>Use them twice. <strong>Profile first</strong>, while exploring new sources — measure null rates, ranges, and distributions so transforms handle reality, not assumptions. <strong>Validate continuously</strong> — build the four checks into every pipeline as automated gates after transformation; fail or quarantine bad rows before they reach the curated zone. A pipeline without quality gates fails silently.</p>
+<p>On AWS: Glue Data Quality (rule-based checks), Glue DataBrew (profiling).</p>
+<h2 id="stage-6--optimize--serve-serving">Stage 6 — Optimize &amp; Serve (Serving)<a class="headerlink" href="#stage-6--optimize--serve-serving" title="Permanent link">&para;</a></h2>
+<p>Data is clean and loaded; make it fast and cheap for consumers. Optimize only once real query patterns exist — before that it is guesswork.</p>
+<ul>
+<li><strong>Indexing</strong> — avoid full table scans; slow lookups on specific values → index those columns.</li>
+<li><strong>Partitioning</strong> — reduces data scanned per query, enables parallelism, and eases lifecycle management (drop old partitions). Queries always filter on date or region → partition on that column. In a lake this is the S3 folder layout: <code>s3://bucket/data/year=2026/month=08/</code>.</li>
+<li><strong>Compression</strong> — less storage, fewer disk reads, faster transfer (GZIP, ZSTD, LZOP, BZIP2). Columnar formats compress far better because similar values sit together; Parquet + ZSTD/GZIP is the standard combo.</li>
+</ul>
+<p>On AWS: S3 partition layout + Parquet drive Athena cost and speed. Redshift has sort keys (indexing role), distribution styles (partitioning role), and column compression encodings. Revisit this stage whenever consumers complain about speed or cost.</p>
+<h2 id="stage-7--govern-document--evolve-data-management">Stage 7 — Govern, Document &amp; Evolve (Data Management)<a class="headerlink" href="#stage-7--govern-document--evolve-data-management" title="Permanent link">&para;</a></h2>
+<p>The pipeline is live; keep it explainable, compliant, and safe to change.</p>
+<p><strong>Data lineage</strong> traces the flow and transformation of data from source to final destination. You rely on it when a dashboard number looks wrong and you must trace it back through every transform, and when an auditor asks where a figure came from. Start capturing it as soon as pipelines multiply — retrofitting is much harder. On AWS: Spline agents on Glue Spark jobs feeding Neptune; Amazon DataZone.</p>
+<p><strong>Schema evolution — operational side.</strong> When a source adds a column, changes a type, or drops a field: register the new schema version, let the registry verify backward compatibility, update transforms, then deploy. Old records must stay readable. This is where the Stage 2 preparation pays off — or where unprepared pipelines shatter.</p>
+<h2 id="undercurrents--present-at-every-stage">Undercurrents — Present at Every Stage<a class="headerlink" href="#undercurrents--present-at-every-stage" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Security</strong> — least-privilege access (IAM), encryption at rest and in transit (KMS, TLS), fine-grained permissions on lake data (Lake Formation). Applied from Stage 2 onward, not bolted on later.</li>
+<li><strong>Orchestration</strong> — automated scheduling, dependencies, retries, alerts (Stage 4.2 above; it governs the whole platform).</li>
+<li><strong>DataOps</strong> — automation, monitoring, and quality gates as habits: version control for every script and config, automated validation on every run, observability on every pipeline.</li>
+<li><strong>SQL and Git</strong> — the two everyday tools. SQL is the working language of transformation, validation, and serving (aggregation, <code>GROUP BY</code>, joins, conditional aggregation, regex matching). Git versions all pipeline code, SQL, and infrastructure definitions from day one.</li>
+</ul>
+<h2 id="a-worked-mini-scenario">A Worked Mini-Scenario<a class="headerlink" href="#a-worked-mini-scenario" title="Permanent link">&para;</a></h2>
+<p>An e-commerce company wants daily sales dashboards plus a foundation for future ML.</p>
+<ol>
+<li><strong>Understand:</strong> orders database (structured), clickstream (semi-structured JSON, high velocity), product images (unstructured). ~50 GB/day. Mixed variety, one high-velocity source.</li>
+<li><strong>Design:</strong> lake on S3 for everything raw + Redshift for dashboard tables. Curated zone in Parquet. Star schema: <code>fact_sales</code> + <code>dim_product</code>, <code>dim_customer</code>, <code>dim_date</code>. Clickstream schema registered in Glue Schema Registry.</li>
+<li><strong>Ingest:</strong> orders → nightly JDBC batch; clickstream → Kinesis stream; images → straight to S3.</li>
+<li><strong>Transform:</strong> Glue jobs (ELT in the lake) dedupe, enrich, and aggregate; Step Functions orchestrates nightly. One slow job → one mega-customer's hot key → skew → fixed with salting.</li>
+<li><strong>Validate:</strong> automated post-run checks — no null order IDs (completeness), totals match source (accuracy), every sale's product exists in <code>dim_product</code> (integrity). Failures quarantine the batch.</li>
+<li><strong>Optimize:</strong> dashboards filter by date → partition curated zone by <code>year=/month=/day=</code>; Parquet + compression cuts Athena scan costs ~90%; Redshift sort key on <code>sale_date</code>.</li>
+<li><strong>Govern:</strong> lineage captured from Glue jobs. Months later the orders team adds a <code>discount_code</code> column; the registry validates it as backward-compatible and pipelines keep running.</li>
+</ol>
+<p>Throughout: every script and query in Git; every transform and check in SQL.</p>
+<h2 id="say-it-out-loud--the-g0-checklist">Say It Out Loud — the G0 Checklist<a class="headerlink" href="#say-it-out-loud--the-g0-checklist" title="Permanent link">&para;</a></h2>
+<p>You should be able to answer each of these in one or two spoken sentences, with no notes:</p>
+<ol>
+<li>What are the three types of data and the three Vs, and what do they decide?</li>
+<li>Warehouse vs. lake — what is the real difference, and why do most platforms use both?</li>
+<li>How does data get in, and when do you stream instead of batch?</li>
+<li>What is ETL vs. ELT, and who made that choice for you?</li>
+<li>What are the four quality dimensions, and where do the gates go?</li>
+<li>What are the three levers that make queries fast and cheap?</li>
+<li>What do lineage and a schema registry each protect you from?</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.top", "search.suggest", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

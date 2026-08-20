@@ -1,0 +1,1413 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../phase-1-foundations/">
+      
+      
+        <link rel="next" href="../phase-3-spark-databricks/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Phase 2 — AWS Lakehouse Core - The Data Engineer Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#phase-2--aws-lakehouse-core--cert-phase-1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="The Data Engineer Framework" class="md-header__button md-logo" aria-label="The Data Engineer Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The Data Engineer Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Phase 2 — AWS Lakehouse Core
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="The Data Engineer Framework" class="md-nav__button md-logo" aria-label="The Data Engineer Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    The Data Engineer Framework
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phases
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-0-orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Orientation & Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-1-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Foundations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — AWS Lakehouse Core
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — AWS Lakehouse Core
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-terminology--glossarymd-p2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New terminology → GLOSSARY.md [P2]
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learn-43-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learn (~43 h)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build--platform-v1-the-lakehouse-on-aws-30-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build — Platform v1: the lakehouse on AWS (~30 h)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Build — Platform v1: the lakehouse on AWS (~30 h)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prove-it-assignment-half-day-pipeline-testing-with-pytest--moto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prove-it assignment (half-day): pipeline testing with pytest + moto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exam-mini-labs-6-h-same-day-teardown--domain-1--2-anchors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exam mini-labs (~6 h, same-day teardown) — Domain 1 &amp; 2 anchors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build--satellite-s2-the-cost-aware-athena-mart-12-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build — Satellite S2: the cost-aware Athena mart (~12 h)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#competency-gate-g2-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Competency gate G2 ⭐
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publish-checkpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Publish checkpoint
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-yourself--questions-you-can-now-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check yourself — questions you can now answer
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-3-spark-databricks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Spark & Databricks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-4-orchestration-ingestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Orchestration & Ingestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-5-streaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 5 — Streaming & CDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phase-6-production-serving/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 6 — Production, Serving & Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GLOSSARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PROGRESS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progress tracker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/WHY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why it looks this way
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/TOOLS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/DATASETS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datasets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/CERTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Certifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/COURSES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Video courses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/LEARNERS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learners & placement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/SOURCES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-terminology--glossarymd-p2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New terminology → GLOSSARY.md [P2]
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learn-43-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learn (~43 h)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build--platform-v1-the-lakehouse-on-aws-30-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build — Platform v1: the lakehouse on AWS (~30 h)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Build — Platform v1: the lakehouse on AWS (~30 h)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prove-it-assignment-half-day-pipeline-testing-with-pytest--moto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prove-it assignment (half-day): pipeline testing with pytest + moto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exam-mini-labs-6-h-same-day-teardown--domain-1--2-anchors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exam mini-labs (~6 h, same-day teardown) — Domain 1 &amp; 2 anchors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build--satellite-s2-the-cost-aware-athena-mart-12-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build — Satellite S2: the cost-aware Athena mart (~12 h)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#competency-gate-g2-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Competency gate G2 ⭐
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publish-checkpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Publish checkpoint
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-yourself--questions-you-can-now-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check yourself — questions you can now answer
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="phase-2--aws-lakehouse-core--cert-phase-1">Phase 2 — AWS Lakehouse Core ⭐ Cert Phase 1<a class="headerlink" href="#phase-2--aws-lakehouse-core--cert-phase-1" title="Permanent link">&para;</a></h1>
+<p><strong>Duration:</strong> months 3–5 (elastic — the gate decides) · <strong>Budget:</strong> ~95 hours (DEA prep is woven through the phase — the build <em>is</em> most of the prep, and practice-exam time is counted honestly below) · <strong>AWS cost:</strong> target ≤ $25/mo (S3 pennies, Athena $5/TB scanned, Glue job minutes; teardown discipline for everything else) + exam $150 + Tutorials Dojo $15</p>
+<p>Your lakehouse moves to AWS. Same project, real cloud — the exact services the DEA-C01 exam tests. The phase ends with the <strong>AWS DEA-C01</strong> exam; blueprint and timing rationale: <a href="../../reference/CERTS/">CERTS.md</a>.</p>
+<h2 id="objectives">Objectives<a class="headerlink" href="#objectives" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Operate the <strong>S3 + Glue Catalog + Athena</strong> trifecta — the cheapest production lakehouse on AWS.</li>
+<li>Adopt <strong>S3 Tables</strong> (managed Iceberg) as the curated layer and understand what maintenance it automates.</li>
+<li>Feel Athena's <strong>cost mechanics</strong> in dollars (partitioning, Parquet, scanned bytes).</li>
+<li>Ship <strong>incremental dbt models with idempotent backfills</strong> against a cloud engine.</li>
+<li>Test pipelines like a software engineer: pytest + moto, CI-gated.</li>
+<li><strong>Pass AWS DEA-C01</strong> at the gate.</li>
+</ol>
+<h2 id="new-terminology--glossarymd-p2">New terminology → <a href="../../GLOSSARY/">GLOSSARY.md</a> <code>[P2]</code><a class="headerlink" href="#new-terminology--glossarymd-p2" title="Permanent link">&para;</a></h2>
+<p>Object storage semantics · S3 Tables · Glue's three faces · Athena · dbt adapters · partition projection · CTAS · Lake Formation · data zones · compaction/small files · snapshot expiration · backfill.</p>
+<h2 id="learn-43-h">Learn (~43 h)<a class="headerlink" href="#learn-43-h" title="Permanent link">&para;</a></h2>
+<p>Every resource is <strong>pinned</strong> to an exercise — nothing here is learn-only.</p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Scope</th>
+<th>Hours</th>
+<th>Pinned by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.udemy.com/course/aws-data-engineer/">Maarek/Kane DEA-C01 Udemy course</a> (~$15–20 on sale) — <strong>tranche 1</strong></td>
+<td>Storage, Glue, Athena, Lake Formation, migration/S3 sections; skim familiar sections at 1.5×</td>
+<td>10</td>
+<td>Platform build steps 1–6: you operate every service you just watched</td>
+</tr>
+<tr>
+<td>Maarek/Kane course — <strong>tranche 2</strong></td>
+<td>Orchestration, Kinesis/streaming, DMS, Redshift, security, ops sections (theory now; hands-on depth arrives in P4, post-exam)</td>
+<td>10</td>
+<td>The two exam mini-labs + Tutorials Dojo domain sets</td>
+</tr>
+<tr>
+<td><strong>PySpark DataFrame basics</strong> — <a href="https://spark.apache.org/docs/latest/api/python/getting_started/quickstart_df.html">official quickstart</a></td>
+<td>select/filter/withColumn/write — exactly what the Glue job needs, nothing more (real Spark depth is P3)</td>
+<td>2</td>
+<td>Build step 3: you hand-write the Glue job's transform</td>
+</tr>
+<tr>
+<td><a href="https://catalog.workshops.aws/glue-immersion-day/en-US">AWS Glue Immersion Day</a></td>
+<td>Crawlers + one ETL job lab (~$5–10 spend)</td>
+<td>4</td>
+<td>Build steps 2–3 (crawler→DDL swap, the Glue ETL job)</td>
+</tr>
+<tr>
+<td><a href="https://builder.aws.com/content/2voduyQmGbAaMbTC0O5pieY5CkK/getting-started-with-amazon-sagemaker-lakehouse">S3 Tables / SageMaker Lakehouse walkthrough</a> + <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/apache-iceberg-on-aws/introduction.html">Iceberg-on-AWS prescriptive guidance</a></td>
+<td>Read + follow along</td>
+<td>4</td>
+<td>Build step 3 + the schema-evolution drill on the managed table</td>
+</tr>
+<tr>
+<td><a href="https://docs.getdbt.com/reference/resource-configs/athena-configs">dbt-athena adapter docs</a></td>
+<td>Incremental strategies (<code>merge</code> is Iceberg-only; <code>insert_overwrite</code> is for Hive tables), workgroups</td>
+<td>2</td>
+<td>Build step 4: the incremental model + <code>make backfill</code> idempotency proof</td>
+</tr>
+<tr>
+<td><a href="https://polaris.apache.org/">Apache Polaris</a> — what an Iceberg REST catalog is</td>
+<td>1-hour read; Glue/S3 Tables covers the doing</td>
+<td>1</td>
+<td>One-paragraph note in <code>notes/</code> (the REST-catalog concept returns in P5)</td>
+</tr>
+<tr>
+<td>SageMaker Lakehouse rebrand reading · dbt Fusion engine what/why</td>
+<td>Umbrella diagram + awareness (verify Athena adapter status)</td>
+<td>2</td>
+<td>Half-page note in <code>notes/</code> + one written <code>SELF-CHECK.md</code> answer</td>
+</tr>
+<tr>
+<td><a href="https://portal.tutorialsdojo.com/courses/aws-certified-data-engineer-associate-practice-exam-dea-c01/">Tutorials Dojo DEA-C01 practice exams</a> ($15)</td>
+<td>Final 3 weeks of the phase; ≥80% on timed sets before booking</td>
+<td>8</td>
+<td>The exam itself — book only at ≥80% timed</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Video lane — optional swap.</strong> Each row below <strong>replaces</strong> the default row it names: same "Pinned by" exercise, hours swap rather than add. Pick one lane per row before starting (<a href="../../GUIDE/#the-phase-loop">the rule</a>); prices, details, and the rows with no video twin: <a href="../../reference/COURSES/">COURSES.md</a>. <em>(Most default rows above are already video — this swap changes the provider or the price, not the format.)</em></p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Scope</th>
+<th>Hours</th>
+<th>Pinned by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.youtube.com/watch?v=6G0bLDIcO7Y">Johnny Chivers: free DEA-C01 full course</a> + <a href="https://www.youtube.com/johnnychivers">"2026 Edition" AWS DE series</a> (free, with a <a href="https://github.com/johnny-chivers/aws-data-engineering">labs repo</a>)</td>
+<td>Swaps <strong>both Maarek/Kane tranches</strong> at $0. Honest trade: thinner on Redshift/security/ops — backstop those domains with the free <a href="https://skillbuilder.aws/learning-plan/QYZWVSMX4B/exam-prep-plan-aws-certified-data-engineer--associate-deac01--english/YTMBK7R698">Skill Builder DEA-C01 exam-prep plan</a> (<a href="../../reference/CERTS/">CERTS.md</a> prep item 4). Tutorials Dojo stays mandatory in both lanes</td>
+<td>10–15 (vs 20)</td>
+<td>Platform build steps 1–6: you operate every service you just watched · the two exam mini-labs + Tutorials Dojo domain sets</td>
+</tr>
+</tbody>
+</table>
+<p><em>Before starting, re-verify:</em> S3 Tables regional availability &amp; pricing; dbt-athena current incremental-strategy and S3 Tables catalog support (see build step 4); Athena Iceberg-version support; the DEA-C01 exam guide (~6 weeks before your target booking date).</p>
+<h2 id="build--platform-v1-the-lakehouse-on-aws-30-h">Build — Platform v1: the lakehouse on AWS (~30 h)<a class="headerlink" href="#build--platform-v1-the-lakehouse-on-aws-30-h" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Zones:</strong> <code>raw</code> and <code>curated</code> S3 buckets (versioning, lifecycle rules, SSE). Migrate the Phase-1 ingest to land in <code>raw/</code> (same idempotent partitioned layout).</li>
+<li><strong>Catalog:</strong> Glue Crawler builds the raw tables; then <em>replace</em> the crawler with explicit DDL and understand why teams often do (drift control). Register everything in the Glue Data Catalog.</li>
+<li><strong>Curated layer on S3 Tables:</strong> create a table bucket; write the cleaned taxi data as managed Iceberg via a small <strong>Glue ETL job</strong> (hand-written PySpark, scoped small: read raw Parquet, cast types, dedupe, write Iceberg — ~40 lines; the basics row above covers every call you need). Observe what S3 Tables automates: compaction, snapshot expiry. Repeat the Phase-1 schema-evolution drill <em>on the managed table</em>.</li>
+<li><strong>Transform:</strong> point the <strong>same dbt project</strong> at Athena (dbt-athena target). <strong>The catalog pattern, stated plainly:</strong> dbt <em>reads</em> the S3 Tables curated layer through Athena's federated <code>s3tablescatalog</code> (a one-time integration with AWS analytics services), and <em>materializes</em> marts as <strong>Iceberg tables in the regular Glue catalog</strong>. (Materializing directly <em>into</em> S3 Tables needs dbt-athena ≥ the July 2026 release via <code>catalog_type: s3_tables</code> + catalogs.yml — an advanced variant; pin the adapter version if you try it.) Convert <code>fct_trips</code> to an <strong>incremental</strong> model; implement <code>make backfill START=... END=...</code> and prove idempotency by running it twice and diffing row counts. Carry the P1 snapshot (SCD2 <code>dim_zones</code>) over and note in <code>MODELING.md</code> what changed on AWS.</li>
+<li><strong>Cost telemetry:</strong> Athena workgroup with per-query scanned-bytes limit + query metrics; a <code>cost_report.py</code> that prints scanned-bytes per dbt model <em>(hint: <code>GetQueryExecution</code> statistics expose <code>data_scanned_in_bytes</code>; tag each model's queries via dbt's <code>query_comment</code> to attribute bytes to models)</em>. Two micro-drills inside this step, both feeding the cost story: run one explicit <strong>CTAS</strong> in Athena and read its cost; convert one table to <strong>partition projection</strong> and show the metadata-lookup difference. Screenshot the partitioned-vs-unpartitioned query cost delta for the README — expect a 10–100× scan reduction on the platform's data (the S2 satellite's 5–10 GB dataset is where the dollars get visible).</li>
+<li><strong>Governance (scoped):</strong> Lake Formation grants for a read-only "analyst" principal on curated tables only.</li>
+<li><strong>Interim scheduling:</strong> a GitHub Actions workflow runs ingest + <code>dbt build</code> nightly — real orchestration arrives in Phase 4; feel the <em>absence</em> first. CI is <strong>test-gated</strong>: the pytest suite (below) must pass before the nightly build runs. <strong>Authenticate via GitHub's OIDC federation to a scoped IAM role</strong> (<code>aws-actions/configure-aws-credentials</code>) — never long-lived keys, not even in repo secrets.</li>
+<li><strong>Ops guardrails:</strong> <code>make destroy</code> for anything chargeable; budget alarm verified monthly.</li>
+</ol>
+<p><strong>AI rule:</strong> let your assistant write boilerplate (IAM policy JSON, workflow YAML); hand-write the Glue job's transform logic, every dbt incremental config, and the tests below.</p>
+<h3 id="prove-it-assignment-half-day-pipeline-testing-with-pytest--moto">Prove-it assignment (half-day): pipeline testing with pytest + moto<a class="headerlink" href="#prove-it-assignment-half-day-pipeline-testing-with-pytest--moto" title="Permanent link">&para;</a></h3>
+<p>The phase's software-engineering proof — job specs increasingly filter on this: unit tests for the ingester with <strong>moto</strong> mocking S3 (upload path, idempotent re-run, partition layout), plus one integration test that runs the dbt project against a DuckDB fixture. Wire both into the GitHub Actions workflow so a red test blocks the nightly run. Done = <code>pytest</code> green in CI, badge in the README.</p>
+<h3 id="exam-mini-labs-6-h-same-day-teardown--domain-1--2-anchors">Exam mini-labs (~6 h, same-day teardown) — Domain 1 &amp; 2 anchors<a class="headerlink" href="#exam-mini-labs-6-h-same-day-teardown--domain-1--2-anchors" title="Permanent link">&para;</a></h3>
+<p>These exist so DEA Domain 1/2 answers come from muscle memory, not flashcards. The <em>deep</em> builds stay in Phase 4, after the exam.</p>
+<ul>
+<li><strong>Kinesis mini-lab (~3 h, ≤$3):</strong> one Data Stream + one Firehose delivery stream to S3; put records with the CLI; watch buffering hints work; note where Streams ends and Firehose begins. <code>make destroy</code> the same day.</li>
+<li><strong>Redshift Serverless taste (~3 h, free credits):</strong> create a workgroup, load one small table, <code>CREATE EXTERNAL SCHEMA</code> over your curated S3 data (Spectrum), run one federated query, read its <code>EXPLAIN</code>; note DISTKEY/SORTKEY concepts against your cloud-storage knowledge. Teardown after.</li>
+</ul>
+<h2 id="build--satellite-s2-the-cost-aware-athena-mart-12-h">Build — Satellite S2: the cost-aware Athena mart (~12 h)<a class="headerlink" href="#build--satellite-s2-the-cost-aware-athena-mart-12-h" title="Permanent link">&para;</a></h2>
+<p>Separate repo, fresh dataset — pick from the S2 menu in <a href="../../reference/DATASETS/"><code>DATASETS.md</code></a> (SEC EDGAR, NYC 311, or a Saudi Open Data portal dataset; ~5–10 GB). Build a small dbt-athena mart where <strong>every model is tagged with its dollar cost per build</strong> — a <code>MODEL_COST_REPORT.md</code> leaderboard, then one partitioning fix shown halving the top model's cost. Few builders can say "I know what my pipeline costs to run" — after this, you can. Want a unique, realistic brief instead? Use the <code>/satellite-brief</code> skill or <a href="../../prompts/generate-satellite-requirements/"><code>prompts/generate-satellite-requirements.md</code></a>.</p>
+<h2 id="competency-gate-g2-">Competency gate G2 ⭐<a class="headerlink" href="#competency-gate-g2-" title="Permanent link">&para;</a></h2>
+<ul>
+<li>[ ] <strong>AWS DEA-C01 — passed.</strong> (Book only after ≥80% on Tutorials Dojo timed sets; both Maarek tranches done.)</li>
+<li>[ ] <strong>Named artifact:</strong> platform on AWS — nightly GitHub Actions run green (test-gated); <code>dbt build</code> against Athena; README updated with AWS architecture diagram + cost section.</li>
+<li>[ ] Backfill idempotency demo (run twice, counts identical).</li>
+<li>[ ] Schema-evolution drill on S3 Tables narrated in 2 minutes.</li>
+<li>[ ] pytest + moto suite green in CI.</li>
+<li>[ ] Exam mini-labs done <strong>and torn down</strong> (Kinesis ≤$3 · Redshift free credits).</li>
+<li>[ ] Satellite cost leaderboard (<code>MODEL_COST_REPORT.md</code>) published.</li>
+<li>[ ] Monthly AWS bill ≤ $25 with evidence (billing screenshot linked in PROGRESS.md).</li>
+<li>[ ] <strong>External critique requested:</strong> phase artifact posted to r/dataengineering, dbt Slack, or DataTalksClub Slack — request thread linked in PROGRESS.md (the ask is the gate; responses are a bonus).</li>
+<li>[ ] <code>SELF-CHECK.md</code> updated: 3–5-sentence written answers to this phase's check-yourself questions, evidence linked.</li>
+<li>[ ] <strong>Retrieval checkpoint:</strong> all <code>[P2]</code> terms + 10 random earlier terms, ≥80% (the <code>/quiz</code> skill runs this).</li>
+<li>[ ] Both phase posts published (see below).</li>
+</ul>
+<h2 id="publish-checkpoint">Publish checkpoint<a class="headerlink" href="#publish-checkpoint" title="Permanent link">&para;</a></h2>
+<p>Two posts this phase (any public platform): (1) the cost story — "Partitioning cut this query's scan by 99%. Same query, same answer, 1% of the cost," with the two Athena screenshots; (2) the DEA-C01 announcement with honest prep notes (what the build taught vs what needed the course).</p>
+<h2 id="check-yourself--questions-you-can-now-answer">Check yourself — questions you can now answer<a class="headerlink" href="#check-yourself--questions-you-can-now-answer" title="Permanent link">&para;</a></h2>
+<ul>
+<li>"Design a cheap analytics platform on AWS for ~100 GB/day."</li>
+<li>"Glue Crawler vs explicit DDL — trade-offs?"</li>
+<li>"How does Athena pricing work and how do you control it?"</li>
+<li>"What table maintenance does a lakehouse need and who does it in your design?"</li>
+<li>"Kinesis Data Streams vs Firehose — where does each fit?"</li>
+<li>"How do you test a pipeline before it ships?"</li>
+</ul>
+<hr />
+<p>← <a href="../phase-1-foundations/">Phase 1 — Foundations</a> · <a href="../../">Route map</a> · <a href="../../GUIDE/">Guide</a> · <a href="../../PROGRESS/">Progress</a> · <strong>Next: <a href="../phase-3-spark-databricks/">Phase 3 — Spark &amp; Databricks →</a></strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
