@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.3 — 2026-08-20 · The video lane
+
+Added an optional **video lane**: every phase's Learn section now carries a second table offering vetted video twins of named default rows — same "Pinned by" exercise, **hours swap rather than add** (pick one lane per row before starting; the unpicked lane is the fallback; never both). Phase budgets, the ~483 h total, and the ~$310–455 certification spend are unchanged; the money table gained one optional line.
+
+- New [`reference/COURSES.md`](reference/COURSES.md) — the learner-facing catalog of the vetted course research ([`sources/research/courses.md`](sources/research/courses.md)): per-phase swap maps with prices, the Coursera program's substitution map, the honest no-video-twin gaps, and the platforms never researched (DataCamp, Udacity).
+- The **DeepLearning.AI Data Engineering Professional Certificate** re-scoped in [CERTS.md](reference/CERTS.md): still skipped as a credential, returns as an optional video lane (Course 1 ↔ the P0 FoDE row is the only clean swap). Pre-P1 SQL video courses stay declined.
+- The lane rule added to [GUIDE.md](GUIDE.md)'s phase loop (step 4) and the `/start-phase` skill; [WHY.md](reference/WHY.md) records the design decision — the Zoomcamp swap-not-add precedent now governs the lane.
+
 ## v1.2 — 2026-08-20 · Comprehensive audit + repositioning
 
 A five-track audit (principal-engineer technical review with external verification against official docs · a full learner-journey walkthrough · usability/navigation design · internal-consistency sweep · a "nothing is learn-only" coverage matrix) produced ~55 findings; every decision below was reconciled explicitly.

@@ -30,6 +30,12 @@ Every resource is **pinned** to an exercise — nothing here is learn-only.
 | MWAA current state reading | Now runs Airflow 3.x — know the managed trade-offs + cost | 1 | The MWAA lab (build step 7) + its ops-differences note |
 | [Airflow secrets backend docs](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/secrets-backends/aws-ssm-parameter-store.html) — SSM Parameter Store | Read before build step 2 | 1 | Build step 2: the SSM-backed connections wiring |
 
+**Video lane — optional swap.** Each row below **replaces** the default row it names: same "Pinned by" exercise, hours swap rather than add. Pick one lane per row before starting ([the rule](../../GUIDE.md#the-phase-loop)); prices, details, and the rows with no video twin: [COURSES.md](../../reference/COURSES.md). *(Most default rows above are already video — this swap changes the provider or the price, not the format.)*
+
+| Resource | Scope | Hours | Pinned by |
+|---|---|---|---|
+| Marc Lamberti Udemy: [Airflow 3 intro](https://www.udemy.com/course/the-complete-hands-on-course-to-master-apache-airflow/) + [Advanced DAG Authoring](https://www.udemy.com/course/apache-airflow-3-advanced-dag-authoring/) (~$15–20 each; Airflow-3-current) | Swaps the *Astronomer Academy* row. Honest note: the free default covers the same ground and is shorter — pick this only if the Academy format doesn't stick | 20–30 (vs 12 — noticeably longer) | Build step 1 (the small-DAGs migration) + the DAG-integrity test assignment |
+
 *Before starting, re-verify:* Airflow current minor (3.3.x at research date), MWAA supported versions, Redshift Serverless free-credit terms.
 
 ## Build — Platform v2: orchestrated, multi-mode ingestion (~38 h)

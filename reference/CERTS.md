@@ -76,7 +76,7 @@ Two cert milestones anchor the **first half** of the year — both passed by ≈
 ## Evaluated and skipped (for the record)
 
 - A **"dbt Foundational Certificate" does not exist** — the real credential is the dbt Analytics Engineering Certification ($200, updated May 2026). Not pursued: dbt skill is demonstrated through the platform's dbt project instead, and the free "dbt Fundamentals" badge is picked up in Phase 1 anyway.
-- The **DeepLearning.AI Data Engineering Specialization** — a course certificate, not an industry credential; duplicates P0–P2 content in watch-only form.
+- The **DeepLearning.AI Data Engineering Professional Certificate** — still skipped **as a credential**: a course certificate, not an industry credential, and the framework replaces watch-only learning with pinned exercises. As a *learning resource* it earns a different verdict — Joe Reis lectures with graded AWS labs are the strongest guided-video coverage of P0–P2 territory — so it returns as an optional **video lane** ([COURSES.md](COURSES.md)). Take the courses if video suits you; the certificate PDF is a by-product, never a milestone.
 - **General SQL/PostgreSQL video courses** — below the framework's entry bar of strong SQL; DataLemur/LeetCode cover applied SQL practice.
 - More certificates ≠ more signal: the two chosen certs are milestones; the platform is the proof.
 

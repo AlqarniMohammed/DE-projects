@@ -10,7 +10,7 @@ The framework ends with something big: a **complete data platform** covering the
 
 ## Where the 12 months go — the honest hour math
 
-The phase budgets sum to **~483 hours** (18 + 70 + 95 + 75 + 72 + 65 + 88). Practice-exam time and labs are counted, not hidden. Against the stated pace:
+The phase budgets sum to **~483 hours** (18 + 70 + 95 + 75 + 72 + 65 + 88). Practice-exam time and labs are counted, not hidden. (The optional [video lane](COURSES.md) swaps rows one-for-one inside these budgets — where a twin runs longer, its row says so; budget the printed hours for whichever lane you pick, never both.) Against the stated pace:
 
 | Weekly pace | Total duration | Verdict |
 |---|---|---|
@@ -31,6 +31,7 @@ The title says 12 months; the gates say "when you're ready." Two **buffer weeks 
 | Both certs in the first half of the year | Each exam's core surface is exactly what its phase builds (P2 = DEA's S3/Glue/Athena/Lake Formation; P3 = the Databricks environment itself), so prep and build align instead of competing. Sitting early also shrinks the blueprint-revision risk window. Full reasoning: [CERTS.md](CERTS.md). |
 | A terminology on-ramp in every phase | The #1 reported problem with tool-dense plans is terminology overwhelm. Every phase lists its new terms first, linked to the glossary, taught as contrast pairs. |
 | Every learn-resource pinned to an exercise | Passive watching is the other half of tutorial hell. Each Learn row names the drill, assignment, or written artifact that exercises it. |
+| An optional video lane — swap, not add | Learners split on format, and the vetted catalog ([courses](../sources/research/courses.md)) has strong video twins for several Learn rows — surfaced in [COURSES.md](COURSES.md). Same verdict as the Zoomcamp evaluation ([SOURCES.md](SOURCES.md)): running two paths in parallel recreates the overwhelm this framework exists to fix — so a video twin *replaces* its default row, inherits its pinned exercise, and the phase budgets don't move. |
 | AWS-first, Databricks second, open-source satellites | AWS leads DE tool demand globally (40.3% of postings) and regionally; many regional postings pair Databricks + PySpark ([job market](../sources/research/job-market.md)). |
 | Airflow deep, Dagster taste | Airflow is #1 in every demand source; Dagster is the credible challenger worth one satellite ([tools](../sources/research/tool-landscape.md)). |
 | Streaming late, batch first | "Default to batch, justify streaming" — and every surveyed roadmap puts Kafka/streaming last of the core topics. |

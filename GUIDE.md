@@ -31,6 +31,7 @@ Don't create these on Day 0 — each phase tells you when. This is the complete 
 | Astronomer Academy · Dagster University | free | P4 |
 | Confluent Developer (free courses + free certificate) | free | P5 |
 | Optional books: PySpark (Rioux ~$33) · DDIA 2E · FoDE (~$45, P0) | optional | P0/P3/P6 |
+| Optional video-lane courses ([catalog + prices](reference/COURSES.md)) — Udemy twins ~$15–25 each · Coursera $49/mo | optional — a $0 default lane always exists; not in the total below | any phase |
 | Communities for external critique: r/dataengineering, dbt Slack, DataTalksClub Slack | free | from G2 |
 
 **Total for the year:** AWS ≤ $25/month + certifications ~$310–455 ([breakdown](reference/CERTS.md)).
@@ -42,9 +43,9 @@ Don't create these on Day 0 — each phase tells you when. This is the complete 
 Every phase README has the same sections, in the same order. Work them like this. "The phase README" means the file you opened, e.g. `phases/phase-2-aws-lakehouse-core/README.md`.
 
 1. **Read the header and Objectives.** The top lines tell you the months, the hours, and what it costs. **Objectives** tells you what you'll be able to do at the end. Read nothing else yet.
-2. **Run the re-verify checks.** Under the Learn table there's an italic line starting *"Before starting, re-verify."* Tools change; do those checks now, before you invest hours.
+2. **Run the re-verify checks.** At the end of the Learn section there's an italic line starting *"Before starting, re-verify."* Tools change; do those checks now, before you invest hours.
 3. **Learn the words first.** Open [GLOSSARY.md](GLOSSARY.md) and find this phase's section (the terms tagged `[P0]`, `[P1]`, …). Read every term and explain it out loud in your own words. From Phase 1 on, quiz yourself with the Anki deck you built in Phase 0 — or run the **`/quiz` skill**.
-4. **Work the Learn table, top to bottom, one row at a time.** Each row names a resource, how much of it to do, and — in the **"Pinned by"** column — the exercise that locks it in. Finish the row's exercise before starting the next row. Never bank rows to "exercise later."
+4. **Work the Learn table, top to bottom, one row at a time.** Each row names a resource, how much of it to do, and — in the **"Pinned by"** column — the exercise that locks it in. Finish the row's exercise before starting the next row. Never bank rows to "exercise later." **Some phases add a second, video-lane table** under the default one — vetted video twins of named rows, catalogued with prices in [reference/COURSES.md](reference/COURSES.md). For each row it names, pick **one** lane *before you start the row*, then do that lane's resource and the row's exercise. The lane you didn't pick is your fallback — open it only when you're stuck. Never work both lanes of one row; hours swap, they never add.
 5. **Do the Build steps in order.** This grows your platform repo. Every change: make a branch, open a PR, review it yourself, squash-merge. Each phase has an **"AI rule"** line — it says what AI may write and what you must type by hand. Follow it exactly.
 6. **Do the Prove-it assignment.** Some phases fold it into a build step; do it wherever the phase README puts it.
 7. **Build the satellite(s).** Two ways: follow the satellite section as written (the default — it's complete), or get a unique brief via [the generator](#getting-a-unique-project-brief).

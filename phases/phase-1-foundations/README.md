@@ -27,6 +27,13 @@ Every resource is **pinned** to an exercise — nothing here is learn-only.
 | [*Apache Iceberg: The Definitive Guide*](https://www.dremio.com/guides/apache-iceberg-the-definitive-guide/) (free) | Ch. 1–4 (architecture, metadata, why it exists) | 4 | The Iceberg drill: schema evolution + time travel, narrated |
 | [dbt Fundamentals](https://learn.getdbt.com/courses/dbt-fundamentals) (free, grab the badge) — prefer the [VS Code variant](https://learn.getdbt.com/courses/dbt-fundamentals-vs-code) | Full course | 4 | The platform's 3-layer dbt project + satellite S1 from zero |
 
+**Video lane — optional swap.** Each row below **replaces** the default row it names: same "Pinned by" exercise, hours swap rather than add. Pick one lane per row before starting ([the rule](../../GUIDE.md#the-phase-loop)); prices, details, and the rows with no video twin: [COURSES.md](../../reference/COURSES.md).
+
+| Resource | Scope | Hours | Pinned by |
+|---|---|---|---|
+| [Dremio University: Apache Iceberg courses](https://university.dremio.com/course/apache-iceberg) (free) | Swaps the *Apache Iceberg: The Definitive Guide* ch. 1–4 row — the same architecture/metadata ground in course form | 3–4 | The Iceberg drill: schema evolution + time travel, narrated |
+| [calmcode.io Polars series](https://calmcode.io/course/polars/introduction) (free) | Swaps only the **Polars half** of the DuckDB/Polars row; the DuckDB friendly-SQL + Parquet pages stay either way | 1–2 | `make demo` benchmark queries + the Polars lab |
+
 *Before starting, re-verify:* course editions (dbt Learn reorganizes periodically), DuckDB major version (v2.0 was in preview Aug 2026).
 
 ## Build — Platform v0.1: the local lakehouse (~25 h)

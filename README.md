@@ -35,7 +35,7 @@ Each phase also builds one or two **satellite projects** (separate repos) for to
 Every phase has the same shape. You repeat this loop seven times:
 
 1. Read the phase's new terms in [GLOSSARY.md](GLOSSARY.md).
-2. Work through the Learn table — each resource comes with an exercise.
+2. Work through the Learn table — each resource comes with an exercise; some rows offer a [video alternative](reference/COURSES.md) (pick one lane, never both).
 3. Build: grow the platform, then build the phase's satellite.
 4. Pass the gate: demo your work, quiz yourself, log evidence in [PROGRESS.md](PROGRESS.md).
 5. Move to the next phase.
@@ -58,7 +58,7 @@ AWS: at most **$25/month**, protected by a budget alarm you set on day one. Exam
 | [`PROGRESS.md`](PROGRESS.md) | Your evidence tracker (fork it, make it yours) |
 | [`GLOSSARY.md`](GLOSSARY.md) | Every term, plainly defined, tagged by phase |
 | [`phases/`](phases/) | The seven phase specs — the default path |
-| [`reference/`](reference/) | Consulted, not read cover-to-cover: [WHY](reference/WHY.md) · [TOOLS](reference/TOOLS.md) · [DATASETS](reference/DATASETS.md) · [CERTS](reference/CERTS.md) · [LEARNERS](reference/LEARNERS.md) · [SOURCES](reference/SOURCES.md) |
+| [`reference/`](reference/) | Consulted, not read cover-to-cover: [WHY](reference/WHY.md) · [TOOLS](reference/TOOLS.md) · [DATASETS](reference/DATASETS.md) · [CERTS](reference/CERTS.md) · [COURSES](reference/COURSES.md) · [LEARNERS](reference/LEARNERS.md) · [SOURCES](reference/SOURCES.md) |
 | [`prompts/`](prompts/) | The satellite-requirements generator + a worked example |
 | [`.claude/skills/`](.claude/skills/) | The six built-in helper skills |
 | [`sources/research/`](sources/research/) | The research reports behind every claim |
