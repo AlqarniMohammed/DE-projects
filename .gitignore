@@ -1,0 +1,26 @@
+# Tooling/session artifacts
+.claude/
+.DS_Store
+
+# Data — datasets never enter git
+data/
+*.duckdb
+*.parquet
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Secrets — see the P0 standing rule: no secret ever enters git
+.env
+.env.*
+*.pem
+
+# Infra & build outputs
+.terraform/
+*.tfstate*
+target/
+dbt_packages/
+logs/

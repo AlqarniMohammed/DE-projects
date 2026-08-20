@@ -1,6 +1,6 @@
 # Phase 0 — Orientation & Setup
 
-**Duration:** ~2 weeks · **Budget:** ~15 hours · **AWS cost:** $0 (plus you *install the guardrails* that keep the year ≤$25/mo)
+**Duration:** ~2 weeks · **Budget:** ~18 hours · **AWS cost:** $0 (plus you *install the guardrails* that keep the year ≤$25/mo)
 
 Setup is isolated here on purpose — the single most-reported failure mode of public DE courses is the "week-1 setup wall" where Docker + cloud + IaC land on top of new concepts. Here, setup is the *whole* phase, so Phase 1 starts with everything working.
 
@@ -16,16 +16,18 @@ Lifecycle · OLTP vs OLAP · ETL vs ELT · batch vs streaming · warehouse vs la
 
 ## Learn (~8 h)
 
-| Resource | Scope | Hours |
-|---|---|---|
-| [`sources/de-lifecycle-refrence.md`](../../sources/de-lifecycle-refrence.md) — your own lifecycle notes | Full read; it's the best asset you already have | 2 |
-| *Fundamentals of Data Engineering* (Reis/Housley) | Ch. 1–3 (what DE is, the lifecycle, architecting) — the rest is referenced by later phases | 4 |
-| [dataengineering.wiki Getting Started](https://dataengineering.wiki/Guides/Getting+Started+With+Data+Engineering) | Skim; bookmark as your second glossary | 1 |
-| [GLOSSARY.md](../../GLOSSARY.md) `[P0]` terms | Active read: cover the definition, explain each term aloud in your own words | 1 |
+Every resource is **pinned** to an exercise — nothing here is learn-only (framework rule: information that isn't exercised evaporates).
+
+| Resource | Scope | Hours | Pinned by |
+|---|---|---|---|
+| [`sources/de-lifecycle-reference.md`](../../sources/de-lifecycle-reference.md) — your own lifecycle notes | Full read; it's the best asset you already have | 2 | G0 voice memo: lifecycle explained aloud, no notes |
+| *Fundamentals of Data Engineering* (Reis/Housley) | Ch. 1–3 (what DE is, the lifecycle, architecting) — the rest is referenced by later phases | 4 | Same voice memo + the 20-term self-quiz |
+| [dataengineering.wiki Getting Started](https://dataengineering.wiki/Guides/Getting+Started+With+Data+Engineering) | Skim; bookmark as your second glossary | 1 | 20-term self-quiz (it's your cross-check source) |
+| [GLOSSARY.md](../../GLOSSARY.md) `[P0]` terms | Active read: cover the definition, explain each term aloud in your own words | 1 | The Anki-generator assignment (you parse this very file) + self-quiz ≥17/20 |
 
 ## Build — environment (~6 h)
 
-1. **Local toolchain:** [uv](https://docs.astral.sh/uv/) (Python env manager) · Docker Desktop/Engine + Compose · VS Code · Git configured. Verify: `uv run python -c "import duckdb"` works in a fresh project.
+1. **Local toolchain:** [uv](https://docs.astral.sh/uv/) (Python env manager) · Docker Desktop/Engine + Compose · VS Code · Git configured. Verify: `uv run python -c "import duckdb"` works in a fresh project. Install a **[gitleaks](https://github.com/gitleaks/gitleaks) pre-commit hook** in every repo you create this year — the standing rule from day one is: **no secret ever enters git** (the runtime half of this rule arrives in Phase 4 with a real secrets backend).
 2. **First contact:** download one month of [NYC TLC yellow-taxi Parquet](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page), query it with DuckDB CLI (`SELECT count(*), avg(trip_distance) ...`) — sixty seconds of magic that grounds everything Phase 1 does.
 3. **AWS guardrails (non-negotiable, from your existing account):**
    - AWS Budget: $25/month with email alert at 50/80/100%.
@@ -36,13 +38,18 @@ Lifecycle · OLTP vs OLAP · ETL vs ELT · batch vs streaming · warehouse vs la
 
 **AI rule for this phase:** use Claude Code freely to explain concepts and debug setup; type every shell command yourself so the toolchain is in your fingers.
 
+### Prove-it assignment (~3 h): the Anki generator
+
+Your first Python artifact, and the tool that powers every retrieval checkpoint of the year: a small script that parses [GLOSSARY.md](../../GLOSSARY.md) (its format is machine-parseable) and emits an **Anki deck** — term → definition + contrast pair, tagged by `[P#]` phase. Include a pytest for the parser (a malformed glossary line must fail loudly, not silently drop a card). Hand-type it; it's small enough to own completely.
+
 ## Competency gate G0
 
 - [ ] Explain the lifecycle stages and where a lakehouse fits, out loud, no notes (record a 3-minute voice memo — seriously; it exposes gaps reading hides).
 - [ ] 20-term self-quiz on `[P0]` glossary terms: cover the right column, define, check. ≥17/20 or repeat tomorrow.
 - [ ] `duckdb` query over a local Parquet file runs and you can say *why* Parquet made it fast (columns + compression).
 - [ ] AWS budget alert email received; `de-framework` profile works.
-- [ ] Both GitHub repos exist with real READMEs.
+- [ ] Both GitHub repos exist with real READMEs; gitleaks pre-commit hook installed in both.
+- [ ] Anki generator works: deck imported, parser test green.
 
 ## Publish checkpoint
 

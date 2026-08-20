@@ -8,7 +8,7 @@ Every term the framework uses, defined in plain language, **taught as contrast p
 
 ## Phase 0 — The Big Picture
 
-- **Data engineering lifecycle** `[P0]` — the stages every data system passes through: generation → ingestion → storage → transformation → serving (with security, orchestration, DataOps as undercurrents). The skeleton this whole framework hangs on. (Your `sources/de-lifecycle-refrence.md` walks it in project order.)
+- **Data engineering lifecycle** `[P0]` — the stages every data system passes through: generation → ingestion → storage → transformation → serving (with security, orchestration, DataOps as undercurrents). The skeleton this whole framework hangs on. (Your `sources/de-lifecycle-reference.md` walks it in project order.)
 - **OLTP vs OLAP** `[P0]` — *OLTP* (online transaction processing): many small reads/writes of single rows — the app's database. *OLAP* (online analytical processing): few large scans aggregating millions of rows — the analytics side. Data engineering largely exists to move and reshape data from OLTP-shaped systems into OLAP-shaped ones.
 - **ETL vs ELT** `[P0]` — both move data. *ETL*: transform **before** loading (classic warehouses, schema-on-write). *ELT*: load raw first, transform **inside** the platform (modern default — storage is cheap, and raw data retained = reprocessable).
 - **Batch vs streaming** `[P0]` — *batch*: process data in scheduled chunks (hourly/daily) — simpler, cheaper, the workhorse. *Streaming*: process events continuously within seconds — needed only when a consumer genuinely needs fresh data. Rule: default to batch, justify streaming.

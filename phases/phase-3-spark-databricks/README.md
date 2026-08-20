@@ -1,8 +1,8 @@
-# Phase 3 — Spark & Databricks ⭐ Cert Phase 1
+# Phase 3 — Spark & Databricks ⭐ Cert Phase 2
 
-**Duration:** months 5–6 · **Budget:** ~80 hours (cert prep overlaps the phase — it *is* the phase) · **Cost:** $0 platform (Databricks Free Edition) + exam $200 (→$100 with voucher) + optional course ~$30–40
+**Duration:** months 5–7 (elastic — the gate decides) · **Budget:** ~80 hours (cert prep overlaps the phase — it *is* the phase) · **Cost:** $0 platform (Databricks Free Edition) + exam $200 (→$100 with voucher) + optional course ~$30–40
 
-Distributed compute enters. Everything here runs on **Databricks Free Edition** (Community Edition's successor: serverless-only, Unity Catalog on by default — exactly the environment the current exam assumes). The gate is the **Databricks Certified Data Engineer Associate** exam, current version effective **May 4, 2026** — PySpark-first, Lakeflow-branded. Full blueprint: [CERTS.md](../../CERTS.md).
+Distributed compute enters. Everything here runs on **Databricks Free Edition** (Community Edition's successor: serverless-only, Unity Catalog on by default — exactly the environment the current exam assumes). The gate is the **Databricks Certified Data Engineer Associate** exam (≈ month 6–7 — the second and final cert, completing the pair), current version effective **May 4, 2026** — PySpark-first, Lakeflow-branded. Your DEA-C01 pass arrives as a tailwind: Spark-on-AWS, lakehouse storage, and CI/CD concepts are pre-loaded, so the new surface here is genuinely Databricks-specific. Full blueprint: [CERTS.md](../../CERTS.md).
 
 ## Objectives
 
@@ -18,17 +18,19 @@ Spark/PySpark · lazy evaluation, transformations vs actions · shuffle · skew 
 
 ## Learn (~25 h)
 
-| Resource | Scope | Hours |
-|---|---|---|
-| **Databricks Academy self-paced DE path (free)** — the exam guide names these: *Data Ingestion with Lakeflow Connect · Deploy Workloads with Lakeflow Jobs · DevOps Essentials for Data Engineering · Data Interoperability with Unity Catalog · Build Data Pipelines with Lakeflow Spark Declarative Pipelines · Get Started with Data Governance* | All six | 15–20 |
-| *Data Analysis with Python and PySpark* (Rioux, Manning, ~$33) — optional but the best PySpark book for your profile | Ch. 1–9 as reference alongside labs | as-needed |
-| Senior-post corroboration: skew/broadcast-join and lazy-evaluation posts in [`sources/senior-de-posts.md`](../../sources/senior-de-posts.md) | Quick re-read — you now have the context to appreciate them | 0.5 |
+Every resource is **pinned** to an exercise — nothing here is learn-only.
+
+| Resource | Scope | Hours | Pinned by |
+|---|---|---|---|
+| **Databricks Academy self-paced DE path (free)** — the exam guide names these: *Data Ingestion with Lakeflow Connect · Deploy Workloads with Lakeflow Jobs · DevOps Essentials for Data Engineering · Data Interoperability with Unity Catalog · Build Data Pipelines with Lakeflow Spark Declarative Pipelines · Get Started with Data Governance* | All six | 15–20 | Labs 1–7 below — they map 1:1 to the courses and the exam sections |
+| *Data Analysis with Python and PySpark* (Rioux, Manning, ~$33) — optional but the best PySpark book for your profile | Ch. 1–9 as reference alongside labs | as-needed | The medallion lab's hand-typed notebooks |
+| Senior-post corroboration: skew/broadcast-join and lazy-evaluation posts in [`sources/senior-de-posts.md`](../../sources/senior-de-posts.md) | Quick re-read — you now have the context to appreciate them | 0.5 | The skew-detection kata + forensics satellite S3a |
 
 *Before starting, re-verify:* the exam guide PDF (revises every 6–10 months!), Free Edition quotas, and whether a **Learning Festival** window (50% exam voucher) falls in these two months — plan the Academy pathway inside it if so.
 
 ## Build — labs on Free Edition (~30 h; maps 1:1 to exam sections)
 
-A fresh dataset keeps it interesting (Spotify charts or IMDb work well — anything with daily updates for MERGE practice):
+A fresh dataset keeps it interesting — pick from the P3 menu in [`DATASETS.md`](../../DATASETS.md) (Spotify charts or IMDb are the proven defaults; anything with daily updates for MERGE practice works):
 
 1. **Ingestion lab:** Auto Loader streaming file ingestion with schema evolution + COPY INTO batch equivalent; know when each.
 2. **Medallion lab:** bronze→silver→gold in PySpark notebooks; joins (incl. one broadcast), explode, dedup; gold as **materialized view vs view vs streaming table** — build one of each and explain the difference (exam favorite).
@@ -46,12 +48,23 @@ A fresh dataset keeps it interesting (Spotify charts or IMDb work well — anyth
 
 **S3b — Iceberg vs Delta bake-off** *(recycled Week 6, local)*: same workload through PyIceberg and delta-rs on your laptop; benchmark write/read/schema-evolution/time-travel; publish `BAKEOFF.md` with real numbers and a verdict. Read about **UniForm/format convergence** to frame the conclusion.
 
+### Prove-it assignment (2–3 h): skew-detection kata
+
+Before starting S3a, hand-write a small `detect_skew(df, key)` helper (partition-size distribution + a skew-ratio number) with provided pytest asserts against two synthetic DataFrames — one uniform, one skewed. It becomes the measuring instrument you use inside the forensics satellite.
+
+## Career track (≤1 h/wk)
+
+The week the cert lands: draft **resume v1** from PROGRESS.md's evidence (accomplishments with numbers — don't wait for P6); send your first 2–3 informational-interview / warm-outreach messages to people at `JOB-SEARCH.md` companies; book your **first Exponent mock interview** (free tier) — post-cert is the audit-recommended moment. Optional but high-leverage: one paid or community **mentor checkpoint** reviewing the spine repo — an hour of external eyes at mid-year is worth ten at month 12.
+
 ## Competency gate G3 ⭐
 
 - [ ] **Databricks Certified Data Engineer Associate — passed.** (Book only after ≥80% on Derar Alhussein V4 practice exams.)
 - [ ] Forensics artifact published (`FORENSICS.md` + screenshots).
 - [ ] Bake-off artifact published.
 - [ ] 3-minute narrated demo: your declarative pipeline graph with expectations catching bad rows.
+- [ ] **External critique requested:** forensics or bake-off artifact posted to a practitioner community — request thread linked in PROGRESS.md.
+- [ ] Career: resume v1 drafted · first outreach sent · first mock interview done.
+- [ ] `INTERVIEW.md` updated with this phase's written answers.
 - [ ] **Retrieval checkpoint:** 10 random earlier-phase terms + 15 `[P3]` terms (≥80%).
 
 ## Publish checkpoint

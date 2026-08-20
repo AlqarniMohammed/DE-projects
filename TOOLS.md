@@ -1,6 +1,6 @@
 # Tool Universe — Verdicts, Phase Placement, Cert Mapping
 
-Every tool considered for this framework, with a verdict grounded in the 2026 research (full evidence + URLs in [`sources/research/tool-landscape.md`](sources/research/tool-landscape.md); demand data in [`sources/research/job-market.md`](sources/research/job-market.md)).
+Every tool considered for this framework, with a verdict grounded in the 2026 research (full evidence + URLs in [`sources/research/tool-landscape.md`](sources/research/tool-landscape.md); demand data in [`sources/research/job-market.md`](sources/research/job-market.md)). **Every tool name links to its official documentation — the source of truth that outlives any course or blog post.** When a tutorial and the docs disagree, the docs win.
 
 > **CORE** = learn hands-on, it's in the spine or a satellite. **AWARE** = understand the concepts + ≤1 day exposure. **SKIP** = deliberately excluded this year (reason given). Cert columns: **DBX** = Databricks DE Associate, **DEA** = AWS DEA-C01.
 
@@ -8,68 +8,69 @@ Every tool considered for this framework, with a verdict grounded in the 2026 re
 
 | Tool | Phase(s) | Cert | Role in the framework |
 |---|---|---|---|
-| SQL (advanced/analytical) | P0–P6 (permanent) | DBX, DEA | The permanent spine; in 69–94% of job postings |
-| Python (+ uv, pytest, typing) | P0–P6 (permanent) | DBX, DEA | The other permanent spine; all ingestion/glue code |
-| Parquet | P1 | DEA | The physical layer under everything |
-| DuckDB | P1 | — | Local dev warehouse; SQL-on-files default |
-| Apache Iceberg | P1, P2 | DEA | The spine's table format (local → S3 Tables); v3 era |
-| dbt (Core, 3-layer project, tests, incremental) | P1, P2, P6 | DEA (transform concepts) | The transformation layer, one project grown all year |
-| Amazon S3 + zones | P2 | DEA | The lakehouse's storage |
-| AWS Glue (Catalog, Crawlers, ETL) | P2 | DEA (~25% of exam surface) | Catalog + serverless Spark ETL |
-| Amazon Athena | P2 | DEA | The spine's query engine; cost mechanics |
-| Amazon S3 Tables | P2 | DEA | Managed Iceberg: compaction/snapshot maintenance handled |
-| AWS Lake Formation (scoped) | P2 | DEA (Domain 4) | Governance grants over the lake |
-| AWS Lambda | P2, P4 | DEA | Serverless glue: triggers, light transforms |
-| PySpark / Spark 4.x | P3 | DBX, DEA (Glue/EMR) | Distributed compute; Spark UI literacy |
-| Delta Lake | P3 | DBX | Databricks phase table format; MERGE, time travel, Liquid Clustering |
-| Databricks (Free Edition: Lakeflow Jobs/SDP, Auto Loader, UC, Asset Bundles) | P3 | DBX | The entire cert phase environment |
-| Apache Airflow 3.x | P4 | DEA (MWAA) | The spine's orchestrator (local/Astro CLI) |
-| dlt (dltHub) | P4 | — | Declarative API/database ingestion; breakout tool of the cycle |
-| AWS DMS | P4 | DEA | AWS-native CDC into the spine |
-| Amazon Kinesis (Streams + Firehose) | P4 | DEA (Domain 1) | AWS streaming ingest path |
-| Amazon Redshift (+ Spectrum, Serverless) | P4 | DEA | Warehouse satellite; heavy exam presence |
-| Apache Kafka 4.x (KRaft) | P5 | DEA (MSK trade-offs) | Event backbone fundamentals, run locally |
-| Debezium | P5 | — | Open-source CDC; the DMS-comparison satellite |
-| dbt tests + dbt-expectations (metaplane) + Elementary | P6 | DEA (data quality concepts) | The 2026 quality/observability stack for a dbt lakehouse |
-| Terraform | P6 | DEA (IaC concepts) | Codify the spine's core resources |
-| Apache Superset | P6 | — | The portfolio's visible BI layer |
-| ClickHouse | P6 (satellite) | — | The serving/speed layer fed from gold marts (Tweeq pattern) |
-| pgvector + embedding pipeline | P6 (satellite) | — | The AI-data differentiator module (~12% of postings, climbing) |
-| Docker / Docker Compose | P0–P6 | — | Local infra for everything above |
-| Git + GitHub Actions | P0–P6 | DEA (CI/CD concepts) | Version control; interim scheduler (MoJ pattern); CI for dbt |
-| LLM-assisted DE (Claude Code, MCP awareness) | P0–P6 (practice) | — | Assumed in 2026 job specs; used deliberately per phase rules |
+| [SQL](https://www.postgresql.org/docs/current/queries.html) (advanced/analytical; Postgres dialect as reference) | P0–P6 (permanent) | DBX, DEA | The permanent spine; in 69–94% of job postings |
+| [Python](https://docs.python.org/3/) (+ [uv](https://docs.astral.sh/uv/), [pytest](https://docs.pytest.org/), typing) | P0–P6 (permanent) | DBX, DEA | The other permanent spine; all ingestion/glue code |
+| [Parquet](https://parquet.apache.org/docs/) | P1 | DEA | The physical layer under everything |
+| [DuckDB](https://duckdb.org/docs/) | P1 | — | Local dev warehouse; SQL-on-files default |
+| [Apache Iceberg](https://iceberg.apache.org/docs/latest/) | P1, P2 | DEA | The spine's table format (local → S3 Tables); v3 era |
+| [dbt](https://docs.getdbt.com/) (Core, 3-layer project, tests, snapshots, incremental) | P1, P2, P6 | DEA (transform concepts) | The transformation layer, one project grown all year |
+| [Amazon S3](https://docs.aws.amazon.com/s3/) + zones | P2 | DEA | The lakehouse's storage |
+| [AWS Glue](https://docs.aws.amazon.com/glue/) (Catalog, Crawlers, ETL) | P2 | DEA (~25% of exam surface) | Catalog + serverless Spark ETL |
+| [Amazon Athena](https://docs.aws.amazon.com/athena/) | P2 | DEA | The spine's query engine; cost mechanics |
+| [Amazon S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html) | P2 | DEA | Managed Iceberg: compaction/snapshot maintenance handled |
+| [AWS Lake Formation](https://docs.aws.amazon.com/lake-formation/) (scoped) | P2 | DEA (Domain 4) | Governance grants over the lake |
+| [AWS Lambda](https://docs.aws.amazon.com/lambda/) | P2, P4 | DEA | Serverless glue: triggers, light transforms |
+| [PySpark / Spark 4.x](https://spark.apache.org/docs/latest/) | P3 | DBX, DEA (Glue/EMR) | Distributed compute; Spark UI literacy |
+| [Delta Lake](https://docs.delta.io/latest/) | P3 | DBX | Databricks phase table format; MERGE, time travel, Liquid Clustering |
+| [Databricks](https://docs.databricks.com/) (Free Edition: Lakeflow Jobs/SDP, Auto Loader, UC, Asset Bundles) | P3 | DBX | The entire cert phase environment |
+| [Apache Airflow 3.x](https://airflow.apache.org/docs/) | P4 | DEA (MWAA) | The spine's orchestrator (local/Astro CLI) |
+| [dlt](https://dlthub.com/docs/intro) (dltHub) | P4 | — | Declarative API/database ingestion; breakout tool of the cycle |
+| [AWS DMS](https://docs.aws.amazon.com/dms/) | P4 | DEA | AWS-native CDC into the spine |
+| [Amazon Kinesis](https://docs.aws.amazon.com/kinesis/) (Streams + Firehose) | P2 (mini-lab), P4 | DEA (Domain 1) | AWS streaming ingest path |
+| [Amazon Redshift](https://docs.aws.amazon.com/redshift/) (+ Spectrum, Serverless) | P2 (taste), P4 | DEA | Warehouse satellite; heavy exam presence |
+| [AWS SSM Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) (+ [gitleaks](https://github.com/gitleaks/gitleaks)) | P0, P4 | DEA (security concepts) | The secrets story: nothing in git, DAGs pull at runtime |
+| [Apache Kafka 4.x](https://kafka.apache.org/documentation/) (KRaft) | P5 | DEA (MSK trade-offs) | Event backbone fundamentals, run locally |
+| [Debezium](https://debezium.io/documentation/) | P5 | — | Open-source CDC; the DMS-comparison satellite |
+| [dbt tests](https://docs.getdbt.com/docs/build/data-tests) + [dbt-expectations (metaplane)](https://hub.getdbt.com/metaplane/dbt_expectations/latest/) + [Elementary](https://docs.elementary-data.com/) | P6 | DEA (data quality concepts) | The 2026 quality/observability stack for a dbt lakehouse |
+| [Terraform](https://developer.hashicorp.com/terraform/docs) | P6 | DEA (IaC concepts) | Codify the spine's core resources |
+| [Apache Superset](https://superset.apache.org/docs/intro) | P6 | — | The portfolio's visible BI layer |
+| [ClickHouse](https://clickhouse.com/docs) | P6 (satellite) | — | The serving/speed layer fed from gold marts (Tweeq pattern) |
+| [pgvector](https://github.com/pgvector/pgvector) + embedding pipeline | P6 (satellite) | — | The AI-data differentiator module (~12% of postings, climbing) |
+| [Docker / Docker Compose](https://docs.docker.com/) | P0–P6 | — | Local infra for everything above |
+| [Git](https://git-scm.com/doc) + [GitHub Actions](https://docs.github.com/actions) | P0–P6 | DEA (CI/CD concepts) | Version control; interim scheduler (MoJ pattern); CI for dbt |
+| [LLM-assisted DE](https://code.claude.com/docs) (Claude Code, MCP awareness) | P0–P6 (practice) | — | Assumed in 2026 job specs; used deliberately per phase rules |
 
 ## AWARE — concepts + ≤1 day exposure
 
 | Tool | Where covered | Why not CORE |
 |---|---|---|
-| Polars | P1 (half-day lab) | DuckDB covers the local niche; jobs still say pandas/Spark |
-| Apache Flink | P5 (Flink SQL lab, Confluent 101) | Stateful-streaming depth is a post-job specialization |
-| Redpanda | P5 (as the local Kafka) | It *is* the dev vehicle; Kafka is the skill |
-| MSK / MSK Connect | P5 (theory + costed mini-lab) | Deployment vehicle for Kafka skills; $-heavy to keep running |
-| MWAA | P4 (theory + short-lived lab) | ~$350+/mo baseline; Airflow-the-skill is learned locally |
-| EMR / EMR Serverless | P4 (one job) | Know Glue-vs-EMR trade-off; Glue covers Spark-on-AWS hands-on |
-| Step Functions + EventBridge | P4 (one state machine lab) | Know when they beat Airflow |
-| SageMaker Lakehouse (branding) | P2 (reading) | Umbrella rebrand of Glue/Athena/Redshift — know the diagram |
-| Dagster | P4 (satellite) | Airflow leads demand; Dagster = one strong comparison satellite |
-| SQLMesh | P6 (reading + 2-hr taste) | Credible dbt challenger, now LF-governed; market still dbt-first |
-| dbt Fusion engine | P2/P6 (reading) | Arrives with dbt v2; know why it matters (Rust, static analysis) |
-| Delta UniForm / format convergence | P3 (reading) | Explains why Iceberg knowledge transfers to Delta shops |
-| DuckLake | P1 (reading) | Format to watch; one year old vs the Iceberg ecosystem |
-| Apache Polaris (Iceberg REST catalog) | P2 (reading) | Know the REST-catalog concept; Glue/S3 Tables covers the doing |
-| DataHub / OpenMetadata | P6 (reading + optional quickstart) | Catalog concepts; a full deployment is overkill solo |
-| OpenLineage / Marquez | P6 (1-hr demo) | The lineage standard; demo-level is interview-sufficient |
-| Soda (v4 contracts) | P6 (reading) | Contracts vocabulary; dbt model contracts cover the hands-on |
-| Great Expectations (GX) | P6 (vocabulary only) | Acquired by FICO 2026, GX Cloud shut down; dbt tests + Elementary replaced the pattern |
-| Pandera | P6 (reading) | DataFrame validation niche; right-sized awareness |
-| Monte Carlo | P6 (vocabulary) | Category-defining, $50K+/yr, can't self-host |
-| Semantic layers (MetricFlow, Cube) | P6 (reading) | Fast-moving AI-agent infrastructure; awareness suffices |
-| Airbyte / Fivetran / Sling | P4 (reading) | Connector-ELT concepts; dlt is the hands-on pick |
-| Snowflake | P6 (half-day reading) | Global demand hedge (29% of postings); Databricks chosen for Gulf weighting |
-| Azure data stack (ADF/Synapse/Fabric vocabulary) | P6 (half-day reading) | Saudi enterprise hedge; no builds |
-| WarpStream-style diskless streaming / Confluent Tableflow | P5 (reading) | Architecture direction; concept-level |
-| MotherDuck / Evidence / Metabase | opportunistic | Nice satellite garnish, not scheduled |
-| CloudWatch + AWS Budgets | P0 (alarms) + P6 (dashboard) | Scoped to what the spine needs |
+| [Polars](https://docs.pola.rs/) | P1 (half-day lab) | DuckDB covers the local niche; jobs still say pandas/Spark |
+| [Apache Flink](https://nightlies.apache.org/flink/flink-docs-stable/) | P5 (Flink SQL lab, Confluent 101) | Stateful-streaming depth is a post-job specialization |
+| [Redpanda](https://docs.redpanda.com/) | P5 (as the local Kafka) | It *is* the dev vehicle; Kafka is the skill |
+| [MSK / MSK Connect](https://docs.aws.amazon.com/msk/) | P5 (theory + costed mini-lab) | Deployment vehicle for Kafka skills; $-heavy to keep running |
+| [MWAA](https://docs.aws.amazon.com/mwaa/) | P4 (theory + short-lived lab) | ~$350+/mo baseline; Airflow-the-skill is learned locally |
+| [EMR / EMR Serverless](https://docs.aws.amazon.com/emr/) | P4 (one job) | Know Glue-vs-EMR trade-off; Glue covers Spark-on-AWS hands-on |
+| [Step Functions](https://docs.aws.amazon.com/step-functions/) + [EventBridge](https://docs.aws.amazon.com/eventbridge/) | P4 (one state machine lab) | Know when they beat Airflow |
+| [SageMaker Lakehouse](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/lakehouse.html) (branding) | P2 (reading) | Umbrella rebrand of Glue/Athena/Redshift — know the diagram |
+| [Dagster](https://docs.dagster.io/) | P4 (satellite) | Airflow leads demand; Dagster = one strong comparison satellite |
+| [SQLMesh](https://sqlmesh.readthedocs.io/) | P6 (reading + 2-hr taste) | Credible dbt challenger, now LF-governed; market still dbt-first |
+| [dbt Fusion engine](https://docs.getdbt.com/docs/fusion/about-fusion) | P2/P6 (reading) | Arrives with dbt v2; know why it matters (Rust, static analysis) |
+| [Delta UniForm](https://docs.delta.io/latest/delta-uniform.html) / format convergence | P3 (reading) | Explains why Iceberg knowledge transfers to Delta shops |
+| [DuckLake](https://ducklake.select/) | P1 (reading) | Format to watch; one year old vs the Iceberg ecosystem |
+| [Apache Polaris](https://polaris.apache.org/) (Iceberg REST catalog) | P2 (reading) | Know the REST-catalog concept; Glue/S3 Tables covers the doing |
+| [DataHub](https://docs.datahub.com/) / [OpenMetadata](https://docs.open-metadata.org/) | P6 (reading + optional quickstart) | Catalog concepts; a full deployment is overkill solo |
+| [OpenLineage](https://openlineage.io/docs) / [Marquez](https://marquezproject.github.io/marquez/) | P6 (1-hr demo) | The lineage standard; demo-level is interview-sufficient |
+| [Soda](https://docs.soda.io/) (v4 contracts) | P6 (reading) | Contracts vocabulary; dbt model contracts cover the hands-on |
+| [Great Expectations (GX)](https://docs.greatexpectations.io/) | P6 (vocabulary only) | Acquired by FICO 2026, GX Cloud shut down; dbt tests + Elementary replaced the pattern |
+| [Pandera](https://pandera.readthedocs.io/) | P6 (reading) | DataFrame validation niche; right-sized awareness |
+| [Monte Carlo](https://docs.getmontecarlo.com/) | P6 (vocabulary) | Category-defining, $50K+/yr, can't self-host |
+| Semantic layers ([MetricFlow](https://docs.getdbt.com/docs/build/about-metricflow), [Cube](https://cube.dev/docs)) | P6 (reading) | Fast-moving AI-agent infrastructure; awareness suffices |
+| [Airbyte](https://docs.airbyte.com/) / [Fivetran](https://fivetran.com/docs/getting-started) / [Sling](https://docs.slingdata.io/) | P4 (reading) | Connector-ELT concepts; dlt is the hands-on pick |
+| [Snowflake](https://docs.snowflake.com/) | P6 (half-day reading) | Global demand hedge (29% of postings); Databricks chosen for Gulf weighting |
+| Azure data stack ([ADF](https://learn.microsoft.com/azure/data-factory/)/[Synapse](https://learn.microsoft.com/azure/synapse-analytics/)/[Fabric](https://learn.microsoft.com/fabric/) vocabulary) | P6 (half-day reading) | Saudi enterprise hedge; no builds |
+| [WarpStream](https://docs.warpstream.com/)-style diskless streaming / [Confluent Tableflow](https://docs.confluent.io/cloud/current/topics/tableflow/overview.html) | P5 (reading) | Architecture direction; concept-level |
+| [MotherDuck](https://motherduck.com/docs/) / [Evidence](https://docs.evidence.dev/) / [Metabase](https://www.metabase.com/docs/) | opportunistic | Nice satellite garnish, not scheduled |
+| [CloudWatch](https://docs.aws.amazon.com/cloudwatch/) + [AWS Budgets](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html) | P0 (alarms) + P6 (dashboard) | Scoped to what the spine needs |
 
 ## SKIP — deliberately excluded this year
 

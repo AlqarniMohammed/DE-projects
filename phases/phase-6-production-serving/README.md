@@ -19,13 +19,16 @@ DQ dimensions (validity vs accuracy) · dbt tests vs dbt-expectations vs Element
 
 ## Learn (~20 h)
 
-| Resource | Scope | Hours |
-|---|---|---|
-| Quality compact path: [dbt tests docs](https://docs.getdbt.com/docs/build/data-tests) + [dbt-expectations (metaplane fork)](https://hub.getdbt.com/metaplane/dbt_expectations/latest/) + [Elementary quickstart](https://docs.elementary-data.com/oss/quickstart/quickstart-cli-package) | Working level | 6 |
-| [Terraform AWS get-started](https://developer.hashicorp.com/terraform/tutorials/aws-get-started) | Full track | 5 |
-| [OpenLineage getting started](https://openlineage.io/getting-started/) + [Marquez tutorial](https://www.astronomer.io/docs/learn/marquez) | 1-hour demo level | 2 |
-| *DDIA 2nd edition* (Kleppmann & Riccomini, **March 2026** — buy the 2E) | Targeted: storage engines, replication, batch/stream chapters | 8 (spread) |
-| Vocabulary passes (half-day each): GX/Soda/Monte Carlo story · SQLMesh 2-hr taste · semantic layers · Snowflake positioning · Azure stack (ADF/Synapse/Fabric terms) | Interview hedges — reading only | 4 |
+Every resource is **pinned** to an exercise — nothing here is learn-only.
+
+| Resource | Scope | Hours | Pinned by |
+|---|---|---|---|
+| Quality compact path: [dbt tests docs](https://docs.getdbt.com/docs/build/data-tests) + [dbt-expectations (metaplane fork)](https://hub.getdbt.com/metaplane/dbt_expectations/latest/) + [Elementary quickstart](https://docs.elementary-data.com/oss/quickstart/quickstart-cli-package) | Working level | 6 | Build step 1: the layered quality stack + the caught-anomaly demo |
+| [Terraform AWS get-started](https://developer.hashicorp.com/terraform/tutorials/aws-get-started) | Full track | 5 | Build step 4: Terraform-izing the spine core, `plan` clean |
+| [OpenLineage getting started](https://openlineage.io/getting-started/) + [Marquez tutorial](https://www.astronomer.io/docs/learn/marquez) | 1-hour demo level | 2 | Build step 3: the cross-DAG lineage graph screenshot |
+| *DDIA 2nd edition* (Kleppmann & Riccomini, **March 2026** — buy the 2E) | Targeted: storage engines, replication, batch/stream chapters | 8 (spread) | `INTERVIEW.md` answers + the system-design self-run |
+| Vocabulary passes (half-day each): GX/Soda/Monte Carlo story · SQLMesh 2-hr taste · semantic layers · Snowflake positioning · Azure stack (ADF/Synapse/Fabric terms) | Interview hedges — reading only | 4 | One written contrast paragraph per pass, filed in `INTERVIEW.md` |
+| **PDPL (Saudi Personal Data Protection Law) primer** — official SDAIA summary/guidelines | 1-hour governance read; pairs with the Lake Formation work | 1 | A short "PDPL implications for this platform" note in `PLATFORM-RUNBOOK.md` — governance-aware candidates are rare |
 
 ## Build — Spine v4: production hardening (~25 h)
 
@@ -40,6 +43,8 @@ DQ dimensions (validity vs accuracy) · dbt tests vs dbt-expectations vs Element
 ## Build — Satellite S6a: ClickHouse + Superset serving layer (~15 h)
 
 *(The Tweeq pattern — new; the old plan lacked a serving layer entirely.)* Docker Compose: **ClickHouse** + **Superset**. A small Airflow DAG replicates two gold marts from the lakehouse into ClickHouse MergeTree tables on a schedule (the "hot copy" pattern — lakehouse stays the source of truth). Superset dashboard with a live, filterable "customer-facing" view; measure the latency difference vs Athena for the same query and put the number in the README. Read the [Tweeq article](https://engineering.tweeq.sa/tweeq-data-platform-journey-and-lessons-learned-clickhouse-dbt-dagster-and-superset-fa27a4a61904) *after* building — their lessons (Kafka Engine schema pain, adapter maturity) will now read as war stories you understand.
+
+**Optional full-stack variant** (for builders with app-development skills): replace or augment Superset with a small **data product** — a FastAPI read API over the gold marts (or ClickHouse) plus a minimal frontend. The latency story is still required, and the framing writes itself: "I built the pipeline *and* the product it feeds." Very few DE portfolios can show this end-to-end; if you can, it's a differentiator no dashboard matches. A regional dataset from the S6a menu in [`DATASETS.md`](../../DATASETS.md) compounds the effect.
 
 ## Build — Satellite S6b: the AI-data pipeline (~12 h)
 
@@ -71,7 +76,9 @@ DQ dimensions (validity vs accuracy) · dbt tests vs dbt-expectations vs Element
 - [ ] Breaking-PR-blocked-by-contract evidence linked.
 - [ ] Serving-layer latency number published; AI-pipeline retrieval check green.
 - [ ] `terraform plan` clean on the spine's core.
-- [ ] ≥3 mock interviews done; resume rewritten.
+- [ ] ≥3 mock interviews done; resume rewritten (v2 — v1 has existed since G3).
+- [ ] **External critique requested:** capstone repo posted for community review — request thread linked.
+- [ ] `INTERVIEW.md` complete: every phase's questions answered in writing, evidence linked — your interview-prep doc wrote itself.
 - [ ] **Final retrieval checkpoint:** 30 terms sampled across ALL phases (≥80%).
 
 ## Publish checkpoint
