@@ -25,6 +25,12 @@ Every resource is **pinned** to an exercise — nothing here is learn-only (fram
 | [dataengineering.wiki Getting Started](https://dataengineering.wiki/Guides/Getting+Started+With+Data+Engineering) | Skim; bookmark as your second glossary | 1 | Glossary self-quiz (it's your cross-check source) |
 | [GLOSSARY.md](../../GLOSSARY.md) `[P0]` terms | Active read: cover the definition, explain each term aloud in your own words | 1 | The Anki-generator assignment (you parse this very file) + self-quiz ≥8/10 |
 
+**Video lane — optional swap.** Each row below **replaces** the default row it names: same "Pinned by" exercise, hours swap rather than add. Pick one lane per row before starting ([the rule](../../GUIDE.md#the-phase-loop)); prices, details, and the rows with no video twin: [COURSES.md](../../reference/COURSES.md).
+
+| Resource | Scope | Hours | Pinned by |
+|---|---|---|---|
+| [DeepLearning.AI Data Engineering Professional Certificate](https://www.coursera.org/professional-certificates/data-engineering) — **Course 1 only** (Joe Reis + AWS) | Swaps the *Fundamentals of Data Engineering* ch. 1–3 row — the same lifecycle material from the same author, as lectures with graded AWS labs (Coursera $49/mo; one billing month covers it — read [COURSES.md](../../reference/COURSES.md) before subscribing) | 6–8 (vs 4 — the labs add time) | Same voice memo + the glossary self-quiz |
+
 *Before starting, re-verify:* current install steps for uv and Docker (they change), and the FoDE edition/availability.
 
 ## Build — environment (~6 h)

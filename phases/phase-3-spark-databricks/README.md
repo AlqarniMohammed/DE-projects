@@ -26,6 +26,13 @@ Every resource is **pinned** to an exercise — nothing here is learn-only.
 | *Data Analysis with Python and PySpark* (Rioux, Manning, ~$33) — optional; the strongest current PySpark book | Ch. 1–9 as reference alongside labs | as-needed | The medallion lab's hand-typed notebooks |
 | [Spark performance-tuning docs](https://spark.apache.org/docs/latest/sql-performance-tuning.html) — skew, broadcast joins, AQE | Quick read — you now have the context to appreciate it | 0.5 | The skew-detection kata + forensics satellite S3a |
 
+**Video lane — optional swap.** Each row below **replaces** the default row it names: same "Pinned by" exercise, hours swap rather than add. Pick one lane per row before starting ([the rule](../../GUIDE.md#the-phase-loop)); prices, details, and the rows with no video twin: [COURSES.md](../../reference/COURSES.md). *(Most default rows above are already video — this swap changes the provider or the price, not the format.)*
+
+| Resource | Scope | Hours | Pinned by |
+|---|---|---|---|
+| [Derar Alhussein: Databricks DE Associate prep course](https://www.udemy.com/course/databricks-certified-data-engineer-associate/) + [practice exams](https://www.udemy.com/course/practice-exams-databricks-certified-data-engineer-associate/) (~$30–40 on sale; V4, May-2026 syllabus) | Swaps the *Databricks Academy path* row as your primary video, if a single-instructor format sticks better; keep the Academy course list as your syllabus checklist — the exam guide names those courses. (His practice exams are already assumed by gate G3) | 15–20 | Labs 1–7 below — they map 1:1 to the courses and the exam sections |
+| [PySpark: Apache Spark Programming for Beginners](https://www.udemy.com/course/apache-spark-programming-in-python-for-beginners/) (Pandey, ~$15–20 on sale; runs in Databricks) | Swaps the *Rioux book* reference row — course-as-reference instead of book-as-reference; watch sections as the labs demand them, not front-to-back | as-needed (14–18 watched through) | The medallion lab's hand-typed notebooks |
+
 *Before starting, re-verify:* the exam guide PDF (revises every 6–10 months!), Free Edition quotas, and whether a **Learning Festival** window (50% exam voucher) falls in these two months — plan the Academy pathway inside it if so.
 
 ## Build — labs on Free Edition (~30 h; maps 1:1 to exam sections)

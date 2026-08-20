@@ -33,6 +33,12 @@ Every resource is **pinned** to an exercise — nothing here is learn-only.
 | SageMaker Lakehouse rebrand reading · dbt Fusion engine what/why | Umbrella diagram + awareness (verify Athena adapter status) | 2 | Half-page note in `notes/` + one written `SELF-CHECK.md` answer |
 | [Tutorials Dojo DEA-C01 practice exams](https://portal.tutorialsdojo.com/courses/aws-certified-data-engineer-associate-practice-exam-dea-c01/) ($15) | Final 3 weeks of the phase; ≥80% on timed sets before booking | 8 | The exam itself — book only at ≥80% timed |
 
+**Video lane — optional swap.** Each row below **replaces** the default row it names: same "Pinned by" exercise, hours swap rather than add. Pick one lane per row before starting ([the rule](../../GUIDE.md#the-phase-loop)); prices, details, and the rows with no video twin: [COURSES.md](../../reference/COURSES.md). *(Most default rows above are already video — this swap changes the provider or the price, not the format.)*
+
+| Resource | Scope | Hours | Pinned by |
+|---|---|---|---|
+| [Johnny Chivers: free DEA-C01 full course](https://www.youtube.com/watch?v=6G0bLDIcO7Y) + ["2026 Edition" AWS DE series](https://www.youtube.com/johnnychivers) (free, with a [labs repo](https://github.com/johnny-chivers/aws-data-engineering)) | Swaps **both Maarek/Kane tranches** at $0. Honest trade: thinner on Redshift/security/ops — backstop those domains with the free [Skill Builder DEA-C01 exam-prep plan](https://skillbuilder.aws/learning-plan/QYZWVSMX4B/exam-prep-plan-aws-certified-data-engineer--associate-deac01--english/YTMBK7R698) ([CERTS.md](../../reference/CERTS.md) prep item 4). Tutorials Dojo stays mandatory in both lanes | 10–15 (vs 20) | Platform build steps 1–6: you operate every service you just watched · the two exam mini-labs + Tutorials Dojo domain sets |
+
 *Before starting, re-verify:* S3 Tables regional availability & pricing; dbt-athena current incremental-strategy and S3 Tables catalog support (see build step 4); Athena Iceberg-version support; the DEA-C01 exam guide (~6 weeks before your target booking date).
 
 ## Build — Platform v1: the lakehouse on AWS (~30 h)

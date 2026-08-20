@@ -27,6 +27,12 @@ Every resource is **pinned** to an exercise — nothing here is learn-only.
 | [Confluent Apache Flink 101](https://developer.confluent.io/courses/apache-flink/intro/) — Flink-SQL-focused | Full (semantics: windows, watermarks) | 5 | The Flink SQL lab (windows + watermark note) |
 | Reading: diskless streaming (WarpStream-style) + Confluent Tableflow | Concept notes — where streaming-to-lakehouse is heading | 1 | Half-page concept note in `notes/` + one written `SELF-CHECK.md` answer |
 
+**Video lane — optional swap.** Each row below **replaces** the default row it names: same "Pinned by" exercise, hours swap rather than add. Pick one lane per row before starting ([the rule](../../GUIDE.md#the-phase-loop)); prices, details, and the rows with no video twin: [COURSES.md](../../reference/COURSES.md). *(Most default rows above are already video — this swap changes the provider or the price, not the format.)*
+
+| Resource | Scope | Hours | Pinned by |
+|---|---|---|---|
+| [Maarek: Apache Kafka for Beginners](https://www.udemy.com/course/apache-kafka/) (~$15–20 on sale; updated for Kafka 4.0) | Swaps the **Kafka 101 half** of the Confluent row only; do Connect 101 and sit the free certificate either way — the pin doesn't move | 6–8 (vs ~4 of that row's 8) | Build step 1 (produce/consume, kill-a-consumer drill) + the certificate exam |
+
 *Before starting, re-verify:* Kafka/Redpanda current majors, the Confluent course lineup and the free certificate's availability, PyIceberg upsert support status.
 
 *Avoid:* apache/flink-training (stale, Flink 1.17) and any Kafka tutorial teaching ZooKeeper ops (pre-2025, obsolete).

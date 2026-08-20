@@ -61,6 +61,7 @@ nav:
       - Tools: reference/TOOLS.md
       - Datasets: reference/DATASETS.md
       - Certifications: reference/CERTS.md
+      - "Video courses": reference/COURSES.md
       - "Learners & placement": reference/LEARNERS.md
       - Sources: reference/SOURCES.md
   - Changelog: CHANGELOG.md

@@ -30,6 +30,12 @@ Every resource is **pinned** to an exercise — nothing here is learn-only.
 | Vocabulary passes (half-day each): GX/Soda/Monte Carlo story · SQLMesh 2-hr taste · Pandera positioning · semantic layers · Snowflake positioning · Azure stack (ADF/Synapse/Fabric terms) | Reading + one written paragraph each | 4 | One written contrast paragraph per pass, filed in `SELF-CHECK.md` |
 | **PDPL (Saudi Personal Data Protection Law) primer** — official SDAIA summary/guidelines | 1-hour governance read; pairs with the Lake Formation work | 1 | A short "PDPL implications for this platform" note in `PLATFORM-RUNBOOK.md` — governance-aware engineers are rare |
 
+**Video lane — optional swap.** Each row below **replaces** the default row it names: same "Pinned by" exercise, hours swap rather than add. Pick one lane per row before starting ([the rule](../../GUIDE.md#the-phase-loop)); prices, details, and the rows with no video twin: [COURSES.md](../../reference/COURSES.md).
+
+| Resource | Scope | Hours | Pinned by |
+|---|---|---|---|
+| [freeCodeCamp: Terraform + AWS dev environment](https://www.freecodecamp.org/news/learn-terraform-and-aws-by-building-a-dev-environment/) (free video course) | Swaps the *Terraform AWS get-started* row — build-along video instead of the HashiCorp text track; then Terraform the platform's own resources either way | 4–6 (vs 5) | Build step 4: Terraform-izing the platform core, `plan` clean |
+
 *Before starting, re-verify:* Elementary + dbt-expectations package versions (the quality stack churns), Terraform AWS provider major, DDIA 2E availability in your region.
 
 ## Build — Platform v4: production hardening (~25 h)
