@@ -1,11 +1,10 @@
-# Tooling/session artifacts
-.claude/
+# Tooling/session artifacts (the skills in .claude/skills/ ship with the repo; the rest stays local)
+.claude/*
+!.claude/skills/
 .DS_Store
 
-# Data — datasets never enter git
-data/
-*.duckdb
-*.parquet
+# Personal archive — kept locally, never published
+sources/personal/
 
 # Python
 __pycache__/
@@ -13,12 +12,21 @@ __pycache__/
 .venv/
 .pytest_cache/
 
-# Secrets — see the P0 standing rule: no secret ever enters git
+# Docs site build (docs/ is the staged mirror, site/ the build output)
+docs/
+site/
+
+# Secrets — standing rule: no secret ever enters git
 .env
 .env.*
 *.pem
 
-# Infra & build outputs
+# ── Template for your platform repo ─────────────────────────────
+# This framework repo contains no data or build outputs; the lines
+# below are here to copy into your aws-lakehouse-platform repo.
+data/
+*.duckdb
+*.parquet
 .terraform/
 *.tfstate*
 target/

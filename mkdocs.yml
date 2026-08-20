@@ -1,0 +1,66 @@
+# Material for MkDocs config. The markdown files at the repo root remain the
+# single source of truth: the build stages them into a gitignored docs/ mirror
+# first (see scripts/stage-docs.sh), because MkDocs cannot use the repo root
+# itself as docs_dir. Local preview:
+#   ./scripts/stage-docs.sh && mkdocs serve
+
+site_name: "The Data Engineer Framework"
+
+docs_dir: docs
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - content.code.copy
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+      # match GitHub's anchor slugs (em-dashes → double hyphens etc.) so the
+      # same #links work on github.com and on the site
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.superfences
+
+plugins:
+  - search
+
+nav:
+  - Home: README.md
+  - Guide: GUIDE.md
+  - Phases:
+      - "Phase 0 — Orientation & Setup": phases/phase-0-orientation/README.md
+      - "Phase 1 — Foundations": phases/phase-1-foundations/README.md
+      - "Phase 2 — AWS Lakehouse Core": phases/phase-2-aws-lakehouse-core/README.md
+      - "Phase 3 — Spark & Databricks": phases/phase-3-spark-databricks/README.md
+      - "Phase 4 — Orchestration & Ingestion": phases/phase-4-orchestration-ingestion/README.md
+      - "Phase 5 — Streaming & CDC": phases/phase-5-streaming/README.md
+      - "Phase 6 — Production, Serving & Capstone": phases/phase-6-production-serving/README.md
+  - Glossary: GLOSSARY.md
+  - Progress tracker: PROGRESS.md
+  - Reference:
+      - "Why it looks this way": reference/WHY.md
+      - Tools: reference/TOOLS.md
+      - Datasets: reference/DATASETS.md
+      - Certifications: reference/CERTS.md
+      - "Learners & placement": reference/LEARNERS.md
+      - Sources: reference/SOURCES.md
+  - Changelog: CHANGELOG.md

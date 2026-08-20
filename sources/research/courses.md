@@ -1,6 +1,6 @@
 # Research Report — DE Learning Resources (verified current as of 2026-08-20)
 
-**Audience fit criteria applied throughout:** AWS SAA-certified, strong SQL/data-modeling, 6-10 hrs/week, free/cheap preferred, short theory ramp then hands-on building. All currency claims verified against live sources on 2026-08-19/20.
+**Audience fit criteria applied throughout:** strong SQL/data-modeling with associate-level AWS knowledge, 6-10 hrs/week, free/cheap preferred, short theory ramp then hands-on building. All currency claims verified against live sources on 2026-08-19/20.
 
 ---
 

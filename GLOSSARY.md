@@ -1,14 +1,16 @@
 # Glossary — The Terminology On-Ramp
 
-Every term the framework uses, defined in plain language, **taught as contrast pairs** where possible (the fastest way to make a term stick), and tagged with the phase where you first need it. Read a phase's terms *before* starting its build. When a build instruction uses a word you can't explain, come back here — if it's missing, add it (this file is yours to grow).
+Every term the framework uses, in plain language. Each term is defined next to what it is *not* — contrast pairs stick. Terms are tagged with the phase where you first need them; read a phase's terms before starting its build. If a build instruction uses a word you can't explain, come back here — and if it's missing, add it.
 
-> Format: **Term** `[P#]` — definition. *Contrast:* what it is **not**.
+> Format (machine-parseable — the Phase 0 Anki generator depends on it): ``- **Term** `[P#]` — definition. *Contrast:* what it is not.`` One `[P#]` tag per line, always; the *Contrast:* part is optional.
+
+Jump: [P0](#phase-0--orientation--setup) · [P1](#phase-1--foundations) · [P2](#phase-2--aws-lakehouse-core) · [P3](#phase-3--spark--databricks) · [P4](#phase-4--orchestration--ingestion) · [P5](#phase-5--streaming--cdc) · [P6](#phase-6--production-serving--capstone)
 
 ---
 
-## Phase 0 — The Big Picture
+## Phase 0 — Orientation & Setup
 
-- **Data engineering lifecycle** `[P0]` — the stages every data system passes through: generation → ingestion → storage → transformation → serving (with security, orchestration, DataOps as undercurrents). The skeleton this whole framework hangs on. (Your `sources/de-lifecycle-reference.md` walks it in project order.)
+- **Data engineering lifecycle** `[P0]` — the stages every data system passes through: generation → ingestion → storage → transformation → serving (with security, orchestration, DataOps as undercurrents). The skeleton this whole framework hangs on. ([The lifecycle primer](sources/research/de-lifecycle-primer.md) walks it in project order.)
 - **OLTP vs OLAP** `[P0]` — *OLTP* (online transaction processing): many small reads/writes of single rows — the app's database. *OLAP* (online analytical processing): few large scans aggregating millions of rows — the analytics side. Data engineering largely exists to move and reshape data from OLTP-shaped systems into OLAP-shaped ones.
 - **ETL vs ELT** `[P0]` — both move data. *ETL*: transform **before** loading (classic warehouses, schema-on-write). *ELT*: load raw first, transform **inside** the platform (modern default — storage is cheap, and raw data retained = reprocessable).
 - **Batch vs streaming** `[P0]` — *batch*: process data in scheduled chunks (hourly/daily) — simpler, cheaper, the workhorse. *Streaming*: process events continuously within seconds — needed only when a consumer genuinely needs fresh data. Rule: default to batch, justify streaming.
@@ -17,13 +19,13 @@ Every term the framework uses, defined in plain language, **taught as contrast p
 - **Row-oriented vs column-oriented storage** `[P0]` — rows: fast to write/fetch one record (OLTP). Columns: fast to scan one field across millions of records, compresses far better (OLAP). Why Parquet/ClickHouse/Redshift are columnar.
 - **Data pipeline** `[P0]` — any automated path data takes from source to consumer. *Contrast:* a script you run by hand is not a pipeline until it's scheduled, retried, and monitored.
 - **Medallion architecture (bronze/silver/gold)** `[P0]` — layering convention: *bronze* = raw as-landed, *silver* = cleaned/typed/deduplicated, *gold* = business-ready marts. Same idea as dbt's staging → intermediate → marts.
-- **Idempotency** `[P0]` — a job you can safely run twice and get the same result (no duplicates, no double-counting). The single most important pipeline property; every spine job must have it.
+- **Idempotency** `[P0]` — a job you can safely run twice and get the same result (no duplicates, no double-counting). The single most important pipeline property; every platform job must have it.
 
-## Phase 1 — Files, Local Engines, dbt
+## Phase 1 — Foundations
 
 - **Parquet** `[P1]` — the universal columnar file format for analytics: column pruning (read only needed columns), predicate pushdown (skip irrelevant chunks), heavy compression. *Contrast:* CSV/JSON are row-oriented text — fine for interchange, terrible for analytics at scale.
 - **Predicate pushdown / column pruning** `[P1]` — query engines skipping data *before* reading it: pushdown skips row-groups/partitions failing the WHERE clause; pruning reads only referenced columns. Why Parquet + partitioning = 99% cost cuts.
-- **Partitioning (storage)** `[P1]` — physically splitting data by a column's value (e.g., `year=2026/month=08/` folders) so queries touching one slice read one slice. *Contrast with (Spark) partitions* `[P3]`: chunks of data distributed across workers during computation.
+- **Partitioning (storage)** `[P1]` — physically splitting data by a column's value (e.g., `year=2026/month=08/` folders) so queries touching one slice read one slice. *Contrast with (Spark) partitions* (see the Phase 3 entry): chunks of data distributed across workers during computation.
 - **DuckDB** `[P1]` — an in-process analytical SQL engine ("SQLite for analytics"): queries Parquet/CSV files directly, no server. Your local development warehouse.
 - **Polars** `[P1]` — a fast Rust-based DataFrame library (pandas replacement) built on Apache Arrow. Use when Python-native transforms beat SQL.
 - **Apache Arrow** `[P1]` — the in-memory columnar format tools use to share data without conversion; the reason DuckDB/Polars/pandas interoperate cheaply.
@@ -35,15 +37,21 @@ Every term the framework uses, defined in plain language, **taught as contrast p
 - **dbt** `[P1]` — the transformation framework: SQL SELECT statements as version-controlled, testable, documented **models** with dependencies via `ref()`. Brings software-engineering discipline to SQL.
 - **dbt model / source / seed / test / materialization** `[P1]` — *model*: one SELECT → one table/view. *Source*: declared raw input. *Seed*: small CSV loaded as a table. *Test*: assertion (unique, not_null, relationships, accepted_values). *Materialization*: how a model persists — view, table, **incremental**, ephemeral.
 - **Staging → intermediate → marts** `[P1]` — dbt's three layers: staging (1:1 with sources, rename/type only) → intermediate (reusable joins/logic) → marts (business-ready facts/dims). Two layers are never enough — every real team added the third within a year.
-- **Incremental model** `[P1→P2]` — a dbt model that processes only new/changed rows on each run, using a `unique_key` + strategy (append / merge / insert_overwrite). The most-asked dbt interview topic.
-- **Lineage (data lineage)** `[P1]` — the traceable graph of where data came from and what transformed it. dbt docs give it within the dbt project; OpenLineage `[P6]` standardizes it across tools.
+- **Fact table vs dimension table** `[P1]` — facts: the events/measurements you count (trips, orders), long and narrow, one row per event at a stated grain. Dimensions: the who/what/where context you slice by (zones, customers, dates), wide and comparatively small. Marts are usually facts joined to dimensions.
+- **Grain** `[P1]` — the exact meaning of one row in a fact table ("one row = one taxi trip"). Declare it before writing any SQL; most modeling bugs are grain bugs.
+- **Slowly changing dimension (SCD1 vs SCD2)** `[P1]` — what to do when a dimension attribute changes. *SCD1*: overwrite (history lost). *SCD2*: add a new row with validity dates (history kept). The interview default is knowing when each is right.
+- **dbt snapshot** `[P1]` — dbt's built-in SCD2 mechanism: point it at a table + unique key, it tracks changes as validity-dated rows.
+- **Conformed dimension** `[P1]` — one dimension shared by multiple fact tables (the same `dim_zones` for trips and for weather), so numbers agree across marts.
+- **Star schema (Kimball) vs One Big Table** `[P1]` — star: facts + dimension tables, joined at query time — flexible, governed. OBT: everything pre-joined into one wide table — fast and simple until it isn't. Modern lakehouses often use star logic materialized into a few OBTs; know the trade-off.
+- **Incremental model** `[P1]` — a dbt model that processes only new/changed rows on each run, using a `unique_key` + strategy (append / merge / insert_overwrite). Introduced here, used heavily in Phase 2. The most-asked dbt interview topic.
+- **Lineage (data lineage)** `[P1]` — the traceable graph of where data came from and what transformed it. dbt docs give it within the dbt project (OpenLineage, a Phase 6 topic, standardizes it across tools).
 
 ## Phase 2 — AWS Lakehouse Core
 
 - **Object storage (S3)** `[P2]` — durable, cheap, schemaless byte buckets. The lakehouse's physical layer. *Contrast:* a filesystem has directories and append; object stores have keys and whole-object writes — why table formats exist.
-- **S3 Tables** `[P2]` — AWS's *managed Iceberg* service: table buckets with automatic compaction, snapshot expiry, and an Iceberg REST catalog endpoint. The spine's curated layer.
+- **S3 Tables** `[P2]` — AWS's *managed Iceberg* service: table buckets with automatic compaction, snapshot expiry, and an Iceberg REST catalog endpoint. The platform's curated layer.
 - **AWS Glue (three faces)** `[P2]` — one brand, three tools: **Glue Data Catalog** (the metastore Athena/EMR/Redshift Spectrum all read), **Glue Crawlers** (schema inference over S3), **Glue ETL** (serverless Spark jobs).
-- **Athena** `[P2]` — serverless SQL over S3 (Trino-based), billed **per TB scanned** ($5/TB). Partitioning + Parquet directly cut your bill. The spine's query engine.
+- **Athena** `[P2]` — serverless SQL over S3 (Trino-based), billed **per TB scanned** ($5/TB). Partitioning + Parquet directly cut your bill. The platform's query engine.
 - **dbt adapter (dbt-duckdb / dbt-athena / dbt-databricks)** `[P2]` — the plugin that runs the same dbt project against a different engine. Same models, different warehouse — dbt's portability superpower.
 - **Partition projection** `[P2]` — Athena feature: compute partition values from a pattern instead of enumerating them in the catalog — avoids slow/stale partition metadata.
 - **CTAS** `[P2]` — `CREATE TABLE AS SELECT`: materialize query results as a new (Parquet/Iceberg) table. Athena's workhorse for building curated tables.
@@ -69,7 +77,7 @@ Every term the framework uses, defined in plain language, **taught as contrast p
 - **Auto Loader / COPY INTO** `[P3]` — Databricks incremental file ingestion: Auto Loader streams new files with schema inference/evolution; COPY INTO is its batch SQL cousin.
 - **Liquid Clustering** `[P3]` — Delta's replacement for fixed partitioning/ZORDER: the engine incrementally re-clusters data by chosen keys.
 - **Asset Bundles (Databricks)** `[P3]` — YAML-defined deployable units (jobs, pipelines, code) promoted dev → prod via the Databricks CLI: CI/CD for Databricks.
-- **Serverless vs classic compute** `[P3]` — Databricks-managed instant compute vs self-configured clusters. Free Edition is serverless-only; the exam still asks classic-cluster questions — learn the concepts.
+- **Serverless vs classic compute** `[P3]` — Databricks-managed instant compute vs self-configured clusters. Free Edition is serverless-only; the exam still asks classic-cluster questions — learn the concepts. *(Exam-vocabulary term: Free Edition cannot demonstrate classic clusters — learn the concept, not the console.)*
 
 ## Phase 4 — Orchestration & Ingestion
 
@@ -80,15 +88,16 @@ Every term the framework uses, defined in plain language, **taught as contrast p
 - **Sensor / trigger** `[P4]` — a task that waits for a condition (file lands, table updates) instead of a clock. The bridge from scheduled to event-driven pipelines.
 - **XCom** `[P4]` — Airflow's small-value message-passing between tasks (pass a date or path, never a dataset).
 - **MWAA** `[P4]` — Managed Workflows for Apache Airflow: AWS-hosted Airflow (now 3.x). Costly to leave running (~$350+/mo baseline) — learn Airflow locally; know MWAA for the exam.
+- **Secrets backend** `[P4]` — where pipeline credentials actually live at runtime: the orchestrator fetches them from a managed store (SSM Parameter Store, Secrets Manager, Vault) at execution time. *Contrast:* `.env` files and `airflow.cfg` values are static copies that leak into git and machines.
 - **dlt (data load tool)** `[P4]` — declarative Python ingestion library: REST/database sources with pagination, incremental cursors, schema inference, merge dispositions — replaces hand-rolled extract scripts. The breakout ingestion tool of this cycle.
 - **CDC (change data capture)** `[P4]` — replicating a database by tailing its transaction log (inserts/updates/deletes as events) instead of re-querying tables. *Contrast:* batch extract re-reads state; CDC streams **changes**.
-- **AWS DMS** `[P4]` — AWS's managed migration/CDC service: full-load + ongoing replication from a source DB to S3/targets. The AWS-native CDC answer (Debezium `[P5]` is the open-source one).
+- **AWS DMS** `[P4]` — AWS's managed migration/CDC service: full-load + ongoing replication from a source DB to S3/targets. The AWS-native CDC answer (Debezium, in Phase 5, is the open-source one).
 - **Kinesis Data Streams vs Firehose** `[P4]` — *Streams*: the durable shard-based event stream you write consumers against. *Firehose*: the zero-admin delivery hose that buffers and lands events into S3/Iceberg/Redshift. Exam favorite distinction.
 - **Step Functions / EventBridge** `[P4]` — AWS serverless micro-orchestration: EventBridge routes events/schedules; Step Functions runs state machines. When a full Airflow is overkill.
 - **Redshift / Redshift Spectrum / Serverless** `[P4]` — AWS's warehouse; Spectrum queries S3 data from Redshift (hot-in-warehouse, cold-on-S3 pattern); Serverless bills per-use. Heavy on the DEA exam.
 - **Distribution key / sort key** `[P4]` — Redshift table design: DISTKEY controls which node holds a row (bad key = built-in skew); SORTKEY orders data for range-scan pruning.
 
-## Phase 5 — Streaming & CDC (Open Source)
+## Phase 5 — Streaming & CDC
 
 - **Kafka** `[P5]` — the distributed event log: producers append to **topics** split into **partitions**; **consumer groups** read with tracked **offsets**. The backbone of event streaming. 4.x is **KRaft-only** (ZooKeeper is gone — pre-2025 ops tutorials are obsolete).
 - **Topic / partition / offset / consumer group** `[P5]` — topic: named stream. Partition: ordered shard (parallelism unit). Offset: a consumer's position. Consumer group: consumers sharing work, each partition owned by one member.
@@ -102,7 +111,7 @@ Every term the framework uses, defined in plain language, **taught as contrast p
 - **Outbox pattern** `[P5]` — app writes business row + event row in one DB transaction; CDC ships the event table — solving dual-write inconsistency.
 - **Diskless/object-storage streaming (WarpStream-style)** `[P5]` — brokers that persist directly to S3, trading latency for 10x cost cuts. Concept to know; the direction high-volume streaming is moving.
 
-## Phase 6 — Production, Serving & Quality
+## Phase 6 — Production, Serving & Capstone
 
 - **Data quality dimensions** `[P6]` — completeness, uniqueness, validity, accuracy, consistency, timeliness. Note *validity* (conforms to rules) ≠ *accuracy* (matches reality).
 - **dbt tests vs dbt-expectations vs Elementary** `[P6]` — dbt tests: schema/constraint assertions in the project. dbt-expectations (metaplane fork): distributional/statistical tests as dbt macros. Elementary: a dbt package adding anomaly detection, test history, and an observability report + Slack alerts. Together: the 2026 lakehouse quality stack. (Great Expectations: know the vocabulary; the product was acquired/reset in 2026.)
@@ -113,11 +122,11 @@ Every term the framework uses, defined in plain language, **taught as contrast p
 - **Terraform state / drift** `[P6]` — the recorded mapping of config → real resources; *drift* is reality diverging from it (someone clicked in the console).
 - **ClickHouse** `[P6]` — the dominant open-source real-time OLAP engine (MergeTree storage): sub-second aggregations over billions of rows. Role in this framework: the **serving/speed layer** fed *from* the lakehouse gold marts — not a warehouse replacement.
 - **Serving layer vs lakehouse** `[P6]` — lakehouse: system of record + transformation substrate (seconds-to-minutes latency, cheap). Serving layer: a copy of hot marts in a low-latency engine for customer-facing dashboards. Add it only when a latency-sensitive consumer exists (the Tweeq lesson).
-- **Apache Superset** `[P6]` — the standard open-source BI tool (SQL IDE + dashboards) — the visible front-end that makes portfolio pipelines demoable.
+- **Apache Superset** `[P6]` — the standard open-source BI tool (SQL IDE + dashboards) — the visible front-end that makes your pipelines demoable.
 - **Embeddings / vector database / RAG** `[P6]` — *embedding*: text → numeric vector capturing meaning. *Vector DB* (pgvector = Postgres extension): stores vectors for similarity search. *RAG*: retrieve relevant chunks → feed the LLM as context. The DE's role: the **pipeline** that turns raw documents into fresh, deduplicated, chunked, embedded rows — a normal pipeline with a new sink.
 - **Semantic layer** `[P6]` — governed metric definitions ("revenue means *this*") exposed to BI/AI tools so every consumer computes numbers the same way (dbt MetricFlow, Cube). Awareness level.
 - **SLA / SLO (for data)** `[P6]` — the promise ("gold marts fresh by 07:00") and the measured objective behind it; what your alerts should actually track.
 
 ---
 
-*Missing a term you hit during a build? Add it here in the same format, tagged with the phase — maintaining this glossary is itself Phase-0-gate behavior.*
+*Missing a term you hit during a build? Add it here in the same format, one `[P#]` tag per line — the CI format check will hold you to the grammar.*
