@@ -1,0 +1,7 @@
+# Install: uvx pre-commit install (or pipx). The same config belongs in your
+# platform repo — no secret ever enters git.
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks

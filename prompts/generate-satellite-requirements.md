@@ -2,7 +2,15 @@
 
 Paste this whole file (plus the one satellite block you're running, from the catalog below) into your AI assistant when you want a **unique, realistic set of requirements** for a satellite project instead of the default spec in the phase README. The default specs are complete on their own — this prompt exists so different learners (or a second pass through a phase) get *different data, different stakeholders, different constraints* while provably training the **same competencies**: the satellite's objectives and gate artifact are fixed and non-negotiable.
 
-Pattern credit: the requirements-generation workflow from [`solutions-architecture-projects`](https://github.com/AlqarniMohammed/solutions-architecture-projects).
+**The easy way:** if you use Claude Code in your fork, the **`/satellite-brief` skill** runs this whole flow for you — it writes the three output files to the right place and keeps the sealed one sealed. This file is the manual fallback for any other assistant. A complete worked example (what good outputs look like) lives in [`example/`](example/).
+
+# Where the outputs land
+
+The three outputs are files, saved in your **satellite project repo** (create it first) at exactly these paths — or, if you generate before creating that repo, under `satellites/<satellite-id>-<short-slug>/requirements/` in your framework fork, copied over later:
+
+- `requirements/requirements.md` — your brief. Read it.
+- `requirements/acceptance-tests.md` — how the build will be judged. Read it.
+- `requirements/.reference-solution.md` — **sealed. Do not read it until self-evaluation** (the unseal step is in your satellite's gate).
 
 ---
 
@@ -46,6 +54,8 @@ A validation plan derived from the Success Criteria AND the block's fixed gate a
 
 Drop the client persona and switch roles: as a principal data engineer working within this framework's toolset for the block's phase, write the reference build: the pipeline/modeling design with justifications and at least one rejected alternative, how each acceptance test is satisfied, an estimated cost posture, and your resolution of each deliberate ambiguity. This file is SEALED: the learner does not read it until self-evaluation after the build. Do not quote or reference it in later turns.
 
+**Sealing mechanics (matters — a seal the learner has already seen is no seal):** if the assistant can write files, it must write Output 3 **directly to disk without printing it** (this is what the `/satellite-brief` skill does). Chat-only assistant? Generate Output 3 in a **separate conversation** and close it unread, saving the response to the file without reading past the first line. **The unseal step:** after your build passes the acceptance tests, open the sealed file, compare, and write a 5-line delta note (what the reference did differently, and whether you'd adopt it) — that note is part of the satellite's evidence.
+
 ---
 
 # Satellite catalog — Fixed blocks
@@ -74,12 +84,12 @@ Copy exactly one block below the prompt when you run it. **Fixed = the same-leve
 
 ## S4a — Redshift + Spectrum hybrid (Phase 4)
 - **Fixed objectives:** Redshift Serverless + Spectrum external schema over the learner's curated S3 data; one dbt mart joining native + external; `EXPLAIN` proof of the federated plan; cost note. Free-credit posture, teardown after.
-- **Dataset menu:** the learner's own spine curated data (fixed by nature) + one small native table from any menu above.
+- **Dataset menu:** the learner's own platform curated data (fixed by nature) + one small native table from any menu above.
 - **Variable:** which consumer "needs the warehouse," their query shapes and cadence.
 
 ## S4b — Dagster vs Airflow comparison (Phase 4)
-- **Fixed objectives:** rebuild ONE spine pipeline as Dagster software-defined assets with `dagster-dbt`; `COMPARISON.md` on task-graphs vs asset-graphs.
-- **Dataset menu:** the learner's own spine pipeline (fixed).
+- **Fixed objectives:** rebuild ONE platform pipeline as Dagster software-defined assets with `dagster-dbt`; `COMPARISON.md` on task-graphs vs asset-graphs.
+- **Dataset menu:** the learner's own platform pipeline (fixed).
 - **Variable:** the organizational framing (who's proposing the switch and what they claim).
 
 ## S5 — CDC showdown: Debezium vs DMS (Phase 5)
