@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="hand-authored" version="24.7.7" type="device">
+  <diagram id="route-map" name="Route Map">
+    <mxGraphModel dx="1200" dy="620" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="620" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- P0 card -->
+        <mxCell id="p0card" value="" style="rounded=1;absoluteArcSize=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="30" y="50" width="230" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="p0head" value="&lt;b&gt;P0 · Orientation &amp;amp; Setup&lt;/b&gt;&lt;br&gt;~2 weeks" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E0E0E0;strokeColor=none;fontSize=12;fontColor=#222222;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="32" y="52" width="226" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="p0body" value="Setup only — toolchain + safe AWS account" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="38" y="102" width="214" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p0foot" value="—" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#EBEBEB;strokeColor=none;fontSize=12;fontColor=#555555;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="32" y="151" width="226" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="p0pill" value="G0" style="rounded=1;absoluteArcSize=1;arcSize=28;whiteSpace=wrap;html=1;fillColor=#EBEBEB;strokeColor=#666666;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="117" y="212" width="56" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p0stub" style="endArrow=none;strokeColor=#666666;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p0card" target="p0pill">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- P1 card -->
+        <mxCell id="p1card" value="" style="rounded=1;absoluteArcSize=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="320" y="50" width="230" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="p1head" value="&lt;b&gt;P1 · Foundations&lt;/b&gt;&lt;br&gt;Months 1–2" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E0E0E0;strokeColor=none;fontSize=12;fontColor=#222222;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="322" y="52" width="226" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="p1body" value="Platform v0.1: local lakehouse (DuckDB · Iceberg · dbt)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="328" y="102" width="214" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1foot" value="Satellite: first dbt project" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#EBEBEB;strokeColor=none;fontSize=12;fontColor=#555555;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="322" y="151" width="226" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="p1pill" value="G1" style="rounded=1;absoluteArcSize=1;arcSize=28;whiteSpace=wrap;html=1;fillColor=#EBEBEB;strokeColor=#666666;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="407" y="212" width="56" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p1stub" style="endArrow=none;strokeColor=#666666;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p1card" target="p1pill">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- P2 card (cert accent) -->
+        <mxCell id="p2card" value="" style="rounded=1;absoluteArcSize=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="610" y="50" width="230" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="p2head" value="&lt;b&gt;P2 · AWS Lakehouse Core&lt;/b&gt;&lt;br&gt;Months 3–5" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#1a73a7;strokeColor=none;fontSize=12;fontColor=#FFFFFF;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="612" y="52" width="226" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="p2body" value="Platform v1: S3 · Glue · Athena · S3 Tables · dbt" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="618" y="102" width="214" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p2foot" value="Satellite: cost-aware Athena mart" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#EBEBEB;strokeColor=none;fontSize=12;fontColor=#555555;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="612" y="151" width="226" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="p2pill" value="G2 ★ AWS DEA-C01 exam" style="rounded=1;absoluteArcSize=1;arcSize=28;whiteSpace=wrap;html=1;fillColor=#1a73a7;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="635" y="212" width="180" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p2stub" style="endArrow=none;strokeColor=#666666;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p2card" target="p2pill">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- P3 card (cert accent) -->
+        <mxCell id="p3card" value="" style="rounded=1;absoluteArcSize=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="900" y="50" width="230" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="p3head" value="&lt;b&gt;P3 · Spark &amp;amp; Databricks&lt;/b&gt;&lt;br&gt;Months 5–7" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#1a73a7;strokeColor=none;fontSize=12;fontColor=#FFFFFF;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="902" y="52" width="226" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="p3body" value="Databricks labs: Lakeflow · Unity Catalog · Delta" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="908" y="102" width="214" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p3foot" value="Satellites: Spark forensics · format bake-off" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#EBEBEB;strokeColor=none;fontSize=12;fontColor=#555555;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="902" y="151" width="226" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="p3pill" value="G3 ★ Databricks DE Associate exam" style="rounded=1;absoluteArcSize=1;arcSize=28;whiteSpace=wrap;html=1;fillColor=#1a73a7;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="892" y="212" width="246" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p3stub" style="endArrow=none;strokeColor=#666666;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p3card" target="p3pill">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- P4 card -->
+        <mxCell id="p4card" value="" style="rounded=1;absoluteArcSize=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="175" y="350" width="230" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="p4head" value="&lt;b&gt;P4 · Orchestration &amp;amp; Ingestion&lt;/b&gt;&lt;br&gt;Months 7–8" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E0E0E0;strokeColor=none;fontSize=12;fontColor=#222222;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="177" y="352" width="226" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="p4body" value="Platform v2: Airflow 3 · dlt · CDC · Kinesis" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="183" y="402" width="214" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p4foot" value="Satellites: Redshift hybrid · Dagster comparison" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#EBEBEB;strokeColor=none;fontSize=12;fontColor=#555555;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="177" y="451" width="226" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="p4pill" value="G4" style="rounded=1;absoluteArcSize=1;arcSize=28;whiteSpace=wrap;html=1;fillColor=#EBEBEB;strokeColor=#666666;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="262" y="512" width="56" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p4stub" style="endArrow=none;strokeColor=#666666;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p4card" target="p4pill">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- P5 card -->
+        <mxCell id="p5card" value="" style="rounded=1;absoluteArcSize=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="485" y="350" width="230" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="p5head" value="&lt;b&gt;P5 · Streaming &amp;amp; CDC&lt;/b&gt;&lt;br&gt;Months 9–10" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E0E0E0;strokeColor=none;fontSize=12;fontColor=#222222;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="487" y="352" width="226" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="p5body" value="Platform v3: Kafka events → Iceberg sink" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="493" y="402" width="214" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p5foot" value="Satellite: Debezium vs DMS showdown" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#EBEBEB;strokeColor=none;fontSize=12;fontColor=#555555;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="487" y="451" width="226" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="p5pill" value="G5" style="rounded=1;absoluteArcSize=1;arcSize=28;whiteSpace=wrap;html=1;fillColor=#EBEBEB;strokeColor=#666666;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="572" y="512" width="56" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p5stub" style="endArrow=none;strokeColor=#666666;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p5card" target="p5pill">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- P6 card -->
+        <mxCell id="p6card" value="" style="rounded=1;absoluteArcSize=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="795" y="350" width="230" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="p6head" value="&lt;b&gt;P6 · Production, Serving &amp;amp; Capstone&lt;/b&gt;&lt;br&gt;Months 11–12" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E0E0E0;strokeColor=none;fontSize=12;fontColor=#222222;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="797" y="352" width="226" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="p6body" value="Platform v4: quality · lineage · Terraform · serving" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="803" y="402" width="214" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p6foot" value="Satellites: serving layer · AI-data pipeline" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#EBEBEB;strokeColor=none;fontSize=12;fontColor=#555555;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="797" y="451" width="226" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="p6pill" value="G6" style="rounded=1;absoluteArcSize=1;arcSize=28;whiteSpace=wrap;html=1;fillColor=#EBEBEB;strokeColor=#666666;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="882" y="512" width="56" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p6stub" style="endArrow=none;strokeColor=#666666;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p6card" target="p6pill">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- flow arrows -->
+        <mxCell id="e01" style="endArrow=block;endFill=1;strokeColor=#666666;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="p0card" target="p1card">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" style="endArrow=block;endFill=1;strokeColor=#666666;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="p1card" target="p2card">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e23" style="endArrow=block;endFill=1;strokeColor=#666666;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="p2card" target="p3card">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e34" style="endArrow=block;endFill=1;strokeColor=#666666;strokeWidth=2;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p3card" target="p4card">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1172" y="125" />
+              <mxPoint x="1172" y="282" />
+              <mxPoint x="290" y="282" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e45" style="endArrow=block;endFill=1;strokeColor=#666666;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="p4card" target="p5card">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e56" style="endArrow=block;endFill=1;strokeColor=#666666;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="p5card" target="p6card">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

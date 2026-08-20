@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="1200" height="620" font-family="Helvetica, Arial, sans-serif">
+  <title>Route map: the 7-phase data engineering journey, P0 to P6</title>
+  <desc>Two rows of phase cards read left to right. Top row: P0 Orientation, P1 Foundations, P2 AWS Lakehouse Core, P3 Spark and Databricks. A connector turns down from P3 to the bottom row: P4 Orchestration and Ingestion, P5 Streaming and CDC, P6 Production, Serving and Capstone. Each card shows the platform milestone and satellite projects, with a gate pill G0 to G6 below it. G2 and G3 are certification gates.</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#666666"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="620" fill="#FFFFFF"/>
+
+  <!-- ================= P0 card (x=30, y=50) ================= -->
+  <g>
+    <rect x="30" y="50" width="230" height="150" rx="10" fill="#F5F5F5"/>
+    <path d="M 30 100 L 30 60 Q 30 50 40 50 L 250 50 Q 260 50 260 60 L 260 100 Z" fill="#E0E0E0"/>
+    <path d="M 30 156 L 260 156 L 260 190 Q 260 200 250 200 L 40 200 Q 30 200 30 190 Z" fill="#EBEBEB"/>
+    <line x1="30" y1="100" x2="260" y2="100" stroke="#999999" stroke-width="1"/>
+    <line x1="30" y1="156" x2="260" y2="156" stroke="#999999" stroke-width="1"/>
+    <rect x="30" y="50" width="230" height="150" rx="10" fill="none" stroke="#666666" stroke-width="1.5"/>
+    <text x="145" y="71" text-anchor="middle" font-size="13" font-weight="bold" fill="#222222">P0 · Orientation &amp; Setup</text>
+    <text x="145" y="89" text-anchor="middle" font-size="12" fill="#444444">~2 weeks</text>
+    <text x="145" y="123" text-anchor="middle" font-size="12" fill="#333333">Setup only — toolchain</text>
+    <text x="145" y="139" text-anchor="middle" font-size="12" fill="#333333">+ safe AWS account</text>
+    <text x="145" y="182" text-anchor="middle" font-size="12" fill="#555555">—</text>
+    <line x1="145" y1="200" x2="145" y2="212" stroke="#666666" stroke-width="1.5"/>
+    <rect x="117" y="212" width="56" height="28" rx="14" fill="#EBEBEB" stroke="#666666" stroke-width="1.5"/>
+    <text x="145" y="230" text-anchor="middle" font-size="12" font-weight="bold" fill="#333333">G0</text>
+  </g>
+
+  <!-- ================= P1 card (x=320, y=50) ================= -->
+  <g>
+    <rect x="320" y="50" width="230" height="150" rx="10" fill="#F5F5F5"/>
+    <path d="M 320 100 L 320 60 Q 320 50 330 50 L 540 50 Q 550 50 550 60 L 550 100 Z" fill="#E0E0E0"/>
+    <path d="M 320 156 L 550 156 L 550 190 Q 550 200 540 200 L 330 200 Q 320 200 320 190 Z" fill="#EBEBEB"/>
+    <line x1="320" y1="100" x2="550" y2="100" stroke="#999999" stroke-width="1"/>
+    <line x1="320" y1="156" x2="550" y2="156" stroke="#999999" stroke-width="1"/>
+    <rect x="320" y="50" width="230" height="150" rx="10" fill="none" stroke="#666666" stroke-width="1.5"/>
+    <text x="435" y="71" text-anchor="middle" font-size="13" font-weight="bold" fill="#222222">P1 · Foundations</text>
+    <text x="435" y="89" text-anchor="middle" font-size="12" fill="#444444">Months 1–2</text>
+    <text x="435" y="123" text-anchor="middle" font-size="12" fill="#333333">Platform v0.1: local lakehouse</text>
+    <text x="435" y="139" text-anchor="middle" font-size="12" fill="#333333">(DuckDB · Iceberg · dbt)</text>
+    <text x="435" y="182" text-anchor="middle" font-size="12" fill="#555555">Satellite: first dbt project</text>
+    <line x1="435" y1="200" x2="435" y2="212" stroke="#666666" stroke-width="1.5"/>
+    <rect x="407" y="212" width="56" height="28" rx="14" fill="#EBEBEB" stroke="#666666" stroke-width="1.5"/>
+    <text x="435" y="230" text-anchor="middle" font-size="12" font-weight="bold" fill="#333333">G1</text>
+  </g>
+
+  <!-- ================= P2 card (x=610, y=50, cert accent) ================= -->
+  <g>
+    <rect x="610" y="50" width="230" height="150" rx="10" fill="#F5F5F5"/>
+    <path d="M 610 100 L 610 60 Q 610 50 620 50 L 830 50 Q 840 50 840 60 L 840 100 Z" fill="#1a73a7"/>
+    <path d="M 610 156 L 840 156 L 840 190 Q 840 200 830 200 L 620 200 Q 610 200 610 190 Z" fill="#EBEBEB"/>
+    <line x1="610" y1="100" x2="840" y2="100" stroke="#999999" stroke-width="1"/>
+    <line x1="610" y1="156" x2="840" y2="156" stroke="#999999" stroke-width="1"/>
+    <rect x="610" y="50" width="230" height="150" rx="10" fill="none" stroke="#666666" stroke-width="1.5"/>
+    <text x="725" y="71" text-anchor="middle" font-size="13" font-weight="bold" fill="#FFFFFF">P2 · AWS Lakehouse Core</text>
+    <text x="725" y="89" text-anchor="middle" font-size="12" fill="#FFFFFF">Months 3–5</text>
+    <text x="725" y="123" text-anchor="middle" font-size="12" fill="#333333">Platform v1: S3 · Glue ·</text>
+    <text x="725" y="139" text-anchor="middle" font-size="12" fill="#333333">Athena · S3 Tables · dbt</text>
+    <text x="725" y="174" text-anchor="middle" font-size="12" fill="#555555">Satellite: cost-aware</text>
+    <text x="725" y="190" text-anchor="middle" font-size="12" fill="#555555">Athena mart</text>
+    <line x1="725" y1="200" x2="725" y2="212" stroke="#666666" stroke-width="1.5"/>
+    <rect x="635" y="212" width="180" height="28" rx="14" fill="#1a73a7"/>
+    <text x="725" y="230" text-anchor="middle" font-size="12" font-weight="bold" fill="#FFFFFF">G2 ★ AWS DEA-C01 exam</text>
+  </g>
+
+  <!-- ================= P3 card (x=900, y=50, cert accent) ================= -->
+  <g>
+    <rect x="900" y="50" width="230" height="150" rx="10" fill="#F5F5F5"/>
+    <path d="M 900 100 L 900 60 Q 900 50 910 50 L 1120 50 Q 1130 50 1130 60 L 1130 100 Z" fill="#1a73a7"/>
+    <path d="M 900 156 L 1130 156 L 1130 190 Q 1130 200 1120 200 L 910 200 Q 900 200 900 190 Z" fill="#EBEBEB"/>
+    <line x1="900" y1="100" x2="1130" y2="100" stroke="#999999" stroke-width="1"/>
+    <line x1="900" y1="156" x2="1130" y2="156" stroke="#999999" stroke-width="1"/>
+    <rect x="900" y="50" width="230" height="150" rx="10" fill="none" stroke="#666666" stroke-width="1.5"/>
+    <text x="1015" y="71" text-anchor="middle" font-size="13" font-weight="bold" fill="#FFFFFF">P3 · Spark &amp; Databricks</text>
+    <text x="1015" y="89" text-anchor="middle" font-size="12" fill="#FFFFFF">Months 5–7</text>
+    <text x="1015" y="123" text-anchor="middle" font-size="12" fill="#333333">Databricks labs: Lakeflow ·</text>
+    <text x="1015" y="139" text-anchor="middle" font-size="12" fill="#333333">Unity Catalog · Delta</text>
+    <text x="1015" y="174" text-anchor="middle" font-size="12" fill="#555555">Satellites: Spark forensics ·</text>
+    <text x="1015" y="190" text-anchor="middle" font-size="12" fill="#555555">format bake-off</text>
+    <line x1="1015" y1="200" x2="1015" y2="212" stroke="#666666" stroke-width="1.5"/>
+    <rect x="892" y="212" width="246" height="28" rx="14" fill="#1a73a7"/>
+    <text x="1015" y="230" text-anchor="middle" font-size="12" font-weight="bold" fill="#FFFFFF">G3 ★ Databricks DE Associate exam</text>
+  </g>
+
+  <!-- ================= P4 card (x=175, y=350) ================= -->
+  <g>
+    <rect x="175" y="350" width="230" height="150" rx="10" fill="#F5F5F5"/>
+    <path d="M 175 400 L 175 360 Q 175 350 185 350 L 395 350 Q 405 350 405 360 L 405 400 Z" fill="#E0E0E0"/>
+    <path d="M 175 456 L 405 456 L 405 490 Q 405 500 395 500 L 185 500 Q 175 500 175 490 Z" fill="#EBEBEB"/>
+    <line x1="175" y1="400" x2="405" y2="400" stroke="#999999" stroke-width="1"/>
+    <line x1="175" y1="456" x2="405" y2="456" stroke="#999999" stroke-width="1"/>
+    <rect x="175" y="350" width="230" height="150" rx="10" fill="none" stroke="#666666" stroke-width="1.5"/>
+    <text x="290" y="366" text-anchor="middle" font-size="13" font-weight="bold" fill="#222222">P4 · Orchestration &amp;</text>
+    <text x="290" y="380" text-anchor="middle" font-size="13" font-weight="bold" fill="#222222">Ingestion</text>
+    <text x="290" y="394" text-anchor="middle" font-size="12" fill="#444444">Months 7–8</text>
+    <text x="290" y="423" text-anchor="middle" font-size="12" fill="#333333">Platform v2: Airflow 3 ·</text>
+    <text x="290" y="439" text-anchor="middle" font-size="12" fill="#333333">dlt · CDC · Kinesis</text>
+    <text x="290" y="474" text-anchor="middle" font-size="12" fill="#555555">Satellites: Redshift hybrid ·</text>
+    <text x="290" y="490" text-anchor="middle" font-size="12" fill="#555555">Dagster comparison</text>
+    <line x1="290" y1="500" x2="290" y2="512" stroke="#666666" stroke-width="1.5"/>
+    <rect x="262" y="512" width="56" height="28" rx="14" fill="#EBEBEB" stroke="#666666" stroke-width="1.5"/>
+    <text x="290" y="530" text-anchor="middle" font-size="12" font-weight="bold" fill="#333333">G4</text>
+  </g>
+
+  <!-- ================= P5 card (x=485, y=350) ================= -->
+  <g>
+    <rect x="485" y="350" width="230" height="150" rx="10" fill="#F5F5F5"/>
+    <path d="M 485 400 L 485 360 Q 485 350 495 350 L 705 350 Q 715 350 715 360 L 715 400 Z" fill="#E0E0E0"/>
+    <path d="M 485 456 L 715 456 L 715 490 Q 715 500 705 500 L 495 500 Q 485 500 485 490 Z" fill="#EBEBEB"/>
+    <line x1="485" y1="400" x2="715" y2="400" stroke="#999999" stroke-width="1"/>
+    <line x1="485" y1="456" x2="715" y2="456" stroke="#999999" stroke-width="1"/>
+    <rect x="485" y="350" width="230" height="150" rx="10" fill="none" stroke="#666666" stroke-width="1.5"/>
+    <text x="600" y="371" text-anchor="middle" font-size="13" font-weight="bold" fill="#222222">P5 · Streaming &amp; CDC</text>
+    <text x="600" y="389" text-anchor="middle" font-size="12" fill="#444444">Months 9–10</text>
+    <text x="600" y="423" text-anchor="middle" font-size="12" fill="#333333">Platform v3: Kafka events</text>
+    <text x="600" y="439" text-anchor="middle" font-size="12" fill="#333333">→ Iceberg sink</text>
+    <text x="600" y="474" text-anchor="middle" font-size="12" fill="#555555">Satellite: Debezium vs</text>
+    <text x="600" y="490" text-anchor="middle" font-size="12" fill="#555555">DMS showdown</text>
+    <line x1="600" y1="500" x2="600" y2="512" stroke="#666666" stroke-width="1.5"/>
+    <rect x="572" y="512" width="56" height="28" rx="14" fill="#EBEBEB" stroke="#666666" stroke-width="1.5"/>
+    <text x="600" y="530" text-anchor="middle" font-size="12" font-weight="bold" fill="#333333">G5</text>
+  </g>
+
+  <!-- ================= P6 card (x=795, y=350) ================= -->
+  <g>
+    <rect x="795" y="350" width="230" height="150" rx="10" fill="#F5F5F5"/>
+    <path d="M 795 400 L 795 360 Q 795 350 805 350 L 1015 350 Q 1025 350 1025 360 L 1025 400 Z" fill="#E0E0E0"/>
+    <path d="M 795 456 L 1025 456 L 1025 490 Q 1025 500 1015 500 L 805 500 Q 795 500 795 490 Z" fill="#EBEBEB"/>
+    <line x1="795" y1="400" x2="1025" y2="400" stroke="#999999" stroke-width="1"/>
+    <line x1="795" y1="456" x2="1025" y2="456" stroke="#999999" stroke-width="1"/>
+    <rect x="795" y="350" width="230" height="150" rx="10" fill="none" stroke="#666666" stroke-width="1.5"/>
+    <text x="910" y="366" text-anchor="middle" font-size="13" font-weight="bold" fill="#222222">P6 · Production, Serving</text>
+    <text x="910" y="380" text-anchor="middle" font-size="13" font-weight="bold" fill="#222222">&amp; Capstone</text>
+    <text x="910" y="394" text-anchor="middle" font-size="12" fill="#444444">Months 11–12</text>
+    <text x="910" y="423" text-anchor="middle" font-size="12" fill="#333333">Platform v4: quality ·</text>
+    <text x="910" y="439" text-anchor="middle" font-size="12" fill="#333333">lineage · Terraform · serving</text>
+    <text x="910" y="474" text-anchor="middle" font-size="12" fill="#555555">Satellites: serving layer ·</text>
+    <text x="910" y="490" text-anchor="middle" font-size="12" fill="#555555">AI-data pipeline</text>
+    <line x1="910" y1="500" x2="910" y2="512" stroke="#666666" stroke-width="1.5"/>
+    <rect x="882" y="512" width="56" height="28" rx="14" fill="#EBEBEB" stroke="#666666" stroke-width="1.5"/>
+    <text x="910" y="530" text-anchor="middle" font-size="12" font-weight="bold" fill="#333333">G6</text>
+  </g>
+
+  <!-- ================= flow arrows ================= -->
+  <g stroke="#666666" stroke-width="2" fill="none">
+    <path d="M 263 125 L 314 125" marker-end="url(#arr)"/>
+    <path d="M 553 125 L 604 125" marker-end="url(#arr)"/>
+    <path d="M 843 125 L 894 125" marker-end="url(#arr)"/>
+    <path d="M 1133 125 L 1172 125 L 1172 282 L 290 282 L 290 344" marker-end="url(#arr)"/>
+    <path d="M 408 425 L 479 425" marker-end="url(#arr)"/>
+    <path d="M 718 425 L 789 425" marker-end="url(#arr)"/>
+  </g>
+</svg>

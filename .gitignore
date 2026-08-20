@@ -1,0 +1,34 @@
+# Tooling/session artifacts (the skills in .claude/skills/ ship with the repo; the rest stays local)
+.claude/*
+!.claude/skills/
+.DS_Store
+
+# Personal archive — kept locally, never published
+sources/personal/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Docs site build (docs/ is the staged mirror, site/ the build output)
+docs/
+site/
+
+# Secrets — standing rule: no secret ever enters git
+.env
+.env.*
+*.pem
+
+# ── Template for your platform repo ─────────────────────────────
+# This framework repo contains no data or build outputs; the lines
+# below are here to copy into your aws-lakehouse-platform repo.
+data/
+*.duckdb
+*.parquet
+.terraform/
+*.tfstate*
+target/
+dbt_packages/
+logs/
