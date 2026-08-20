@@ -26,7 +26,7 @@ Every resource is **pinned** to an exercise — nothing here is learn-only.
 | [Astronomer Academy Airflow 101](https://academy.astronomer.io/path/airflow-101) + [DAG Authoring path](https://academy.astronomer.io/path/airflow-dag-authoring) (free, Airflow-3-native) | Both paths | 12 | Build step 1 (the small-DAGs migration) + the DAG-integrity test assignment |
 | [dlt docs](https://dlthub.com/docs/intro) — REST source tutorial + incremental loading | Working level | 4 | Build step 3: the dlt source + the written dlt-vs-hand-rolled comparison |
 | MWAA current state reading | Now runs Airflow 3.x — know the managed trade-offs + cost | 1 | The MWAA lab (build step 7) + its ops-differences note |
-| [Airflow secrets backend docs](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/secrets-backends/aws-ssm-parameter-store-secrets-backend.html) — SSM Parameter Store | Read before build step 2 | 1 | Build step 2: the SSM-backed connections wiring |
+| [Airflow secrets backend docs](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/secrets-backends/aws-ssm-parameter-store.html) — SSM Parameter Store | Read before build step 2 | 1 | Build step 2: the SSM-backed connections wiring |
 
 *Before starting, re-verify:* Airflow current minor (3.3.x at research date), MWAA supported versions, Redshift Serverless free-credit terms.
 

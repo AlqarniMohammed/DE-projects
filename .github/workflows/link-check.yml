@@ -5,6 +5,8 @@ name: Link check
 # dogfoods CI on the repo that preaches it.
 # sources/ is excluded: it's the frozen research bibliography (citations
 # as of the research date); rot there is expected and not actionable.
+# open.data.gov.sa is excluded: the official portal is live (verified
+# manually) but times out from GitHub's runners (geo/CDN).
 
 on:
   pull_request:
@@ -26,5 +28,6 @@ jobs:
             --max-concurrency 8
             --exclude-path LICENSE
             --exclude-path sources
+            --exclude 'open\.data\.gov\.sa'
             './**/*.md'
           fail: true
