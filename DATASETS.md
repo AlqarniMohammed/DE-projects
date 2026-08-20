@@ -17,7 +17,7 @@ Every dataset the default path uses, plus the vetted menu options for satellite 
 ### S1 — First dbt project (P1) — needs 3+ related entities
 | Dataset | Size | Source | Notes |
 |---|---|---|---|
-| **Hacker News dump** — *default* | ~10 GB full; sample fine | [HN BigQuery/Kaggle mirrors](https://console.cloud.google.com/marketplace/product/y-combinator/hacker-news) | Proven; stories/comments/users = natural 3-layer modeling |
+| **Hacker News dump** — *default* | ~10 GB full; sample fine | [official HN API](https://github.com/HackerNews/API) (also mirrored on Kaggle/BigQuery) | Proven; stories/comments/users = natural 3-layer modeling |
 | MovieLens 25M | ~250 MB | [grouplens.org](https://grouplens.org/datasets/movielens/25m/) | Clean relational shape: ratings/movies/tags/links |
 | Saudi Open Data pick (e.g., commercial registrations by region + activity) | varies | [open.data.gov.sa](https://open.data.gov.sa/) | Regional differentiator; verify entity richness before committing |
 
