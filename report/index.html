@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Data Engineer Framework — Introduction Handbook</title>
+<link rel="stylesheet" href="./fonts.css" />
+<style>
+  doc-page:not(:defined){visibility:hidden}
+  body{background:#0e0f18;margin:0}
+  a{color:#d2cefd;text-decoration:none;border-bottom:1px solid rgba(145,132,217,0.5)}
+  a:hover{color:#b5abfc;border-bottom-color:#b5abfc}
+</style>
+<script src="./doc-page.js"></script>
+</head>
+<body>
+
+<doc-page size="a4">
+
+<!-- ============================================================ 01 COVER -->
+<section class="page" id="p01" data-screen-label="01 Cover" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="position:absolute;inset:0;background:radial-gradient(120% 70% at 12% 0%, #262a60 0%, rgba(38,42,96,0) 62%);"></div>
+  <div style="position:relative;height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:56px 56px 44px;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:22px;height:22px;border-radius:6px;border:1.5px solid #9184d9;"></div>
+      <div style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#b2b6ca;">The Data Engineer Framework</div>
+    </div>
+
+    <div style="margin-top:40px;border-radius:8px;border:1px solid #3f424d;background:#1c1e2d;padding:14px;">
+      <svg viewBox="0 0 680 200" style="display:block;width:100%;height:auto;" role="img" aria-label="The seven-phase route from P0 to P6">
+        <line x1="45" y1="118" x2="635" y2="118" stroke="#3f424d" stroke-width="2"/>
+        <text x="143" y="76" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9.5" fill="#75798c">Foundations</text>
+        <text x="340" y="76" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9.5" fill="#75798c">Spark · Databricks</text>
+        <text x="537" y="76" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9.5" fill="#75798c">Streaming</text>
+        <text x="45" y="96" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9.5" fill="#75798c">Orientation</text>
+        <text x="242" y="96" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9.5" fill="#75798c">AWS Lakehouse</text>
+        <text x="438" y="96" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9.5" fill="#75798c">Orchestration</text>
+        <text x="635" y="96" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9.5" fill="#75798c">Production</text>
+        <circle cx="45" cy="118" r="7" fill="#161826" stroke="#9184d9" stroke-width="1.8"/>
+        <circle cx="143" cy="118" r="7" fill="#161826" stroke="#9184d9" stroke-width="1.8"/>
+        <circle cx="242" cy="118" r="7" fill="#161826" stroke="#9184d9" stroke-width="1.8"/>
+        <circle cx="340" cy="118" r="7" fill="#161826" stroke="#9184d9" stroke-width="1.8"/>
+        <circle cx="438" cy="118" r="7" fill="#161826" stroke="#9184d9" stroke-width="1.8"/>
+        <circle cx="537" cy="118" r="7" fill="#161826" stroke="#9184d9" stroke-width="1.8"/>
+        <circle cx="635" cy="118" r="7" fill="#9184d9" stroke="#9184d9" stroke-width="1.8"/>
+        <circle cx="635" cy="118" r="12" fill="none" stroke="#4c5397" stroke-width="1.5"/>
+        <text x="45" y="150" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="12" fill="#d2cefd">P0</text>
+        <text x="143" y="150" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="12" fill="#d2cefd">P1</text>
+        <text x="242" y="150" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="12" fill="#d2cefd">P2</text>
+        <text x="340" y="150" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="12" fill="#d2cefd">P3</text>
+        <text x="438" y="150" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="12" fill="#d2cefd">P4</text>
+        <text x="537" y="150" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="12" fill="#d2cefd">P5</text>
+        <text x="635" y="150" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="12" fill="#d2cefd">P6</text>
+        <text x="45" y="168" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#595d6c">G0</text>
+        <text x="143" y="168" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#595d6c">G1</text>
+        <text x="242" y="168" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#9184d9">G2·cert</text>
+        <text x="340" y="168" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#9184d9">G3·cert</text>
+        <text x="438" y="168" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#595d6c">G4</text>
+        <text x="537" y="168" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#595d6c">G5</text>
+        <text x="635" y="168" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#595d6c">G6</text>
+      </svg>
+      <div style="margin-top:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:#75798c;">the route — one platform across seven phases · gates decide advancement, never the calendar</div>
+    </div>
+
+    <div style="flex:1;"></div>
+
+    <div style="width:64px;height:2px;background:#9184d9;margin-bottom:26px;"></div>
+    <div style="font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:#9184d9;margin-bottom:16px;">Introduction &amp; Review Handbook</div>
+    <h1 style="margin:0;font-size:52px;line-height:1.04;font-weight:500;letter-spacing:-0.025em;max-width:16ch;text-wrap:balance;">Twelve months. One platform. Seven gates.</h1>
+    <p style="margin:22px 0 0;font-size:17px;line-height:1.55;color:#b2b6ca;max-width:50ch;text-wrap:pretty;">A competency-gated route to working data engineering — one AWS lakehouse platform grown end to end, with retrieval practice, honest hours, and public evidence. Written to be read, used, and argued with.</p>
+
+    <div style="margin-top:44px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+    <div style="margin-top:20px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;">
+      <div style="display:grid;grid-template-columns:repeat(3,auto);gap:6px 40px;font-size:12px;">
+        <div style="color:#75798c;letter-spacing:0.1em;text-transform:uppercase;">Edition</div>
+        <div style="color:#75798c;letter-spacing:0.1em;text-transform:uppercase;">Audience</div>
+        <div style="color:#75798c;letter-spacing:0.1em;text-transform:uppercase;">Format</div>
+        <div style="color:#e9e9ed;">v1.3 · August 2026</div>
+        <div style="color:#e9e9ed;">Learners &amp; reviewers</div>
+        <div style="color:#e9e9ed;">Self-paced · gate-based</div>
+      </div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#595d6c;">A4 · 210 × 297 mm</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 02 CONTENTS -->
+<section class="page" id="p02" data-screen-label="02 Contents" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:44px 56px 34px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#75798c;">
+      <span>The Data Engineer Framework</span>
+      <span style="display:flex;align-items:center;gap:10px;"><span style="width:14px;height:1.5px;background:#9184d9;display:inline-block;"></span>Contents</span>
+    </div>
+    <div style="margin-top:12px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+
+    <h2 style="margin:46px 0 0;font-size:34px;font-weight:500;letter-spacing:-0.02em;">Contents</h2>
+    <p style="margin:12px 0 0;font-size:14px;line-height:1.6;color:#9397ab;max-width:52ch;">Four parts, a request for your feedback, and a reference appendix.</p>
+
+    <div style="margin-top:34px;display:flex;flex-direction:column;gap:2px;">
+      <div style="display:flex;align-items:baseline;gap:14px;padding:11px 0;border-bottom:1px solid #292b31;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;width:34px;">01</span>
+        <span style="font-size:16px;color:#e9e9ed;">The idea — what this framework is and how it works</span>
+        <span style="flex:1;border-bottom:1px dotted #3f424d;transform:translateY(-4px);"></span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9397ab;">03</span>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:14px;padding:11px 0;border-bottom:1px solid #292b31;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;width:34px;">02</span>
+        <span style="font-size:16px;color:#e9e9ed;">The route — seven phases, tools, builds and gates</span>
+        <span style="flex:1;border-bottom:1px dotted #3f424d;transform:translateY(-4px);"></span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9397ab;">07</span>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:14px;padding:11px 0;border-bottom:1px solid #292b31;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;width:34px;">03</span>
+        <span style="font-size:16px;color:#e9e9ed;">The projects — the platform and its nine satellites</span>
+        <span style="flex:1;border-bottom:1px dotted #3f424d;transform:translateY(-4px);"></span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9397ab;">14</span>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:14px;padding:11px 0;border-bottom:1px solid #292b31;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;width:34px;">04</span>
+        <span style="font-size:16px;color:#e9e9ed;">Why it works — principles, evidence and honest costs</span>
+        <span style="flex:1;border-bottom:1px dotted #3f424d;transform:translateY(-4px);"></span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9397ab;">17</span>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:14px;padding:11px 0;border-bottom:1px solid #292b31;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#b5abfc;width:34px;">F</span>
+        <span style="font-size:16px;color:#e9e9ed;">Help improve this framework — how to send comments</span>
+        <span style="flex:1;border-bottom:1px dotted #3f424d;transform:translateY(-4px);"></span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9397ab;">20</span>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:14px;padding:11px 0;border-bottom:1px solid #292b31;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#75798c;width:34px;">A</span>
+        <span style="font-size:16px;color:#b2b6ca;">Appendix — tools, costs and where things live</span>
+        <span style="flex:1;border-bottom:1px dotted #3f424d;transform:translateY(-4px);"></span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9397ab;">21</span>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;border:1px solid #3f424d;border-radius:8px;background:#1c1e2d;padding:20px 22px;">
+      <div style="font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#9184d9;margin-bottom:10px;">How to read this handbook</div>
+      <p style="margin:0;font-size:14px;line-height:1.65;color:#b2b6ca;text-wrap:pretty;">Part 1 gives you the whole idea in four pages. Parts 2 and 3 are the detail — the phases, the tools, the projects. If you're here as a reviewer, everything in this document is open to challenge: page 20 tells you exactly what feedback helps most and where to send it. This handbook summarizes the repository at <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#d2cefd;">github.com/AlqarniMohammed/DE-projects</span> — the repo is always the source of truth.</p>
+    </div>
+
+    <div style="flex:1;"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#595d6c;font-family:'IBM Plex Mono',monospace;">
+      <span>Contents</span>
+      <span>02</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 03 PART 1 DIVIDER -->
+<section class="page" id="p03" data-screen-label="03 Part One divider" style="position:relative;overflow:hidden;background:#262a60;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="position:absolute;inset:0;background:radial-gradient(90% 60% at 88% 100%, #353b80 0%, rgba(53,59,128,0) 70%);"></div>
+  <div style="position:relative;height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:56px 56px 44px;">
+    <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#b5abfc;">Part One</div>
+    <div style="flex:1;"></div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:130px;line-height:0.85;color:#4c5397;letter-spacing:-0.04em;">01</div>
+    <h2 style="margin:26px 0 0;font-size:46px;line-height:1.06;font-weight:500;letter-spacing:-0.025em;max-width:16ch;text-wrap:balance;">The idea</h2>
+    <div style="margin-top:28px;width:64px;height:2px;background:#b5abfc;"></div>
+    <div style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:10px 40px;max-width:660px;">
+      <div style="font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#b5abfc;grid-column:1 / -1;">After this part you can</div>
+      <p style="margin:0;font-size:14.5px;line-height:1.6;color:#e4e7f5;">Say what a competency-gated framework is, and why gates replace deadlines.</p>
+      <p style="margin:0;font-size:14.5px;line-height:1.6;color:#e4e7f5;">Explain why one evolving platform beats thirty disconnected projects.</p>
+    </div>
+    <div style="flex:1;"></div>
+    <div style="font-size:11px;color:#9690c9;font-family:'IBM Plex Mono',monospace;">Sections 1.1 — 1.3 · pages 04 — 06</div>
+  </div>
+</section>
+
+<!-- ============================================================ 04 · 1.1 WHAT THIS FRAMEWORK IS -->
+<section class="page" id="p04" data-screen-label="04 What this framework is" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:44px 56px 34px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#75798c;">
+      <span>Part One · The idea</span>
+      <span style="display:flex;align-items:center;gap:10px;"><span style="width:14px;height:1.5px;background:#9184d9;display:inline-block;"></span>1.1</span>
+    </div>
+    <div style="margin-top:12px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+
+    <div style="margin-top:36px;max-width:66ch;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;margin-bottom:10px;">1.1</div>
+      <h3 style="margin:0;font-size:27px;font-weight:500;letter-spacing:-0.018em;line-height:1.2;">What this framework is</h3>
+      <p style="margin:18px 0 0;font-size:15px;line-height:1.68;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">A twelve-month, self-paced route to working data engineering. You build <strong style="font-weight:500;color:#e9e9ed;">one real platform</strong> — a full data stack, end to end: ingestion, lakehouse storage, transformation, orchestration, quality, serving — and you advance by passing <strong style="font-weight:500;color:#e9e9ed;">gates</strong>: named artifacts you built and can demo, plus a terminology quiz you must score 80% on. Never by watching the calendar.</p>
+      <p style="margin:14px 0 0;font-size:15px;line-height:1.68;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">It exists because most self-study plans fail the same three ways: <em>tutorial hell</em> (watching without building), the <em>capstone cliff</em> (thirty tiny exercises, then one huge project assembled from scratch in week thirty), and <em>calendar schedules that cascade</em> the first time life happens. Every design choice in this framework traces to one of those failure modes, with the research behind it recorded in the repository.</p>
+    </div>
+
+    <div style="margin-top:28px;display:flex;gap:22px;align-items:flex-start;max-width:66ch;">
+      <div style="width:2px;align-self:stretch;background:#9184d9;flex:none;"></div>
+      <p style="margin:0;font-size:21px;line-height:1.42;font-weight:400;color:#d2cefd;letter-spacing:-0.012em;text-wrap:pretty;">The title says 12 months; the gates say when you're ready. Slipping two weeks costs nothing.</p>
+    </div>
+
+    <div style="margin-top:28px;max-width:66ch;">
+      <h4 style="margin:0;font-size:16px;font-weight:500;letter-spacing:0.01em;color:#e9e9ed;">Who it's for</h4>
+      <p style="margin:12px 0 0;font-size:15px;line-height:1.68;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">Someone with solid SQL and basic cloud familiarity, spending 6–10 hours a week. Different starting point? The placement rule is simple: <em>you may start at phase N if you can pass gate N−1 today</em> — gates are cumulative, so two learners who hold the same gate evidence have reached the same level by construction. A full placement protocol with a worked example lives in <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#d2cefd;">reference/LEARNERS.md</span>.</p>
+    </div>
+
+    <div style="margin-top:26px;border:1px solid #423a6a;border-radius:8px;background:#2b2741;padding:18px 20px;max-width:66ch;break-inside:avoid;">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:9px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:#9184d9;display:inline-block;"></span>
+        <span style="font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#d2cefd;">The standing rule</span>
+      </div>
+      <p style="margin:0;font-size:14px;line-height:1.65;color:#e4e7f5;text-wrap:pretty;">Nothing is learn-only. Every resource in every phase is pinned to an exercise, a build step, or a written artifact — because unexercised knowledge evaporates. If a row in a Learn table has no exercise attached, that's a bug worth reporting.</p>
+    </div>
+
+    <div style="flex:1;"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#595d6c;font-family:'IBM Plex Mono',monospace;">
+      <span>The Data Engineer Framework</span>
+      <span>04</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 05 · 1.2 HOW A PHASE WORKS -->
+<section class="page" id="p05" data-screen-label="05 How a phase works" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:44px 56px 34px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#75798c;">
+      <span>Part One · The idea</span>
+      <span style="display:flex;align-items:center;gap:10px;"><span style="width:14px;height:1.5px;background:#9184d9;display:inline-block;"></span>1.2</span>
+    </div>
+    <div style="margin-top:12px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+
+    <div style="margin-top:34px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;margin-bottom:10px;">1.2</div>
+      <h3 style="margin:0 0 18px;font-size:27px;font-weight:500;letter-spacing:-0.018em;line-height:1.2;max-width:22ch;">How a phase works</h3>
+    </div>
+
+    <div style="column-count:2;column-gap:34px;hyphens:auto;">
+      <p style="margin:0;font-size:14.5px;line-height:1.66;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">Every phase has the same shape, and you repeat it seven times. <strong style="font-weight:500;color:#e9e9ed;">Words first:</strong> each phase opens with its new glossary terms, taught as contrast pairs (OLTP vs OLAP, SCD1 vs SCD2) because contrast sticks. Then the Learn table, one row at a time — every row names a resource <em>and the exercise that pins it</em>. Several rows offer a vetted video twin: you pick one lane before starting the row, and hours swap — they never add.</p>
+      <p style="margin:12px 0 0;font-size:14.5px;line-height:1.66;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">Then you build: grow the platform through pull requests (branch → PR → self-review → squash-merge, even working solo), do the phase's <strong style="font-weight:500;color:#e9e9ed;">prove-it assignment</strong> — a small artifact that makes the phase's hardest claim concrete — and build the phase's satellite project in its own repo.</p>
+      <p style="margin:12px 0 0;font-size:14.5px;line-height:1.66;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">Finally, the gate. A gate is a fixed checklist: the named artifacts, a <strong style="font-weight:500;color:#e9e9ed;">retrieval checkpoint</strong> (all current-phase terms plus 10 random earlier ones, ≥ 80% — spaced retrieval keeps old phases warm), from G2 onward a <strong style="font-weight:500;color:#e9e9ed;">requested external critique</strong> — the framework never grades itself alone — and one public post. Evidence links go in a tracker; an item counts only when proof is linked.</p>
+    </div>
+
+    <figure style="margin:26px 0 0;break-inside:avoid;">
+      <div style="border-radius:8px;border:1px solid #3f424d;background:#1c1e2d;padding:14px;">
+        <svg viewBox="0 0 680 178" style="display:block;width:100%;height:auto;" role="img" aria-label="The phase loop: terms, learn, build, prove it, satellite, gate, publish — repeated seven times">
+          <defs>
+            <marker id="arrLoop" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0 0L8 4L0 8z" fill="#75798c"/></marker>
+          </defs>
+          <text x="52" y="30" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#9184d9">1</text>
+          <text x="148" y="30" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#9184d9">2</text>
+          <text x="244" y="30" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#9184d9">3</text>
+          <text x="340" y="30" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#9184d9">4</text>
+          <text x="436" y="30" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#9184d9">5</text>
+          <text x="532" y="30" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#9184d9">6</text>
+          <text x="628" y="30" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#9184d9">7</text>
+          <rect x="12" y="40" width="80" height="46" rx="6" fill="#161826" stroke="#3f424d"/>
+          <rect x="108" y="40" width="80" height="46" rx="6" fill="#161826" stroke="#3f424d"/>
+          <rect x="204" y="40" width="80" height="46" rx="6" fill="#161826" stroke="#3f424d"/>
+          <rect x="300" y="40" width="80" height="46" rx="6" fill="#161826" stroke="#3f424d"/>
+          <rect x="396" y="40" width="80" height="46" rx="6" fill="#161826" stroke="#3f424d"/>
+          <rect x="492" y="40" width="80" height="46" rx="6" fill="#161826" stroke="#9184d9" stroke-width="1.5"/>
+          <rect x="588" y="40" width="80" height="46" rx="6" fill="#161826" stroke="#3f424d"/>
+          <text x="52" y="60" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10.5" fill="#e9e9ed">Terms</text>
+          <text x="52" y="74" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#9397ab">glossary first</text>
+          <text x="148" y="60" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10.5" fill="#e9e9ed">Learn</text>
+          <text x="148" y="74" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#9397ab">every row pinned</text>
+          <text x="244" y="60" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10.5" fill="#e9e9ed">Build</text>
+          <text x="244" y="74" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#9397ab">platform, via PRs</text>
+          <text x="340" y="60" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10.5" fill="#e9e9ed">Prove it</text>
+          <text x="340" y="74" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#9397ab">one hard claim</text>
+          <text x="436" y="60" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10.5" fill="#e9e9ed">Satellite</text>
+          <text x="436" y="74" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#9397ab">separate repo</text>
+          <text x="532" y="60" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10.5" fill="#d2cefd">Gate</text>
+          <text x="532" y="74" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#9397ab">quiz ≥ 80%</text>
+          <text x="628" y="60" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10.5" fill="#e9e9ed">Publish</text>
+          <text x="628" y="74" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#9397ab">one public post</text>
+          <line x1="92" y1="63" x2="106" y2="63" stroke="#75798c" stroke-width="1.2" marker-end="url(#arrLoop)"/>
+          <line x1="188" y1="63" x2="202" y2="63" stroke="#75798c" stroke-width="1.2" marker-end="url(#arrLoop)"/>
+          <line x1="284" y1="63" x2="298" y2="63" stroke="#75798c" stroke-width="1.2" marker-end="url(#arrLoop)"/>
+          <line x1="380" y1="63" x2="394" y2="63" stroke="#75798c" stroke-width="1.2" marker-end="url(#arrLoop)"/>
+          <line x1="476" y1="63" x2="490" y2="63" stroke="#75798c" stroke-width="1.2" marker-end="url(#arrLoop)"/>
+          <line x1="572" y1="63" x2="586" y2="63" stroke="#75798c" stroke-width="1.2" marker-end="url(#arrLoop)"/>
+          <path d="M 628 86 L 628 132 L 52 132 L 52 90" fill="none" stroke="#4c5397" stroke-width="1.2" marker-end="url(#arrLoop)"/>
+          <text x="340" y="152" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10" fill="#75798c">repeat × 7 — each gate's quiz re-samples 10 random terms from earlier phases</text>
+        </svg>
+      </div>
+      <figcaption style="margin-top:10px;display:flex;gap:12px;font-size:12px;line-height:1.5;color:#9397ab;">
+        <span style="font-family:'IBM Plex Mono',monospace;color:#9184d9;flex:none;">Fig. 1.1</span>
+        <span style="text-wrap:pretty;">The phase loop. The gate step is the only exit from a phase; six built-in Claude Code skills (<span style="font-family:'IBM Plex Mono',monospace;">/start-phase, /quiz, /gate-check, /satellite-brief, /explain, /resume</span>) automate the repetitive parts, and every flow has a manual path.</span>
+      </figcaption>
+    </figure>
+
+    <div style="flex:1;"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#595d6c;font-family:'IBM Plex Mono',monospace;">
+      <span>The Data Engineer Framework</span>
+      <span>05</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 06 · 1.3 THE ROUTE AT A GLANCE -->
+<section class="page" id="p06" data-screen-label="06 The route at a glance" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:44px 56px 34px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#75798c;">
+      <span>Part One · The idea</span>
+      <span style="display:flex;align-items:center;gap:10px;"><span style="width:14px;height:1.5px;background:#9184d9;display:inline-block;"></span>1.3</span>
+    </div>
+    <div style="margin-top:12px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+
+    <div style="margin-top:34px;max-width:66ch;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;margin-bottom:10px;">1.3</div>
+      <h3 style="margin:0;font-size:27px;font-weight:500;letter-spacing:-0.018em;line-height:1.2;">The route at a glance</h3>
+      <p style="margin:16px 0 0;font-size:15px;line-height:1.68;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">Seven phases, one growing platform. The month columns are a pace suggestion, not a contract — phases 2 and 3 say "elastic, the gate decides" in their own headers.</p>
+    </div>
+
+    <table style="width:100%;margin-top:24px;border-collapse:collapse;font-size:13px;">
+      <thead>
+        <tr>
+          <th style="text-align:left;padding:9px 10px 9px 0;border-bottom:1px solid #595d6c;font-weight:500;font-size:10.5px;letter-spacing:0.13em;text-transform:uppercase;color:#9397ab;">Phase</th>
+          <th style="text-align:left;padding:9px 10px;border-bottom:1px solid #595d6c;font-weight:500;font-size:10.5px;letter-spacing:0.13em;text-transform:uppercase;color:#9397ab;">Months</th>
+          <th style="text-align:left;padding:9px 10px;border-bottom:1px solid #595d6c;font-weight:500;font-size:10.5px;letter-spacing:0.13em;text-transform:uppercase;color:#9397ab;">Hours</th>
+          <th style="text-align:left;padding:9px 10px;border-bottom:1px solid #595d6c;font-weight:500;font-size:10.5px;letter-spacing:0.13em;text-transform:uppercase;color:#9397ab;">You build</th>
+          <th style="text-align:left;padding:9px 0 9px 10px;border-bottom:1px solid #595d6c;font-weight:500;font-size:10.5px;letter-spacing:0.13em;text-transform:uppercase;color:#9397ab;">Gate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:10px 10px 10px 0;border-bottom:1px solid #292b31;color:#e9e9ed;">0 · Orientation &amp; Setup</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#9397ab;white-space:nowrap;">~2 weeks</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#cfd3e5;font-family:'IBM Plex Mono',monospace;font-size:12px;">18</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#cfd3e5;">Toolchain + guard-railed AWS account</td>
+          <td style="padding:10px 0 10px 10px;border-bottom:1px solid #292b31;color:#cfd3e5;">G0</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 10px 10px 0;border-bottom:1px solid #292b31;color:#e9e9ed;">1 · Foundations</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#9397ab;">1–2</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#cfd3e5;font-family:'IBM Plex Mono',monospace;font-size:12px;">70</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#cfd3e5;">A lakehouse on your laptop (DuckDB · Iceberg · dbt)</td>
+          <td style="padding:10px 0 10px 10px;border-bottom:1px solid #292b31;color:#cfd3e5;">G1</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 10px 10px 0;border-bottom:1px solid #292b31;color:#e9e9ed;">2 · AWS Lakehouse Core</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#9397ab;">3–5</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#cfd3e5;font-family:'IBM Plex Mono',monospace;font-size:12px;">95</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#cfd3e5;">The same lakehouse on AWS (S3 · Glue · Athena · S3 Tables)</td>
+          <td style="padding:10px 0 10px 10px;border-bottom:1px solid #292b31;color:#d2cefd;white-space:nowrap;">G2 · AWS DEA-C01</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 10px 10px 0;border-bottom:1px solid #292b31;color:#e9e9ed;">3 · Spark &amp; Databricks</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#9397ab;">5–7</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#cfd3e5;font-family:'IBM Plex Mono',monospace;font-size:12px;">75</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#cfd3e5;">Spark fluency + seven Databricks labs</td>
+          <td style="padding:10px 0 10px 10px;border-bottom:1px solid #292b31;color:#d2cefd;white-space:nowrap;">G3 · Databricks DE</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 10px 10px 0;border-bottom:1px solid #292b31;color:#e9e9ed;">4 · Orchestration &amp; Ingestion</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#9397ab;">7–8</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#cfd3e5;font-family:'IBM Plex Mono',monospace;font-size:12px;">72</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#cfd3e5;">Airflow 3, dlt, CDC and Kinesis on the platform</td>
+          <td style="padding:10px 0 10px 10px;border-bottom:1px solid #292b31;color:#cfd3e5;">G4</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 10px 10px 0;border-bottom:1px solid #292b31;color:#e9e9ed;">5 · Streaming &amp; CDC</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#9397ab;">9–10</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#cfd3e5;font-family:'IBM Plex Mono',monospace;font-size:12px;">65</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#cfd3e5;">Kafka event path → lakehouse; Debezium vs DMS</td>
+          <td style="padding:10px 0 10px 10px;border-bottom:1px solid #292b31;color:#cfd3e5;">G5</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 10px 10px 0;border-bottom:1px solid #292b31;color:#e9e9ed;">6 · Production, Serving &amp; Capstone</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#9397ab;">11–12</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#cfd3e5;font-family:'IBM Plex Mono',monospace;font-size:12px;">88</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#cfd3e5;">Quality, lineage, Terraform, serving, AI pipeline</td>
+          <td style="padding:10px 0 10px 10px;border-bottom:1px solid #292b31;color:#cfd3e5;">G6 · capstone</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+      <div style="border:1px solid #3f424d;border-radius:8px;background:#1c1e2d;padding:16px 18px;break-inside:avoid;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:30px;color:#d2cefd;letter-spacing:-0.02em;">~483 h</div>
+        <div style="margin-top:8px;font-size:12.5px;line-height:1.5;color:#9397ab;">the honest total — every phase budget published, practice-exam time counted</div>
+      </div>
+      <div style="border:1px solid #3f424d;border-radius:8px;background:#1c1e2d;padding:16px 18px;break-inside:avoid;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:30px;color:#d2cefd;letter-spacing:-0.02em;">≤ $25/mo</div>
+        <div style="margin-top:8px;font-size:12.5px;line-height:1.5;color:#9397ab;">the AWS ceiling all year, protected by a budget alarm you force-fire on day one</div>
+      </div>
+      <div style="border:1px solid #3f424d;border-radius:8px;background:#1c1e2d;padding:16px 18px;break-inside:avoid;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:30px;color:#d2cefd;letter-spacing:-0.02em;">2 certs</div>
+        <div style="margin-top:8px;font-size:12.5px;line-height:1.5;color:#9397ab;">AWS DEA-C01 and Databricks DE Associate — both passed by ≈ month 7</div>
+      </div>
+    </div>
+
+    <div style="flex:1;"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#595d6c;font-family:'IBM Plex Mono',monospace;">
+      <span>The Data Engineer Framework</span>
+      <span>06</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 07 PART 2 DIVIDER -->
+<section class="page" id="p07" data-screen-label="07 Part Two divider" style="position:relative;overflow:hidden;background:#262a60;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="position:absolute;inset:0;background:radial-gradient(90% 60% at 88% 100%, #353b80 0%, rgba(53,59,128,0) 70%);"></div>
+  <div style="position:relative;height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:56px 56px 44px;">
+    <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#b5abfc;">Part Two</div>
+    <div style="flex:1;"></div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:130px;line-height:0.85;color:#4c5397;letter-spacing:-0.04em;">02</div>
+    <h2 style="margin:26px 0 0;font-size:46px;line-height:1.06;font-weight:500;letter-spacing:-0.025em;max-width:16ch;text-wrap:balance;">The route: seven phases</h2>
+    <div style="margin-top:28px;width:64px;height:2px;background:#b5abfc;"></div>
+    <div style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:10px 40px;max-width:660px;">
+      <div style="font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#b5abfc;grid-column:1 / -1;">After this part you can</div>
+      <p style="margin:0;font-size:14.5px;line-height:1.6;color:#e4e7f5;">Name each phase's tools and what its core build adds to the platform.</p>
+      <p style="margin:0;font-size:14.5px;line-height:1.6;color:#e4e7f5;">Say what each gate certifies — the bar stays fixed even when scenarios vary.</p>
+    </div>
+    <div style="flex:1;"></div>
+    <div style="font-size:11px;color:#9690c9;font-family:'IBM Plex Mono',monospace;">Sections 2.1 — 2.7 · pages 08 — 13</div>
+  </div>
+</section>
+
+<!-- ============================================================ 08 · 2.1–2.2 PHASES 0–1 -->
+<section class="page" id="p08" data-screen-label="08 Phases 0 and 1" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:44px 56px 34px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#75798c;">
+      <span>Part Two · The route</span>
+      <span style="display:flex;align-items:center;gap:10px;"><span style="width:14px;height:1.5px;background:#9184d9;display:inline-block;"></span>2.1 — 2.2</span>
+    </div>
+    <div style="margin-top:12px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+
+    <div style="margin-top:30px;">
+      <div style="display:flex;align-items:baseline;gap:12px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;">2.1</span>
+        <h3 style="margin:0;font-size:22px;font-weight:500;letter-spacing:-0.015em;line-height:1.2;">Phase 0 — Orientation &amp; Setup</h3>
+      </div>
+      <div style="margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#9397ab;">~2 weeks · ~18 h · AWS $0</div>
+      <p style="margin:12px 0 0;font-size:14px;line-height:1.65;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;max-width:70ch;">Only setup, on purpose — the most-reported failure of public DE courses is the week-1 setup wall, where Docker, cloud and new concepts land at once. You install the toolchain (uv, Docker, VS Code, Git, the DuckDB CLI, a gitleaks pre-commit hook), create a guard-railed AWS account — a $25/month budget whose alarm you <em>force-fire once</em>, because an alarm you've never seen fire is a hope, not a guardrail — and run your first DuckDB query over a Parquet file of NYC taxi trips.</p>
+      <div style="margin-top:12px;display:flex;gap:14px;align-items:flex-start;max-width:70ch;">
+        <div style="width:2px;align-self:stretch;background:#9184d9;flex:none;"></div>
+        <p style="margin:0;font-size:13.5px;line-height:1.6;color:#b2b6ca;text-wrap:pretty;"><strong style="font-weight:500;color:#d2cefd;">Prove it:</strong> the Anki generator — a hand-typed Python script that parses the glossary (its grammar is strictly machine-parseable) into a flashcard deck, with a pytest that fails loudly on a malformed line. It powers every retrieval checkpoint of the year.</p>
+      </div>
+      <p style="margin:12px 0 0;font-size:13px;line-height:1.6;color:#9397ab;max-width:70ch;"><span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Gate G0 certifies</span> — you can speak the DE lifecycle and its core contrast pairs, and operate a guard-railed cloud account and local toolchain.</p>
+    </div>
+
+    <div style="margin-top:26px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+
+    <div style="margin-top:24px;">
+      <div style="display:flex;align-items:baseline;gap:12px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;">2.2</span>
+        <h3 style="margin:0;font-size:22px;font-weight:500;letter-spacing:-0.015em;line-height:1.2;">Phase 1 — Foundations</h3>
+      </div>
+      <div style="margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#9397ab;">months 1–2 · ~70 h · AWS $0 — everything runs on your laptop</div>
+      <p style="margin:12px 0 0;font-size:14px;line-height:1.65;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;max-width:70ch;">A lakehouse on your laptop, one dataset carried end to end. Platform v0.1: an idempotent taxi-data ingester (typed, tested), the data registered as an <strong style="font-weight:500;color:#e9e9ed;">Apache Iceberg</strong> table and deliberately exercised — schema evolution, snapshots, time travel — then a three-layer <strong style="font-weight:500;color:#e9e9ed;">dbt</strong> project (staging → intermediate → marts) with 25+ tests, generated docs, and a snapshot that makes <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">dim_zones</span> a documented SCD2 dimension. <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">make demo</span> runs the whole thing on a fresh clone. The PR workflow starts here and never stops.</p>
+      <p style="margin:12px 0 0;font-size:13.5px;line-height:1.6;color:#b2b6ca;max-width:70ch;"><span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Tools</span> — analytical SQL (DataLemur / LeetCode SQL 50) · Python + pytest · DuckDB · Polars · Arrow · Iceberg (PyIceberg) · dbt. <span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Satellite S1</span> — a standalone dbt project from zero, in its own repo, so you start a dbt project twice: once guided, once alone.</p>
+      <p style="margin:12px 0 0;font-size:13px;line-height:1.6;color:#9397ab;max-width:70ch;"><span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Gate G1 certifies</span> — interview-strength analytical SQL; tested DE Python; a table format operated (schema evolution, time travel); a documented 3-layer dbt project with an SCD2 dimension.</p>
+    </div>
+
+    <div style="flex:1;"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#595d6c;font-family:'IBM Plex Mono',monospace;">
+      <span>The Data Engineer Framework</span>
+      <span>08</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 09 · 2.3 PHASE 2 -->
+<section class="page" id="p09" data-screen-label="09 Phase 2" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:44px 56px 34px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#75798c;">
+      <span>Part Two · The route</span>
+      <span style="display:flex;align-items:center;gap:10px;"><span style="width:14px;height:1.5px;background:#9184d9;display:inline-block;"></span>2.3</span>
+    </div>
+    <div style="margin-top:12px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+
+    <div style="margin-top:34px;max-width:70ch;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;margin-bottom:10px;">2.3</div>
+      <h3 style="margin:0;font-size:26px;font-weight:500;letter-spacing:-0.018em;line-height:1.2;">Phase 2 — AWS Lakehouse Core <span style="display:inline-block;vertical-align:middle;margin-left:8px;transform:translateY(-2px);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#161826;background:#b5abfc;border-radius:4px;padding:4px 9px;">Cert phase 1</span></h3>
+      <div style="margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#9397ab;">months 3–5 (elastic) · ~95 h · AWS ≤ $25/mo + exam $150 + practice exams $15</div>
+      <p style="margin:16px 0 0;font-size:14.5px;line-height:1.66;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">Your lakehouse moves to AWS. Same project, real cloud — and the services you operate are exactly the surface the <strong style="font-weight:500;color:#e9e9ed;">AWS Certified Data Engineer – Associate</strong> exam tests, so the build <em>is</em> most of the prep. Raw and curated S3 zones; a Glue crawler you then replace with explicit DDL (and learn why teams do); the curated layer written as managed Iceberg on <strong style="font-weight:500;color:#e9e9ed;">S3 Tables</strong> by a hand-written ~40-line Glue PySpark job; the same dbt project re-pointed at <strong style="font-weight:500;color:#e9e9ed;">Athena</strong>, with an incremental fact model and a <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">make backfill</span> idempotency proof — run it twice, diff the row counts.</p>
+      <p style="margin:14px 0 0;font-size:14.5px;line-height:1.66;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">The phase's signature move is <strong style="font-weight:500;color:#e9e9ed;">cost telemetry</strong>: a script that prints scanned bytes per dbt model, one CTAS and one partition-projection drill, and a screenshot of the same query before and after partitioning — a 10–100× scan reduction you can show, not claim. Two short exam mini-labs (Kinesis → Firehose, Redshift Serverless taste) are built and torn down the same day.</p>
+      <div style="margin-top:16px;display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:2px;align-self:stretch;background:#9184d9;flex:none;"></div>
+        <p style="margin:0;font-size:13.5px;line-height:1.6;color:#b2b6ca;text-wrap:pretty;"><strong style="font-weight:500;color:#d2cefd;">Prove it:</strong> pipeline tests with pytest + moto (mocked S3), wired into GitHub Actions via OIDC so a red test blocks the nightly run. CI is not decoration — it's the thing that stops a broken pipeline from shipping.</p>
+      </div>
+      <p style="margin:16px 0 0;font-size:13.5px;line-height:1.6;color:#b2b6ca;"><span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Tools</span> — S3 · Glue (Catalog, Crawlers, ETL) · Athena · S3 Tables · dbt-athena · Lake Formation · PySpark basics · pytest + moto · GitHub Actions OIDC. <span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Satellite S2</span> — a cost-aware Athena mart on a fresh 5–10 GB dataset where <em>every model is tagged with its dollar cost per build</em>, published as a <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">MODEL_COST_REPORT.md</span> leaderboard.</p>
+      <p style="margin:14px 0 0;font-size:13px;line-height:1.6;color:#9397ab;"><span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Gate G2 certifies</span> — a production-pattern lakehouse on AWS; idempotent backfills proven; query costs explained and cut; pipelines tested in CI; the monthly bill ≤ $25 with evidence; <strong style="font-weight:500;color:#d2cefd;">AWS DEA-C01 passed</strong>. From this gate on, every gate also requires requesting an external critique from a practitioner community.</p>
+    </div>
+
+    <div style="flex:1;"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#595d6c;font-family:'IBM Plex Mono',monospace;">
+      <span>The Data Engineer Framework</span>
+      <span>09</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 10 · 2.4 PHASE 3 -->
+<section class="page" id="p10" data-screen-label="10 Phase 3" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:44px 56px 34px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#75798c;">
+      <span>Part Two · The route</span>
+      <span style="display:flex;align-items:center;gap:10px;"><span style="width:14px;height:1.5px;background:#9184d9;display:inline-block;"></span>2.4</span>
+    </div>
+    <div style="margin-top:12px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+
+    <div style="margin-top:34px;max-width:70ch;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;margin-bottom:10px;">2.4</div>
+      <h3 style="margin:0;font-size:26px;font-weight:500;letter-spacing:-0.018em;line-height:1.2;">Phase 3 — Spark &amp; Databricks <span style="display:inline-block;vertical-align:middle;margin-left:8px;transform:translateY(-2px);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#161826;background:#b5abfc;border-radius:4px;padding:4px 9px;">Cert phase 2</span></h3>
+      <div style="margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#9397ab;">months 5–7 (elastic) · ~75 h · platform $0 · exam $200 → $100 with voucher</div>
+      <p style="margin:16px 0 0;font-size:14.5px;line-height:1.66;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">Distributed compute enters. The exam labs run on <strong style="font-weight:500;color:#e9e9ed;">Databricks Free Edition</strong> — serverless, Unity Catalog on by default, exactly the environment the current exam assumes — while the Spark-internals work runs on local PySpark, where the full Spark UI is available. Seven labs map one-to-one to the exam sections: ingestion (Auto Loader, COPY INTO), a PySpark medallion build, Delta Lake mechanics (MERGE, the transaction log, Liquid Clustering), a Lakeflow Jobs multi-task DAG with file-arrival and table-update triggers, a declarative pipeline with expectations, Unity Catalog governance (grants, a column mask, a row filter), and a CI/CD Asset Bundle deployed dev → prod.</p>
+      <div style="margin-top:16px;display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:2px;align-self:stretch;background:#9184d9;flex:none;"></div>
+        <p style="margin:0;font-size:13.5px;line-height:1.6;color:#b2b6ca;text-wrap:pretty;"><strong style="font-weight:500;color:#d2cefd;">Prove it:</strong> the skew-detection kata — a hand-written <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">detect_skew(df, key)</span> helper with your own pytest asserts against a uniform and a 90/10-skewed DataFrame. It becomes the measuring instrument for the forensics satellite.</p>
+      </div>
+      <p style="margin:16px 0 0;font-size:13.5px;line-height:1.6;color:#b2b6ca;"><span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Tools</span> — PySpark / Spark 4.x · the Spark UI · Delta Lake · Databricks Free Edition · Unity Catalog · Lakeflow (Connect, Jobs, Spark Declarative Pipelines) · Asset Bundles + the Databricks CLI · PyIceberg &amp; delta-rs for the bake-off. <span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Satellites</span> — <strong style="font-weight:500;color:#e9e9ed;">S3a Spark Performance Forensics</strong>: a deliberately slow job fixed one change at a time (broadcast, AQE, salting, repartitioning, file sizing), published as <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">FORENSICS.md</span> with before/after Spark-UI screenshots and a ranked impact table. <strong style="font-weight:500;color:#e9e9ed;">S3b Iceberg vs Delta bake-off</strong>: the same workload through PyIceberg and delta-rs, benchmarked — write, read, schema evolution, time travel — published as <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">BAKEOFF.md</span> with real numbers and a verdict.</p>
+      <p style="margin:14px 0 0;font-size:13px;line-height:1.6;color:#9397ab;"><span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Gate G3 certifies</span> — PySpark at Spark-UI-literacy level; skew explained <em>and fixed</em>; Delta, Lakeflow and Unity Catalog operated; <strong style="font-weight:500;color:#d2cefd;">Databricks Certified Data Engineer Associate passed</strong>.</p>
+    </div>
+
+    <div style="flex:1;"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#595d6c;font-family:'IBM Plex Mono',monospace;">
+      <span>The Data Engineer Framework</span>
+      <span>10</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 11 · 2.5 PHASE 4 -->
+<section class="page" id="p11" data-screen-label="11 Phase 4" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:44px 56px 34px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#75798c;">
+      <span>Part Two · The route</span>
+      <span style="display:flex;align-items:center;gap:10px;"><span style="width:14px;height:1.5px;background:#9184d9;display:inline-block;"></span>2.5</span>
+    </div>
+    <div style="margin-top:12px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+
+    <div style="margin-top:34px;max-width:70ch;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;margin-bottom:10px;">2.5</div>
+      <h3 style="margin:0;font-size:26px;font-weight:500;letter-spacing:-0.018em;line-height:1.2;">Phase 4 — Orchestration &amp; Ingestion</h3>
+      <div style="margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#9397ab;">months 7–8 · ~72 h · AWS ≤ $25/mo with per-lab caps and teardown deadlines</div>
+      <p style="margin:16px 0 0;font-size:14.5px;line-height:1.66;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">Deliberately exam-free: Kinesis, DMS and Redshift arrive as services you've already answered exam questions about, now operated for real with no prep clock running. Platform v2 gets a real orchestrator — <strong style="font-weight:500;color:#e9e9ed;">Airflow 3</strong>, run locally, as <em>many small single-purpose DAGs, never a mega-DAG</em>: retries, a Deadline Alert (Airflow 3's replacement for the removed SLA feature), failure alerts, one asset-triggered dependency, one deliberate XCom handoff.</p>
+      <p style="margin:14px 0 0;font-size:14.5px;line-height:1.66;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">Then three ingestion modes join the batch path: a declarative <strong style="font-weight:500;color:#e9e9ed;">dlt</strong> REST-API source with an incremental cursor; <strong style="font-weight:500;color:#e9e9ed;">CDC</strong> from a live RDS Postgres through DMS into Iceberg — capped at $8, torn down within five days, with an UPDATE in Postgres visible in Athena in minutes; and a streaming-lite EventBridge → Lambda → <strong style="font-weight:500;color:#e9e9ed;">Kinesis</strong> → Firehose path capped at $5. The secrets story also becomes production-shaped: every credential moves to the SSM Parameter Store backend — none in code, config files, or git.</p>
+      <div style="margin-top:16px;display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:2px;align-self:stretch;background:#9184d9;flex:none;"></div>
+        <p style="margin:0;font-size:13.5px;line-height:1.6;color:#b2b6ca;text-wrap:pretty;"><strong style="font-weight:500;color:#d2cefd;">Prove it:</strong> DAG-integrity tests in CI — every DAG imports cleanly, has retries and an owner, no orphaned tasks, the XCom handoff carries the expected value. A broken DAG never reaches the scheduler.</p>
+      </div>
+      <p style="margin:16px 0 0;font-size:13.5px;line-height:1.6;color:#b2b6ca;"><span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Tools</span> — Airflow 3.x + Astro CLI · dlt · SSM Parameter Store · RDS Postgres + DMS · Kinesis Streams &amp; Firehose · EventBridge, Lambda, Step Functions · MWAA (one short lab) · Dagster. <span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Satellites</span> — <strong style="font-weight:500;color:#e9e9ed;">S4a Redshift + Spectrum hybrid</strong>: a mart joining native and Spectrum tables, with the federated <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">EXPLAIN</span> plan as proof. <strong style="font-weight:500;color:#e9e9ed;">S4b Dagster vs Airflow</strong>: one platform pipeline rebuilt as software-defined assets, compared in <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">COMPARISON.md</span> across four fixed axes with a code diff each.</p>
+      <p style="margin:14px 0 0;font-size:13px;line-height:1.6;color:#9397ab;"><span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Gate G4 certifies</span> — orchestration with a deliberate failure → retry → alert shown on video; ingestion via dlt, CDC and Kinesis; secrets handled like production, with gitleaks shown catching a planted secret.</p>
+    </div>
+
+    <div style="flex:1;"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#595d6c;font-family:'IBM Plex Mono',monospace;">
+      <span>The Data Engineer Framework</span>
+      <span>11</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 12 · 2.6 PHASE 5 -->
+<section class="page" id="p12" data-screen-label="12 Phase 5" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:44px 56px 34px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#75798c;">
+      <span>Part Two · The route</span>
+      <span style="display:flex;align-items:center;gap:10px;"><span style="width:14px;height:1.5px;background:#9184d9;display:inline-block;"></span>2.6</span>
+    </div>
+    <div style="margin-top:12px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+
+    <div style="margin-top:34px;max-width:70ch;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;margin-bottom:10px;">2.6</div>
+      <h3 style="margin:0;font-size:26px;font-weight:500;letter-spacing:-0.018em;line-height:1.2;">Phase 5 — Streaming &amp; CDC</h3>
+      <div style="margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#9397ab;">months 9–10 · ~65 h · near-$0 — Kafka runs locally in Docker</div>
+      <p style="margin:16px 0 0;font-size:14.5px;line-height:1.66;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">Open-source streaming, because Kafka's mechanics transfer everywhere — you already ingested streams the AWS way in Phase 4. Platform v3 grows the event path: a local <strong style="font-weight:500;color:#e9e9ed;">Kafka 4.x / Redpanda</strong> broker; a producer replaying real events; two consumer groups doing different jobs, with consumers killed and restarted mid-stream so partition ownership and offsets are felt, not memorized. The sink is the clever part: a local consumer writing to the <em>cloud-side</em> curated table via PyIceberg against the Glue/S3 Tables REST catalog — local compute, cloud table — which is what makes "an event is visible in Athena within minutes" a real demo.</p>
+      <div style="margin-top:16px;display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:2px;align-self:stretch;background:#9184d9;flex:none;"></div>
+        <p style="margin:0;font-size:13.5px;line-height:1.6;color:#b2b6ca;text-wrap:pretty;"><strong style="font-weight:500;color:#d2cefd;">Prove it — the idempotent sink:</strong> first <em>prove the failure</em> — send duplicates through a naive Iceberg append and watch them land twice — then fix it with <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">upsert()</span> on the event key, resend the duplicates, and show the table stays correct. At-least-once delivery plus an idempotent sink is effectively exactly-once; this is the phase's hardest claim made concrete, on video.</p>
+      </div>
+      <p style="margin:16px 0 0;font-size:13.5px;line-height:1.6;color:#b2b6ca;"><span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Tools</span> — Kafka 4.x KRaft / Redpanda · confluent-kafka (Python) · Kafka Connect · Debezium · PyIceberg upsert · one Flink SQL lab (windows and watermarks, semantics only) · the free Confluent <em>Data Streaming Engineer Foundations</em> certificate. <span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Satellite S5</span> — <strong style="font-weight:500;color:#e9e9ed;">Debezium vs DMS, the CDC showdown</strong>: identical workloads (the seeded OLTP generator built in Phase 4) through both paths, published as <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">CDC-SHOWDOWN.md</span> — a measured latency histogram, schema-change and delete handling in both, the outbox pattern demonstrated, and a verdict. Nobody publishes honest side-by-side CDC numbers; after this, you have them.</p>
+      <p style="margin:14px 0 0;font-size:13px;line-height:1.6;color:#9397ab;"><span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Gate G5 certifies</span> — you can reason about partitions, offsets and delivery guarantees from experience; build an idempotent stream-to-lakehouse sink; and compare CDC approaches with your own measurements.</p>
+    </div>
+
+    <div style="flex:1;"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#595d6c;font-family:'IBM Plex Mono',monospace;">
+      <span>The Data Engineer Framework</span>
+      <span>12</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 13 · 2.7 PHASE 6 -->
+<section class="page" id="p13" data-screen-label="13 Phase 6" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:44px 56px 34px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#75798c;">
+      <span>Part Two · The route</span>
+      <span style="display:flex;align-items:center;gap:10px;"><span style="width:14px;height:1.5px;background:#9184d9;display:inline-block;"></span>2.7</span>
+    </div>
+    <div style="margin-top:12px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+
+    <div style="margin-top:34px;max-width:70ch;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;margin-bottom:10px;">2.7</div>
+      <h3 style="margin:0;font-size:26px;font-weight:500;letter-spacing:-0.018em;line-height:1.2;">Phase 6 — Production, Serving &amp; Capstone</h3>
+      <div style="margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#9397ab;">months 11–12 · ~88 h · AWS ≤ $25/mo — quality, lineage and serving run locally or inside dbt</div>
+      <p style="margin:16px 0 0;font-size:14.5px;line-height:1.66;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">The year's final move: make the platform read like production. Platform v4 layers <strong style="font-weight:500;color:#e9e9ed;">quality</strong> (dbt tests → dbt-expectations distributional tests → Elementary anomaly detection with alerts, plus a quarantine pattern built as its own task), enforces <strong style="font-weight:500;color:#e9e9ed;">contracts</strong> on the two most-consumed marts with a CI check that fails a breaking PR, emits <strong style="font-weight:500;color:#e9e9ed;">OpenLineage</strong> events from Airflow into Marquez for a cross-DAG lineage graph, codifies the core infrastructure in <strong style="font-weight:500;color:#e9e9ed;">Terraform</strong> (imported, clean plan, tfsec-scanned), and writes the runbook.</p>
+      <div style="margin-top:16px;display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:2px;align-self:stretch;background:#9184d9;flex:none;"></div>
+        <p style="margin:0;font-size:13.5px;line-height:1.6;color:#b2b6ca;text-wrap:pretty;"><strong style="font-weight:500;color:#d2cefd;">Prove it — the contract that blocks a PR:</strong> open a deliberately breaking PR (rename a contracted column), let CI reject it, and leave the blocked PR open as permanent evidence. The strongest "I run this like production" proof there is.</p>
+      </div>
+      <p style="margin:16px 0 0;font-size:13.5px;line-height:1.6;color:#b2b6ca;"><span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Tools</span> — dbt-expectations + Elementary · dbt model contracts · OpenLineage → Marquez · Terraform + tfsec · CloudWatch · ClickHouse · Superset · pgvector · DDIA 2E as the theory backstop. <span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Satellites</span> — <strong style="font-weight:500;color:#e9e9ed;">S6a ClickHouse + Superset serving layer</strong>: two gold marts replicated on a schedule (the hot-copy pattern; the lakehouse stays the source of truth), a customer-facing dashboard, and a <em>measured</em> latency number vs Athena. <strong style="font-weight:500;color:#e9e9ed;">S6b the AI-data pipeline</strong>: documents → chunks → embeddings → pgvector with idempotent upserts and a retrieval-quality check as the pipeline's "dbt test" — a normal data pipeline with a new sink.</p>
+      <p style="margin:14px 0 0;font-size:13.5px;line-height:1.66;color:#cfd3e5;text-wrap:pretty;"><strong style="font-weight:500;color:#e9e9ed;">The capstone is packaging, not a new build</strong> — the platform was built all year instead of assembled in week 30. Self-grade against a seven-axis rubric, rewrite the README for a five-minute stranger read, record three ≤3-minute demos, and write <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">JOURNEY.md</span> — the platform-journey article — plus <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">AI-USAGE.md</span>, an honest record of what you delegated to AI versus hand-typed.</p>
+      <p style="margin:14px 0 0;font-size:13px;line-height:1.6;color:#9397ab;"><span style="letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;color:#75798c;">Gate G6 certifies</span> — the whole platform, explained end to end: rubric ≥ 3 average, a caught anomaly, the blocked PR, the lineage graph, a serving-latency number, a clean <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">terraform plan</span> — and a final retrieval checkpoint sampling 30 terms across all phases.</p>
+    </div>
+
+    <div style="flex:1;"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#595d6c;font-family:'IBM Plex Mono',monospace;">
+      <span>The Data Engineer Framework</span>
+      <span>13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 14 PART 3 DIVIDER -->
+<section class="page" id="p14" data-screen-label="14 Part Three divider" style="position:relative;overflow:hidden;background:#262a60;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="position:absolute;inset:0;background:radial-gradient(90% 60% at 88% 100%, #353b80 0%, rgba(53,59,128,0) 70%);"></div>
+  <div style="position:relative;height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:56px 56px 44px;">
+    <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#b5abfc;">Part Three</div>
+    <div style="flex:1;"></div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:130px;line-height:0.85;color:#4c5397;letter-spacing:-0.04em;">03</div>
+    <h2 style="margin:26px 0 0;font-size:46px;line-height:1.06;font-weight:500;letter-spacing:-0.025em;max-width:16ch;text-wrap:balance;">The projects</h2>
+    <div style="margin-top:28px;width:64px;height:2px;background:#b5abfc;"></div>
+    <div style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:10px 40px;max-width:660px;">
+      <div style="font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#b5abfc;grid-column:1 / -1;">After this part you can</div>
+      <p style="margin:0;font-size:14.5px;line-height:1.6;color:#e4e7f5;">Describe the platform's v0.1 → v4 arc and what each phase added to it.</p>
+      <p style="margin:0;font-size:14.5px;line-height:1.6;color:#e4e7f5;">Pick the satellite whose published artifact you'd most want to review.</p>
+    </div>
+    <div style="flex:1;"></div>
+    <div style="font-size:11px;color:#9690c9;font-family:'IBM Plex Mono',monospace;">Sections 3.1 — 3.2 · pages 15 — 16</div>
+  </div>
+</section>
+
+<!-- ============================================================ 15 · 3.1 THE PLATFORM -->
+<section class="page" id="p15" data-screen-label="15 One platform, grown all year" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:44px 56px 34px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#75798c;">
+      <span>Part Three · The projects</span>
+      <span style="display:flex;align-items:center;gap:10px;"><span style="width:14px;height:1.5px;background:#9184d9;display:inline-block;"></span>3.1</span>
+    </div>
+    <div style="margin-top:12px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+
+    <div style="margin-top:34px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;margin-bottom:10px;">3.1</div>
+      <h3 style="margin:0 0 18px;font-size:27px;font-weight:500;letter-spacing:-0.018em;line-height:1.2;max-width:24ch;">One platform, grown all year</h3>
+    </div>
+
+    <div style="column-count:2;column-gap:34px;hyphens:auto;">
+      <p style="margin:0;font-size:14.5px;line-height:1.66;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">The centerpiece is a single repository, <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">aws-lakehouse-platform</span>, created in Phase 0 and grown for twelve months. <strong style="font-weight:500;color:#e9e9ed;">v0.1</strong> is a lakehouse on a laptop. <strong style="font-weight:500;color:#e9e9ed;">v1</strong> moves it to AWS. <strong style="font-weight:500;color:#e9e9ed;">v2</strong> gives it an orchestrator and three more ingestion modes. <strong style="font-weight:500;color:#e9e9ed;">v3</strong> adds the event path. <strong style="font-weight:500;color:#e9e9ed;">v4</strong> hardens it: quality, contracts, lineage, IaC, a serving layer.</p>
+      <p style="margin:12px 0 0;font-size:14.5px;line-height:1.66;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">One platform is the framework's central bet. It avoids the capstone cliff, and it changes what the repo <em>is</em>: a year of pull-request history with tests, teardowns and cost screenshots reads as an operated platform, not a tutorial. Every claim gets a fixed, named artifact — <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">MODELING.md</span>, <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">PLATFORM-RUNBOOK.md</span>, <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">JOURNEY.md</span> — because work never gets credit for an invisible strength.</p>
+      <p style="margin:12px 0 0;font-size:14.5px;line-height:1.66;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">The destination is the kind of full stack real data teams publish journey posts about — and the capstone write-up, <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">JOURNEY.md</span>, tells yours: the problem, the architecture, the decisions with reasons, the numbers, the lessons.</p>
+    </div>
+
+    <figure style="margin:24px 0 0;break-inside:avoid;">
+      <div style="border-radius:8px;border:1px solid #3f424d;background:#1c1e2d;padding:14px;">
+        <svg viewBox="0 0 680 252" style="display:block;width:100%;height:auto;" role="img" aria-label="Platform v4 architecture: sources through ingestion into the lakehouse, out to serving, with orchestration and quality across everything">
+          <defs>
+            <marker id="arrArch" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0 0L8 4L0 8z" fill="#75798c"/></marker>
+          </defs>
+          <text x="73" y="16" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" letter-spacing="1.5" fill="#75798c">SOURCES</text>
+          <text x="248" y="16" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" letter-spacing="1.5" fill="#75798c">INGESTION</text>
+          <text x="433" y="16" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" letter-spacing="1.5" fill="#75798c">LAKEHOUSE</text>
+          <text x="610" y="16" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" letter-spacing="1.5" fill="#75798c">SERVING</text>
+
+          <rect x="8" y="28" width="130" height="40" rx="6" fill="#161826" stroke="#3f424d"/>
+          <text x="73" y="45" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10.5" fill="#e9e9ed">Files &amp; APIs</text>
+          <text x="73" y="59" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#9397ab">Parquet · REST</text>
+          <rect x="8" y="84" width="130" height="40" rx="6" fill="#161826" stroke="#3f424d"/>
+          <text x="73" y="101" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10.5" fill="#e9e9ed">Postgres OLTP</text>
+          <text x="73" y="115" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#9397ab">seeded generator</text>
+          <rect x="8" y="140" width="130" height="40" rx="6" fill="#161826" stroke="#3f424d"/>
+          <text x="73" y="157" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10.5" fill="#e9e9ed">Live events</text>
+          <text x="73" y="171" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#9397ab">GBFS feed</text>
+
+          <rect x="178" y="28" width="140" height="40" rx="6" fill="#161826" stroke="#3f424d"/>
+          <text x="248" y="45" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10.5" fill="#e9e9ed">Batch + dlt</text>
+          <text x="248" y="59" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#9397ab">idempotent, tested</text>
+          <rect x="178" y="84" width="140" height="40" rx="6" fill="#161826" stroke="#3f424d"/>
+          <text x="248" y="101" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10.5" fill="#e9e9ed">CDC — DMS / Debezium</text>
+          <text x="248" y="115" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#9397ab">full load + changes</text>
+          <rect x="178" y="140" width="140" height="40" rx="6" fill="#161826" stroke="#3f424d"/>
+          <text x="248" y="157" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10.5" fill="#e9e9ed">Kinesis / Kafka</text>
+          <text x="248" y="171" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#9397ab">idempotent sink</text>
+
+          <rect x="358" y="28" width="150" height="152" rx="6" fill="#161826" stroke="#9184d9" stroke-width="1.5"/>
+          <text x="433" y="56" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#d2cefd">S3 raw → curated</text>
+          <text x="433" y="76" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10" fill="#cfd3e5">Iceberg · S3 Tables</text>
+          <text x="433" y="96" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10" fill="#cfd3e5">Glue Catalog</text>
+          <line x1="374" y1="112" x2="492" y2="112" stroke="#3f424d" stroke-width="1"/>
+          <text x="433" y="132" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10" fill="#cfd3e5">dbt on Athena</text>
+          <text x="433" y="150" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10" fill="#cfd3e5">staging → marts</text>
+          <text x="433" y="168" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#9397ab">SCD2 · incremental · backfill</text>
+
+          <rect x="548" y="40" width="124" height="52" rx="6" fill="#161826" stroke="#3f424d"/>
+          <text x="610" y="61" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10.5" fill="#e9e9ed">ClickHouse</text>
+          <text x="610" y="77" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#9397ab">+ Superset dashboards</text>
+          <rect x="548" y="116" width="124" height="52" rx="6" fill="#161826" stroke="#3f424d"/>
+          <text x="610" y="137" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10.5" fill="#e9e9ed">pgvector</text>
+          <text x="610" y="153" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#9397ab">embeddings · retrieval check</text>
+
+          <line x1="138" y1="48" x2="176" y2="48" stroke="#75798c" stroke-width="1.2" marker-end="url(#arrArch)"/>
+          <line x1="138" y1="104" x2="176" y2="104" stroke="#75798c" stroke-width="1.2" marker-end="url(#arrArch)"/>
+          <line x1="138" y1="160" x2="176" y2="160" stroke="#75798c" stroke-width="1.2" marker-end="url(#arrArch)"/>
+          <line x1="318" y1="48" x2="356" y2="48" stroke="#75798c" stroke-width="1.2" marker-end="url(#arrArch)"/>
+          <line x1="318" y1="104" x2="356" y2="104" stroke="#75798c" stroke-width="1.2" marker-end="url(#arrArch)"/>
+          <line x1="318" y1="160" x2="356" y2="160" stroke="#75798c" stroke-width="1.2" marker-end="url(#arrArch)"/>
+          <line x1="508" y1="66" x2="546" y2="66" stroke="#75798c" stroke-width="1.2" marker-end="url(#arrArch)"/>
+          <line x1="508" y1="142" x2="546" y2="142" stroke="#75798c" stroke-width="1.2" marker-end="url(#arrArch)"/>
+
+          <rect x="8" y="204" width="664" height="34" rx="6" fill="#2b2741" stroke="#423a6a"/>
+          <text x="340" y="225" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10.5" fill="#d2cefd">Airflow 3 orchestration · quality tests + contracts · OpenLineage lineage · Terraform · CloudWatch</text>
+        </svg>
+      </div>
+      <figcaption style="margin-top:10px;display:flex;gap:12px;font-size:12px;line-height:1.5;color:#9397ab;">
+        <span style="font-family:'IBM Plex Mono',monospace;color:#9184d9;flex:none;">Fig. 3.1</span>
+        <span style="text-wrap:pretty;">Platform v4. Batch, API, CDC and stream ingestion into an Iceberg lakehouse on S3; dbt on Athena for transformation; a ClickHouse hot copy and a pgvector sink for serving; orchestration, quality and lineage cut across every layer.</span>
+      </figcaption>
+    </figure>
+
+    <div style="flex:1;"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#595d6c;font-family:'IBM Plex Mono',monospace;">
+      <span>The Data Engineer Framework</span>
+      <span>15</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 16 · 3.2 THE SATELLITES -->
+<section class="page" id="p16" data-screen-label="16 The nine satellites" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:44px 56px 34px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#75798c;">
+      <span>Part Three · The projects</span>
+      <span style="display:flex;align-items:center;gap:10px;"><span style="width:14px;height:1.5px;background:#9184d9;display:inline-block;"></span>3.2</span>
+    </div>
+    <div style="margin-top:12px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+
+    <div style="margin-top:34px;max-width:66ch;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;margin-bottom:10px;">3.2</div>
+      <h3 style="margin:0;font-size:27px;font-weight:500;letter-spacing:-0.018em;line-height:1.2;">The nine satellites</h3>
+      <p style="margin:16px 0 0;font-size:14.5px;line-height:1.66;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">Separate repos, one or two per phase, for tool diversity the platform's default stack can't give. Each ends in a published, named artifact. The default specs are complete; a built-in generator can also issue a unique, realistic business brief for any of them — with black-box acceptance tests and a sealed reference solution — while the objectives and the gate bar stay fixed.</p>
+    </div>
+
+    <table style="width:100%;margin-top:24px;border-collapse:collapse;font-size:13px;">
+      <thead>
+        <tr>
+          <th style="text-align:left;padding:9px 10px 9px 0;border-bottom:1px solid #595d6c;font-weight:500;font-size:10.5px;letter-spacing:0.13em;text-transform:uppercase;color:#9397ab;">Id</th>
+          <th style="text-align:left;padding:9px 10px;border-bottom:1px solid #595d6c;font-weight:500;font-size:10.5px;letter-spacing:0.13em;text-transform:uppercase;color:#9397ab;">Satellite</th>
+          <th style="text-align:left;padding:9px 10px;border-bottom:1px solid #595d6c;font-weight:500;font-size:10.5px;letter-spacing:0.13em;text-transform:uppercase;color:#9397ab;">Phase</th>
+          <th style="text-align:left;padding:9px 0 9px 10px;border-bottom:1px solid #595d6c;font-weight:500;font-size:10.5px;letter-spacing:0.13em;text-transform:uppercase;color:#9397ab;">The published artifact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:10px 10px 10px 0;border-bottom:1px solid #292b31;color:#d2cefd;font-family:'IBM Plex Mono',monospace;font-size:12px;">S1</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#e9e9ed;">Your first standalone dbt project</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#9397ab;">P1</td>
+          <td style="padding:10px 0 10px 10px;border-bottom:1px solid #292b31;color:#cfd3e5;">A live docs site — 20+ models, 40+ tests, one custom generic test</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 10px 10px 0;border-bottom:1px solid #292b31;color:#d2cefd;font-family:'IBM Plex Mono',monospace;font-size:12px;">S2</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#e9e9ed;">Cost-aware Athena mart</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#9397ab;">P2</td>
+          <td style="padding:10px 0 10px 10px;border-bottom:1px solid #292b31;color:#cfd3e5;"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;">MODEL_COST_REPORT.md</span> — dollar cost per model, one fix halving the top cost</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 10px 10px 0;border-bottom:1px solid #292b31;color:#d2cefd;font-family:'IBM Plex Mono',monospace;font-size:12px;">S3a</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#e9e9ed;">Spark performance forensics</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#9397ab;">P3</td>
+          <td style="padding:10px 0 10px 10px;border-bottom:1px solid #292b31;color:#cfd3e5;"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;">FORENSICS.md</span> — before/after Spark-UI evidence, fixes ranked by impact</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 10px 10px 0;border-bottom:1px solid #292b31;color:#d2cefd;font-family:'IBM Plex Mono',monospace;font-size:12px;">S3b</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#e9e9ed;">Iceberg vs Delta bake-off</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#9397ab;">P3</td>
+          <td style="padding:10px 0 10px 10px;border-bottom:1px solid #292b31;color:#cfd3e5;"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;">BAKEOFF.md</span> — the same workload through both formats, measured, with a verdict</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 10px 10px 0;border-bottom:1px solid #292b31;color:#d2cefd;font-family:'IBM Plex Mono',monospace;font-size:12px;">S4a</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#e9e9ed;">Redshift + Spectrum hybrid</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#9397ab;">P4</td>
+          <td style="padding:10px 0 10px 10px;border-bottom:1px solid #292b31;color:#cfd3e5;">A federated <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;">EXPLAIN</span> plan + a cost note vs all-Redshift</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 10px 10px 0;border-bottom:1px solid #292b31;color:#d2cefd;font-family:'IBM Plex Mono',monospace;font-size:12px;">S4b</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#e9e9ed;">Dagster vs Airflow</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#9397ab;">P4</td>
+          <td style="padding:10px 0 10px 10px;border-bottom:1px solid #292b31;color:#cfd3e5;"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;">COMPARISON.md</span> — four fixed axes, one code diff each</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 10px 10px 0;border-bottom:1px solid #292b31;color:#d2cefd;font-family:'IBM Plex Mono',monospace;font-size:12px;">S5</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#e9e9ed;">Debezium vs DMS — the CDC showdown</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#9397ab;">P5</td>
+          <td style="padding:10px 0 10px 10px;border-bottom:1px solid #292b31;color:#cfd3e5;"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;">CDC-SHOWDOWN.md</span> — measured latency histogram, tombstones, the outbox pattern</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 10px 10px 0;border-bottom:1px solid #292b31;color:#d2cefd;font-family:'IBM Plex Mono',monospace;font-size:12px;">S6a</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#e9e9ed;">ClickHouse + Superset serving layer</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#9397ab;">P6</td>
+          <td style="padding:10px 0 10px 10px;border-bottom:1px solid #292b31;color:#cfd3e5;">A customer-facing dashboard + the measured latency delta vs Athena</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 10px 10px 0;border-bottom:1px solid #292b31;color:#d2cefd;font-family:'IBM Plex Mono',monospace;font-size:12px;">S6b</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#e9e9ed;">The AI-data pipeline</td>
+          <td style="padding:10px;border-bottom:1px solid #292b31;color:#9397ab;">P6</td>
+          <td style="padding:10px 0 10px 10px;border-bottom:1px solid #292b31;color:#cfd3e5;">An embeddings → pgvector pipeline with a green retrieval-quality check</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:24px;border:1px solid #423a6a;border-radius:8px;background:#2b2741;padding:16px 20px;break-inside:avoid;">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:8px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:#9184d9;display:inline-block;"></span>
+        <span style="font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#d2cefd;">Why these nine</span>
+      </div>
+      <p style="margin:0;font-size:13.5px;line-height:1.6;color:#e4e7f5;text-wrap:pretty;">Each satellite either forces a second start-from-zero (S1), produces a comparison the internet is missing (S3b, S4b, S5), or makes an invisible skill visible with a number (S2's dollar costs, S3a's ranked fixes, S6a's latency delta). If one doesn't earn its hours, that's exactly the feedback page 20 asks for.</p>
+    </div>
+
+    <div style="flex:1;"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#595d6c;font-family:'IBM Plex Mono',monospace;">
+      <span>The Data Engineer Framework</span>
+      <span>16</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 17 PART 4 DIVIDER -->
+<section class="page" id="p17" data-screen-label="17 Part Four divider" style="position:relative;overflow:hidden;background:#262a60;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="position:absolute;inset:0;background:radial-gradient(90% 60% at 88% 100%, #353b80 0%, rgba(53,59,128,0) 70%);"></div>
+  <div style="position:relative;height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:56px 56px 44px;">
+    <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#b5abfc;">Part Four</div>
+    <div style="flex:1;"></div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:130px;line-height:0.85;color:#4c5397;letter-spacing:-0.04em;">04</div>
+    <h2 style="margin:26px 0 0;font-size:46px;line-height:1.06;font-weight:500;letter-spacing:-0.025em;max-width:16ch;text-wrap:balance;">Why it works</h2>
+    <div style="margin-top:28px;width:64px;height:2px;background:#b5abfc;"></div>
+    <div style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:10px 40px;max-width:660px;">
+      <div style="font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#b5abfc;grid-column:1 / -1;">After this part you can</div>
+      <p style="margin:0;font-size:14.5px;line-height:1.6;color:#e4e7f5;">Trace each design decision to the failure mode it prevents and the evidence behind it.</p>
+      <p style="margin:0;font-size:14.5px;line-height:1.6;color:#e4e7f5;">Say what a finisher holds at the end — and what the whole year costs.</p>
+    </div>
+    <div style="flex:1;"></div>
+    <div style="font-size:11px;color:#9690c9;font-family:'IBM Plex Mono',monospace;">Sections 4.1 — 4.2 · pages 18 — 19</div>
+  </div>
+</section>
+
+<!-- ============================================================ 18 · 4.1 PRINCIPLES & EVIDENCE -->
+<section class="page" id="p18" data-screen-label="18 The principles and the evidence" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:44px 56px 34px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#75798c;">
+      <span>Part Four · Why it works</span>
+      <span style="display:flex;align-items:center;gap:10px;"><span style="width:14px;height:1.5px;background:#9184d9;display:inline-block;"></span>4.1</span>
+    </div>
+    <div style="margin-top:12px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+
+    <div style="margin-top:32px;max-width:68ch;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;margin-bottom:10px;">4.1</div>
+      <h3 style="margin:0;font-size:27px;font-weight:500;letter-spacing:-0.018em;line-height:1.2;">The principles and the evidence</h3>
+      <p style="margin:14px 0 0;font-size:14.5px;line-height:1.66;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">The framework was compiled from six parallel deep-research reports — tool landscape, cert blueprints, courses, real platform case studies, roadmap benchmarks, market signals — then independently audited twice and revised three times. Nine principles carry the design:</p>
+    </div>
+
+    <div style="margin-top:18px;column-count:2;column-gap:34px;">
+      <div style="break-inside:avoid;margin:0 0 11px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9184d9;">1</span>&nbsp; <span style="font-size:13.5px;color:#e9e9ed;font-weight:500;">SQL and Python are the permanent spine</span> <span style="font-size:13px;color:#9397ab;">— in 70–94% of postings; exercised in every phase.</span></div>
+      <div style="break-inside:avoid;margin:0 0 11px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9184d9;">2</span>&nbsp; <span style="font-size:13.5px;color:#e9e9ed;font-weight:500;">Idempotency + retries is the reliability model</span> <span style="font-size:13px;color:#9397ab;">— the highest lesson-density skill across every platform case study.</span></div>
+      <div style="break-inside:avoid;margin:0 0 11px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9184d9;">3</span>&nbsp; <span style="font-size:13.5px;color:#e9e9ed;font-weight:500;">Many small jobs, never a mega-DAG</span> <span style="font-size:13px;color:#9397ab;">— two teams independently regretted the monolith within a year.</span></div>
+      <div style="break-inside:avoid;margin:0 0 11px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9184d9;">4</span>&nbsp; <span style="font-size:13.5px;color:#e9e9ed;font-weight:500;">Three modeling layers from day one</span> <span style="font-size:13px;color:#9397ab;">— two teams independently regretted two.</span></div>
+      <div style="break-inside:avoid;margin:0 0 11px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9184d9;">5</span>&nbsp; <span style="font-size:13.5px;color:#e9e9ed;font-weight:500;">Table maintenance is the lakehouse's hidden cost</span> <span style="font-size:13px;color:#9397ab;">— compaction and snapshot expiry are first-class objectives.</span></div>
+      <div style="break-inside:avoid;margin:0 0 11px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9184d9;">6</span>&nbsp; <span style="font-size:13.5px;color:#e9e9ed;font-weight:500;">Concepts are the skeleton; tools are replaceable leaves</span> <span style="font-size:13px;color:#9397ab;">— when a tool churns, the phase objective survives.</span></div>
+      <div style="break-inside:avoid;margin:0 0 11px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9184d9;">7</span>&nbsp; <span style="font-size:13.5px;color:#e9e9ed;font-weight:500;">Builds must survive weeks of inattention</span> <span style="font-size:13px;color:#9397ab;">— serverless over self-hosted; the framework never asks you to run Kubernetes.</span></div>
+      <div style="break-inside:avoid;margin:0 0 11px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9184d9;">8</span>&nbsp; <span style="font-size:13.5px;color:#e9e9ed;font-weight:500;">Nothing is learn-only</span> <span style="font-size:13px;color:#9397ab;">— every resource is pinned to an exercise; unexercised knowledge evaporates.</span></div>
+      <div style="break-inside:avoid;margin:0 0 11px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9184d9;">9</span>&nbsp; <span style="font-size:13.5px;color:#e9e9ed;font-weight:500;">Ship the phase, then improve it</span> <span style="font-size:13px;color:#9397ab;">— a gate passed at "good" beats a phase polished forever.</span></div>
+    </div>
+
+    <div style="margin-top:16px;display:flex;gap:22px;align-items:flex-start;max-width:68ch;">
+      <div style="width:2px;align-self:stretch;background:#9184d9;flex:none;"></div>
+      <p style="margin:0;font-size:18px;line-height:1.45;font-weight:400;color:#d2cefd;letter-spacing:-0.012em;text-wrap:pretty;">Spaced retrieval is the framework's original contribution — none of the nine surveyed DE roadmaps has it. Certs sit in the first half because each exam's surface is exactly what its phase builds.</p>
+    </div>
+
+    <div style="margin-top:18px;border:1px solid #423a6a;border-radius:8px;background:#2b2741;padding:16px 20px;max-width:68ch;break-inside:avoid;">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:8px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:#9184d9;display:inline-block;"></span>
+        <span style="font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#d2cefd;">Kept honest, structurally</span>
+      </div>
+      <p style="margin:0;font-size:13.5px;line-height:1.6;color:#e4e7f5;text-wrap:pretty;">External critique is a gate requirement from G2 on — solo learners systematically miss their own gaps, so the framework never grades itself alone. Contested calls (Iceberg as CORE, Airflow over Dagster, Debezium's place) are listed as judgment calls in the open, and each phase starts with a "re-verify before starting" check because tool versions and exam blueprints churn.</p>
+    </div>
+
+    <div style="flex:1;"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#595d6c;font-family:'IBM Plex Mono',monospace;">
+      <span>The Data Engineer Framework</span>
+      <span>18</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 19 · 4.2 WHAT YOU FINISH WITH -->
+<section class="page" id="p19" data-screen-label="19 What you finish with" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:44px 56px 34px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#75798c;">
+      <span>Part Four · Why it works</span>
+      <span style="display:flex;align-items:center;gap:10px;"><span style="width:14px;height:1.5px;background:#9184d9;display:inline-block;"></span>4.2</span>
+    </div>
+    <div style="margin-top:12px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+
+    <div style="margin-top:32px;max-width:66ch;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;margin-bottom:10px;">4.2</div>
+      <h3 style="margin:0;font-size:27px;font-weight:500;letter-spacing:-0.018em;line-height:1.2;">What you finish with, and what it costs</h3>
+      <p style="margin:14px 0 0;font-size:14.5px;line-height:1.66;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">The definition of done: all seven gates passed with linked evidence. In practice you can design, build, operate and explain a batch + streaming lakehouse end to end; prove your data is correct; and say what it costs to run.</p>
+    </div>
+
+    <table style="width:100%;margin-top:20px;border-collapse:collapse;font-size:13.5px;">
+      <thead>
+        <tr>
+          <th style="text-align:left;padding:9px 12px 9px 0;border-bottom:1px solid #595d6c;font-weight:500;font-size:10.5px;letter-spacing:0.13em;text-transform:uppercase;color:#9397ab;">The finisher's inventory</th>
+          <th style="text-align:left;padding:9px 0 9px 12px;border-bottom:1px solid #595d6c;font-weight:500;font-size:10.5px;letter-spacing:0.13em;text-transform:uppercase;color:#9397ab;">Evidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:10px 12px 10px 0;border-bottom:1px solid #292b31;color:#e9e9ed;">The platform, v4</td>
+          <td style="padding:10px 0 10px 12px;border-bottom:1px solid #292b31;color:#cfd3e5;">One repo, a year of PR history, three demo videos, a runbook</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px 10px 0;border-bottom:1px solid #292b31;color:#e9e9ed;">Nine satellite repos</td>
+          <td style="padding:10px 0 10px 12px;border-bottom:1px solid #292b31;color:#cfd3e5;">Each with a published, named artifact — several with numbers nobody else publishes</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px 10px 0;border-bottom:1px solid #292b31;color:#e9e9ed;">Two certifications</td>
+          <td style="padding:10px 0 10px 12px;border-bottom:1px solid #292b31;color:#cfd3e5;">AWS DEA-C01 · Databricks DE Associate (+ a free Confluent streaming certificate)</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px 10px 0;border-bottom:1px solid #292b31;color:#e9e9ed;">The write-ups</td>
+          <td style="padding:10px 0 10px 12px;border-bottom:1px solid #292b31;color:#cfd3e5;"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;">JOURNEY.md</span> · <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;">AI-USAGE.md</span> · <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;">SELF-CHECK.md</span> — a year of written answers</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px 10px 0;border-bottom:1px solid #292b31;color:#e9e9ed;">A public record</td>
+          <td style="padding:10px 0 10px 12px;border-bottom:1px solid #292b31;color:#cfd3e5;">~9 posts, one per phase — the year's arc from local lakehouse to journey post</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin:20px 0 0;font-size:14px;line-height:1.65;color:#cfd3e5;max-width:66ch;text-wrap:pretty;"><strong style="font-weight:500;color:#e9e9ed;">The honest hour math.</strong> Phase budgets sum to ~483 hours (18 + 70 + 95 + 75 + 72 + 65 + 88). At 9–10 h/week that's the 12-month arc; at 8 h/week, ~15 months; at 6 h/week, ~20 months — same destination, later arrival. Two buffer weeks per half-year are planned in. If time runs short there is a pre-authorized trim path — S4a first, then the Polars and Flink labs, then S1 — and trimming an item also strikes it from the gate, so the evidence trail stays honest.</p>
+
+    <div style="margin-top:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+      <div style="border:1px solid #3f424d;border-radius:8px;background:#1c1e2d;padding:16px 18px;break-inside:avoid;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:28px;color:#d2cefd;letter-spacing:-0.02em;">$310–455</div>
+        <div style="margin-top:8px;font-size:12.5px;line-height:1.5;color:#9397ab;">the whole year's exam-and-course spend; the low end assumes the Databricks voucher</div>
+      </div>
+      <div style="border:1px solid #3f424d;border-radius:8px;background:#1c1e2d;padding:16px 18px;break-inside:avoid;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:28px;color:#d2cefd;letter-spacing:-0.02em;">12–20 mo</div>
+        <div style="margin-top:8px;font-size:12.5px;line-height:1.5;color:#9397ab;">the honest range by weekly pace — gates don't care about calendars</div>
+      </div>
+      <div style="border:1px solid #3f424d;border-radius:8px;background:#1c1e2d;padding:16px 18px;break-inside:avoid;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:28px;color:#d2cefd;letter-spacing:-0.02em;">0 trims</div>
+        <div style="margin-top:8px;font-size:12.5px;line-height:1.5;color:#9397ab;">ever allowed on the platform or the two certs — everything else has a stated order</div>
+      </div>
+    </div>
+
+    <div style="flex:1;"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#595d6c;font-family:'IBM Plex Mono',monospace;">
+      <span>The Data Engineer Framework</span>
+      <span>19</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 20 · FEEDBACK -->
+<section class="page" id="p20" data-screen-label="20 Help improve this framework" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:44px 56px 34px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#75798c;">
+      <span>Feedback</span>
+      <span style="display:flex;align-items:center;gap:10px;"><span style="width:14px;height:1.5px;background:#9184d9;display:inline-block;"></span>F</span>
+    </div>
+    <div style="margin-top:12px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+
+    <div style="margin-top:34px;max-width:66ch;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9184d9;margin-bottom:10px;">F</div>
+      <h3 style="margin:0;font-size:27px;font-weight:500;letter-spacing:-0.018em;line-height:1.2;">Help improve this framework</h3>
+      <p style="margin:16px 0 0;font-size:15px;line-height:1.68;color:#cfd3e5;orphans:3;widows:3;text-wrap:pretty;">This handbook exists to collect criticism. The framework was built from research and refined through three audit-driven revisions — but it has not yet been walked end to end by many learners, and that is the gap your comments close. External feedback is already a structural requirement inside the framework; this page applies the same rule to the framework itself.</p>
+      <h4 style="margin:22px 0 0;font-size:16px;font-weight:500;letter-spacing:0.01em;color:#e9e9ed;">What we most want to know</h4>
+    </div>
+
+    <div style="margin-top:14px;max-width:66ch;display:flex;flex-direction:column;gap:9px;">
+      <div style="display:flex;gap:12px;align-items:baseline;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9184d9;flex:none;">01</span><p style="margin:0;font-size:14px;line-height:1.6;color:#cfd3e5;"><strong style="font-weight:500;color:#e9e9ed;">Hours.</strong> Are the phase budgets realistic at your pace — where did the estimate break?</p></div>
+      <div style="display:flex;gap:12px;align-items:baseline;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9184d9;flex:none;">02</span><p style="margin:0;font-size:14px;line-height:1.6;color:#cfd3e5;"><strong style="font-weight:500;color:#e9e9ed;">Tools.</strong> Any CORE / AWARE / SKIP verdict you'd overturn — and the evidence for it?</p></div>
+      <div style="display:flex;gap:12px;align-items:baseline;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9184d9;flex:none;">03</span><p style="margin:0;font-size:14px;line-height:1.6;color:#cfd3e5;"><strong style="font-weight:500;color:#e9e9ed;">Gates.</strong> Is any bar too high, too low, or impossible to verify honestly?</p></div>
+      <div style="display:flex;gap:12px;align-items:baseline;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9184d9;flex:none;">04</span><p style="margin:0;font-size:14px;line-height:1.6;color:#cfd3e5;"><strong style="font-weight:500;color:#e9e9ed;">Satellites.</strong> Which one earns its hours, which one doesn't, and what's missing?</p></div>
+      <div style="display:flex;gap:12px;align-items:baseline;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9184d9;flex:none;">05</span><p style="margin:0;font-size:14px;line-height:1.6;color:#cfd3e5;"><strong style="font-weight:500;color:#e9e9ed;">Gaps.</strong> What would you add — and, just as important, what would you cut to make room?</p></div>
+      <div style="display:flex;gap:12px;align-items:baseline;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9184d9;flex:none;">06</span><p style="margin:0;font-size:14px;line-height:1.6;color:#cfd3e5;"><strong style="font-weight:500;color:#e9e9ed;">Clarity.</strong> Where did the documents lose you? "Step 4 lost me" is a first-class bug report.</p></div>
+    </div>
+
+    <p style="margin:20px 0 0;font-size:13.5px;line-height:1.65;color:#9397ab;max-width:66ch;text-wrap:pretty;">Known gaps, stated rather than hidden: some tool weightings derive from one regional market's signals and should be re-derived for other markets; two course platforms (DataCamp, Udacity) were never researched; the full list of evidence gaps lives in <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">reference/SOURCES.md</span>.</p>
+
+    <div style="margin-top:22px;border:1px solid #423a6a;border-radius:8px;background:#2b2741;padding:18px 20px;max-width:66ch;break-inside:avoid;">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:9px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:#9184d9;display:inline-block;"></span>
+        <span style="font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#d2cefd;">Where to send it</span>
+      </div>
+      <p style="margin:0;font-size:14px;line-height:1.65;color:#e4e7f5;text-wrap:pretty;">Open one GitHub issue per point at <a href="https://github.com/AlqarniMohammed/DE-projects/issues" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">github.com/AlqarniMohammed/DE-projects/issues</a> — quote the page number from this handbook or the file in the repo. Small fixes (typos, dead links) are welcome directly as pull requests. Every issue gets read; decisions and their reasons land in the changelog.</p>
+    </div>
+
+    <div style="flex:1;"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#595d6c;font-family:'IBM Plex Mono',monospace;">
+      <span>The Data Engineer Framework</span>
+      <span>20</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 21 · APPENDIX -->
+<section class="page" id="p21" data-screen-label="21 Appendix" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:44px 56px 34px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#75798c;">
+      <span>Appendix A</span>
+      <span style="display:flex;align-items:center;gap:10px;"><span style="width:14px;height:1.5px;background:#9184d9;display:inline-block;"></span>Reference</span>
+    </div>
+    <div style="margin-top:12px;height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+
+    <h2 style="margin:36px 0 0;font-size:30px;font-weight:500;letter-spacing:-0.02em;">Tools, terms and where things live</h2>
+    <p style="margin:12px 0 0;font-size:14px;line-height:1.6;color:#9397ab;max-width:56ch;">Condensed from the repository's reference shelf. Every tool below links to its official docs there — when a tutorial and the docs disagree, the docs win.</p>
+
+    <div style="margin-top:26px;column-count:2;column-gap:34px;">
+      <div style="break-inside:avoid;margin:0 0 16px;">
+        <div style="font-size:14px;font-weight:500;color:#e9e9ed;">CORE — hands-on, scheduled in a phase</div>
+        <p style="margin:4px 0 0;font-size:13px;line-height:1.6;color:#9397ab;">SQL · Python (uv, pytest, moto) · Parquet · DuckDB · Apache Iceberg · dbt · S3 · Glue · Athena · S3 Tables · Lake Formation · Lambda · PySpark · Delta Lake · Databricks · Airflow 3 · dlt · DMS · Kinesis · Redshift · SSM + gitleaks · Kafka · Debezium · dbt-expectations + Elementary · Terraform · Superset · ClickHouse · pgvector · Docker · Git + GitHub Actions.</p>
+      </div>
+      <div style="break-inside:avoid;margin:0 0 16px;">
+        <div style="font-size:14px;font-weight:500;color:#e9e9ed;">AWARE — concepts + at most a day</div>
+        <p style="margin:4px 0 0;font-size:13px;line-height:1.6;color:#9397ab;">Polars · Flink · Redpanda · MSK · MWAA · EMR · Step Functions + EventBridge · Dagster · SQLMesh · UniForm · DuckLake · Polaris · DataHub / OpenMetadata · OpenLineage / Marquez · Soda · Great Expectations · Monte Carlo · semantic layers · Airbyte / Fivetran / Sling · Snowflake · the Azure vocabulary. Rule: every AWARE item ends in one written comparison sentence — awareness that produced no sentence didn't happen.</p>
+      </div>
+      <div style="break-inside:avoid;margin:0 0 16px;">
+        <div style="font-size:14px;font-weight:500;color:#e9e9ed;">SKIP — deliberately excluded, with reasons</div>
+        <p style="margin:4px 0 0;font-size:13px;line-height:1.6;color:#9397ab;">Hadoop/HDFS ops · Apache Hudi · Prefect and Kestra · StarRocks/Doris · Kubernetes administration · Scala · deep Flink · a third cloud · a third certificate. Each exclusion is argued, not assumed — and each is fair game for feedback.</p>
+      </div>
+      <div style="break-inside:avoid;margin:0 0 16px;">
+        <div style="font-size:14px;font-weight:500;color:#e9e9ed;">Where things live in the repo</div>
+        <p style="margin:4px 0 0;font-size:13px;line-height:1.6;color:#9397ab;"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#cfd3e5;">README</span> the front door · <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#cfd3e5;">GUIDE.md</span> the operating manual · <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#cfd3e5;">GLOSSARY.md</span> 98 terms, machine-parseable · <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#cfd3e5;">PROGRESS.md</span> the evidence tracker · <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#cfd3e5;">phases/</span> the seven specs · <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#cfd3e5;">reference/</span> WHY, TOOLS, CERTS, COURSES, DATASETS, LEARNERS, SOURCES · <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#cfd3e5;">prompts/</span> the satellite-brief generator · <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#cfd3e5;">.claude/skills/</span> six helper skills.</p>
+      </div>
+    </div>
+
+    <h2 style="margin:12px 0 0;font-size:20px;font-weight:500;letter-spacing:-0.012em;">Further reading</h2>
+    <ol style="margin:14px 0 0;padding-left:20px;font-size:13.5px;line-height:1.7;color:#9397ab;">
+      <li style="margin-bottom:4px;">The repository — <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#cfd3e5;">github.com/AlqarniMohammed/DE-projects</span> (CC-BY-4.0). Start with README, then GUIDE.md.</li>
+      <li style="margin-bottom:4px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#cfd3e5;">reference/WHY.md</span> — every design decision with the evidence behind it, including the hour math and the trim rules.</li>
+      <li><span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#cfd3e5;">sources/research/</span> — the six deep-research reports the framework is compiled from.</li>
+    </ol>
+
+    <div style="flex:1;"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#595d6c;font-family:'IBM Plex Mono',monospace;">
+      <span>Appendix A · Reference</span>
+      <span>21</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 22 BACK COVER -->
+<section class="page" id="p22" data-screen-label="22 Back cover" style="position:relative;overflow:hidden;background:#161826;color:#e9e9ed;font-family:Inter,system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact;">
+  <div style="position:absolute;inset:0;background:radial-gradient(110% 60% at 88% 100%, #262a60 0%, rgba(38,42,96,0) 65%);"></div>
+  <div style="position:relative;height:100cqh;box-sizing:border-box;display:flex;flex-direction:column;padding:56px 56px 44px;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:22px;height:22px;border-radius:6px;border:1.5px solid #9184d9;"></div>
+      <div style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#b2b6ca;">The Data Engineer Framework</div>
+    </div>
+    <div style="flex:1;"></div>
+    <div style="width:64px;height:2px;background:#9184d9;margin-bottom:22px;"></div>
+    <p style="margin:0;font-size:24px;line-height:1.4;font-weight:400;color:#e9e9ed;max-width:32ch;letter-spacing:-0.015em;text-wrap:pretty;">Start at Phase 0. Follow the loop. The gates tell you when you're done — and the issues tab is open for everything you'd change.</p>
+    <div style="flex:1;"></div>
+    <div style="height:1px;background:linear-gradient(90deg,transparent 0,rgba(233,233,237,0.16) 48px,rgba(233,233,237,0.16) calc(100% - 48px),transparent 100%);"></div>
+    <div style="margin-top:20px;display:flex;justify-content:space-between;align-items:flex-end;font-size:12px;color:#75798c;">
+      <div style="line-height:1.7;">
+        <div style="color:#b2b6ca;">The Data Engineer Framework</div>
+        <div>An open upskilling framework · CC-BY-4.0</div>
+      </div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#595d6c;text-align:right;line-height:1.7;">
+        <div>v1.3 · Ed. 2026.08</div>
+        <div>github.com/AlqarniMohammed/DE-projects</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</doc-page>
+</body>
+</html>
