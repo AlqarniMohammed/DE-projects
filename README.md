@@ -60,6 +60,7 @@ AWS: at most **$25/month**, protected by a budget alarm you set on day one. Exam
 | [`phases/`](phases/) | The seven phase specs — the default path |
 | [`reference/`](reference/) | Consulted, not read cover-to-cover: [WHY](reference/WHY.md) · [TOOLS](reference/TOOLS.md) · [DATASETS](reference/DATASETS.md) · [CERTS](reference/CERTS.md) · [COURSES](reference/COURSES.md) · [LEARNERS](reference/LEARNERS.md) · [SOURCES](reference/SOURCES.md) |
 | [`prompts/`](prompts/) | The satellite-requirements generator + a worked example |
+| [`report/`](report/) | The introduction handbook — a printable A4 overview for readers and reviewers ([HTML](report/index.html) · [PDF](report/DE-Framework-Handbook.pdf)) |
 | [`.claude/skills/`](.claude/skills/) | The six built-in helper skills |
 | [`sources/research/`](sources/research/) | The research reports behind every claim |
 | [`CHANGELOG.md`](CHANGELOG.md) · [`CONTRIBUTING.md`](CONTRIBUTING.md) · [`LICENSE`](LICENSE) | Revision history · how to contribute · CC-BY-4.0 |
